@@ -1,0 +1,53 @@
+---
+import { getRouter } from "../../lib/getRouter";
+
+// const res = await getRouter();
+// var arr: any[] = [];
+
+// Object.keys(res).forEach((item) => {
+//   const next = res[item].map((s) => ({
+//     type: item,
+//     key: s.replace("/", ""),
+//   }));
+//   arr = [...arr, ...next];
+// });
+// console.log(arr);
+
+// export const getStaticPaths = async () => {
+//   return arr.map((items) => ({
+//     params: { knowledge: items.key },
+//   }));
+//   return [
+//     {
+//       params: {
+//         knowledge: "products",
+//       },
+//     },
+//   ];
+// };
+export const getStaticPaths = async () => {
+  const res = await getRouter();
+  var arr: any = [];
+
+  Object.keys(res).forEach((item) => {
+    const next = res[item].map((s) => ({
+      type: item,
+      key: s.replace("/", ""),
+    }));
+    arr = [...arr, ...next];
+  });
+  const nextArr = arr.filter((s: any) => s.type !== "Home");
+  return nextArr.map((items) => ({
+    params: { knowledge: items.key },
+  }));
+};
+
+const { knowledge } = Astro.params;
+---
+
+<div>
+  {knowledge}
+  <div>
+    <!-- {arr.map((item) => <div>{JSON.stringify(item)}</div>)} -->
+  </div>
+</div>

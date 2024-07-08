@@ -1,0 +1,16 @@
+---
+import Layout from "@/layouts/PageLayout.astro";
+import Card from "../components/Card.astro";
+import { getRouter } from "../lib/getRouter";
+const res = await getRouter();
+let arr: any[] = [];
+Object.keys(res).forEach((item) => {
+  const next = res[item].map((s) => ({
+    type: item,
+    key: s,
+  }));
+  arr.push(next);
+});
+---
+
+<Layout title="Welcome to Astro." />

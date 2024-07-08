@@ -1,0 +1,512 @@
+[
+  {
+    "href": "www",
+    "language": "English",
+    "class": "language-flag language-flag-en"
+  },
+  {
+    "href": "fr",
+    "language": "French",
+    "class": "language-flag language-flag-fr"
+  },
+  {
+    "href": "de",
+    "language": "German",
+    "class": "language-flag language-flag-de"
+  },
+  {
+    "href": "pt",
+    "language": "Portuguese",
+    "class": "language-flag language-flag-pt"
+  },
+  {
+    "href": "es",
+    "language": "Spanish",
+    "class": "language-flag language-flag-es"
+  },
+  {
+    "href": "ru",
+    "language": "Russian",
+    "class": "language-flag language-flag-ru"
+  },
+  {
+    "href": "ja",
+    "language": "Japanese",
+    "class": "language-flag language-flag-ja"
+  },
+  {
+    "href": "ko",
+    "language": "Korean",
+    "class": "language-flag language-flag-ko"
+  },
+  {
+    "href": "ar",
+    "language": "Arabic",
+    "class": "language-flag language-flag-ar"
+  },
+  {
+    "href": "ga",
+    "language": "Greek",
+    "class": "language-flag language-flag-ga"
+  },
+  {
+    "href": "el",
+    "language": "German",
+    "class": "language-flag language-flag-el"
+  },
+  {
+    "href": "tr",
+    "language": "Turkish",
+    "class": "language-flag language-flag-tr"
+  },
+  {
+    "href": "it",
+    "language": "Italian",
+    "class": "language-flag language-flag-it"
+  },
+  {
+    "href": "da",
+    "language": "Danish",
+    "class": "language-flag language-flag-da"
+  },
+  {
+    "href": "ro",
+    "language": "Romanian",
+    "class": "language-flag language-flag-ro"
+  },
+  {
+    "href": "id",
+    "language": "Indonesian",
+    "class": "language-flag language-flag-id"
+  },
+  {
+    "href": "cs",
+    "language": "Czech",
+    "class": "language-flag language-flag-cs"
+  },
+  {
+    "href": "af",
+    "language": "Afrikaans",
+    "class": "language-flag language-flag-af"
+  },
+  {
+    "href": "sv",
+    "language": "Swedish",
+    "class": "language-flag language-flag-sv"
+  },
+  {
+    "href": "pl",
+    "language": "Polish",
+    "class": "language-flag language-flag-pl"
+  },
+  {
+    "href": "eu",
+    "language": "Basque",
+    "class": "language-flag language-flag-eu"
+  },
+  {
+    "href": "ca",
+    "language": "Catalan",
+    "class": "language-flag language-flag-ca"
+  },
+  {
+    "href": "eo",
+    "language": "Esperanto",
+    "class": "language-flag language-flag-eo"
+  },
+  {
+    "href": "hi",
+    "language": "Hindi",
+    "class": "language-flag language-flag-hi"
+  },
+  {
+    "href": "lo",
+    "language": "Lao",
+    "class": "language-flag language-flag-lo"
+  },
+  {
+    "href": "sq",
+    "language": "Albanian",
+    "class": "language-flag language-flag-sq"
+  },
+  {
+    "href": "am",
+    "language": "Amharic",
+    "class": "language-flag language-flag-am"
+  },
+  {
+    "href": "hy",
+    "language": "Armenian",
+    "class": "language-flag language-flag-hy"
+  },
+  {
+    "href": "az",
+    "language": "Azerbaijani",
+    "class": "language-flag language-flag-az"
+  },
+  {
+    "href": "be",
+    "language": "Belarusian",
+    "class": "language-flag language-flag-be"
+  },
+  {
+    "href": "bn",
+    "language": "Bengali",
+    "class": "language-flag language-flag-bn"
+  },
+  {
+    "href": "bs",
+    "language": "Bosnian",
+    "class": "language-flag language-flag-bs"
+  },
+  {
+    "href": "bg",
+    "language": "Bulgarian",
+    "class": "language-flag language-flag-bg"
+  },
+  {
+    "href": "ceb",
+    "language": "Cebuano",
+    "class": "language-flag language-flag-ceb"
+  },
+  {
+    "href": "ny",
+    "language": "Chichewa",
+    "class": "language-flag language-flag-ny"
+  },
+  {
+    "href": "co",
+    "language": "Corsican",
+    "class": "language-flag language-flag-co"
+  },
+  {
+    "href": "hr",
+    "language": "Croatian",
+    "class": "language-flag language-flag-hr"
+  },
+  {
+    "href": "nl",
+    "language": "Dutch",
+    "class": "language-flag language-flag-nl"
+  },
+  {
+    "href": "et",
+    "language": "Estonian",
+    "class": "language-flag language-flag-et"
+  },
+  {
+    "href": "tl",
+    "language": "Filipino",
+    "class": "language-flag language-flag-tl"
+  },
+  {
+    "href": "fi",
+    "language": "Finnish",
+    "class": "language-flag language-flag-fi"
+  },
+  {
+    "href": "fy",
+    "language": "Frisian",
+    "class": "language-flag language-flag-fy"
+  },
+  {
+    "href": "gl",
+    "language": "Galician",
+    "class": "language-flag language-flag-gl"
+  },
+  {
+    "href": "ka",
+    "language": "Georgian",
+    "class": "language-flag language-flag-ka"
+  },
+  {
+    "href": "gu",
+    "language": "Gujarati",
+    "class": "language-flag language-flag-gu"
+  },
+  {
+    "href": "ht",
+    "language": "Haitian",
+    "class": "language-flag language-flag-ht"
+  },
+  {
+    "href": "ha",
+    "language": "Hausa",
+    "class": "language-flag language-flag-ha"
+  },
+  {
+    "href": "haw",
+    "language": "Hawaiian",
+    "class": "language-flag language-flag-haw"
+  },
+  {
+    "href": "iw",
+    "language": "Hebrew",
+    "class": "language-flag language-flag-iw"
+  },
+  {
+    "href": "hmn",
+    "language": "Hmong",
+    "class": "language-flag language-flag-hmn"
+  },
+  {
+    "href": "hu",
+    "language": "Hungarian",
+    "class": "language-flag language-flag-hu"
+  },
+  {
+    "href": "is",
+    "language": "Icelandic",
+    "class": "language-flag language-flag-is"
+  },
+  {
+    "href": "ig",
+    "language": "Igbo",
+    "class": "language-flag language-flag-ig"
+  },
+  {
+    "href": "jw",
+    "language": "Javanese",
+    "class": "language-flag language-flag-jw"
+  },
+  {
+    "href": "kn",
+    "language": "Kannada",
+    "class": "language-flag language-flag-kn"
+  },
+  {
+    "href": "kk",
+    "language": "Kazakh",
+    "class": "language-flag language-flag-kk"
+  },
+  {
+    "href": "km",
+    "language": "Khmer",
+    "class": "language-flag language-flag-km"
+  },
+  {
+    "href": "ku",
+    "language": "Kurdish",
+    "class": "language-flag language-flag-ku"
+  },
+  {
+    "href": "ky",
+    "language": "Kyrgyz",
+    "class": "language-flag language-flag-ky"
+  },
+  {
+    "href": "la",
+    "language": "Latin",
+    "class": "language-flag language-flag-la"
+  },
+  {
+    "href": "lv",
+    "language": "Latvian",
+    "class": "language-flag language-flag-lv"
+  },
+  {
+    "href": "lt",
+    "language": "Lithuanian",
+    "class": "language-flag language-flag-lt"
+  },
+  {
+    "href": "lb",
+    "language": "Luxembou..",
+    "class": "language-flag language-flag-lb"
+  },
+  {
+    "href": "mk",
+    "language": "Macedonian",
+    "class": "language-flag language-flag-mk"
+  },
+  {
+    "href": "mg",
+    "language": "Malagasy",
+    "class": "language-flag language-flag-mg"
+  },
+  {
+    "href": "ms",
+    "language": "Malay",
+    "class": "language-flag language-flag-ms"
+  },
+  {
+    "href": "ml",
+    "language": "Malayalam",
+    "class": "language-flag language-flag-ml"
+  },
+  {
+    "href": "mt",
+    "language": "Maltese",
+    "class": "language-flag language-flag-mt"
+  },
+  {
+    "href": "mi",
+    "language": "Maori",
+    "class": "language-flag language-flag-mi"
+  },
+  {
+    "href": "mr",
+    "language": "Marathi",
+    "class": "language-flag language-flag-mr"
+  },
+  {
+    "href": "mn",
+    "language": "Mongolian",
+    "class": "language-flag language-flag-mn"
+  },
+  {
+    "href": "my",
+    "language": "Burmese",
+    "class": "language-flag language-flag-my"
+  },
+  {
+    "href": "ne",
+    "language": "Nepali",
+    "class": "language-flag language-flag-ne"
+  },
+  {
+    "href": "no",
+    "language": "Norwegian",
+    "class": "language-flag language-flag-no"
+  },
+  {
+    "href": "ps",
+    "language": "Pashto",
+    "class": "language-flag language-flag-ps"
+  },
+  {
+    "href": "fa",
+    "language": "Persian",
+    "class": "language-flag language-flag-fa"
+  },
+  {
+    "href": "pa",
+    "language": "Punjabi",
+    "class": "language-flag language-flag-pa"
+  },
+  {
+    "href": "sr",
+    "language": "Serbian",
+    "class": "language-flag language-flag-sr"
+  },
+  {
+    "href": "st",
+    "language": "Sesotho",
+    "class": "language-flag language-flag-st"
+  },
+  {
+    "href": "si",
+    "language": "Sinhala",
+    "class": "language-flag language-flag-si"
+  },
+  {
+    "href": "sk",
+    "language": "Slovak",
+    "class": "language-flag language-flag-sk"
+  },
+  {
+    "href": "sl",
+    "language": "Slovenian",
+    "class": "language-flag language-flag-sl"
+  },
+  {
+    "href": "so",
+    "language": "Somali",
+    "class": "language-flag language-flag-so"
+  },
+  {
+    "href": "sm",
+    "language": "Samoan",
+    "class": "language-flag language-flag-sm"
+  },
+  {
+    "href": "gd",
+    "language": "Scots Gaelic",
+    "class": "language-flag language-flag-gd"
+  },
+  {
+    "href": "sn",
+    "language": "Shona",
+    "class": "language-flag language-flag-sn"
+  },
+  {
+    "href": "sd",
+    "language": "Sindhi",
+    "class": "language-flag language-flag-sd"
+  },
+  {
+    "href": "su",
+    "language": "Sundanese",
+    "class": "language-flag language-flag-su"
+  },
+  {
+    "href": "sw",
+    "language": "Swahili",
+    "class": "language-flag language-flag-sw"
+  },
+  {
+    "href": "tg",
+    "language": "Tajik",
+    "class": "language-flag language-flag-tg"
+  },
+  {
+    "href": "ta",
+    "language": "Tamil",
+    "class": "language-flag language-flag-ta"
+  },
+  {
+    "href": "te",
+    "language": "Telugu",
+    "class": "language-flag language-flag-te"
+  },
+  {
+    "href": "th",
+    "language": "Thai",
+    "class": "language-flag language-flag-th"
+  },
+  {
+    "href": "uk",
+    "language": "Ukrainian",
+    "class": "language-flag language-flag-uk"
+  },
+  {
+    "href": "ur",
+    "language": "Urdu",
+    "class": "language-flag language-flag-ur"
+  },
+  {
+    "href": "uz",
+    "language": "Uzbek",
+    "class": "language-flag language-flag-uz"
+  },
+  {
+    "href": "vi",
+    "language": "Vietnamese",
+    "class": "language-flag language-flag-vi"
+  },
+  {
+    "href": "cy",
+    "language": "Welsh",
+    "class": "language-flag language-flag-cy"
+  },
+  {
+    "href": "xh",
+    "language": "Xhosa",
+    "class": "language-flag language-flag-xh"
+  },
+  {
+    "href": "yi",
+    "language": "Yiddish",
+    "class": "language-flag language-flag-yi"
+  },
+  {
+    "href": "yo",
+    "language": "Yoruba",
+    "class": "language-flag language-flag-yo"
+  },
+  {
+    "href": "zu",
+    "language": "Zulu",
+    "class": "language-flag language-flag-zu"
+  }
+]

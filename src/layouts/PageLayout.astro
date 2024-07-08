@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Announcement from "@/components/widgets/Announcement.astro";
+import Header from "@/components/widgets/Header.astro";
+
+const { metadata } = Astro.props;
+import { getBaseInfo } from "@/lib/getBaseInfo";
+const { email = "tennyson@somyshare.com", logourl } = await getBaseInfo();
+---
+
+<Layout>
+  <slot name="announcement">
+    <Announcement email={email} />
+  </slot>
+  <slot name="header">
+    <Header logourl={logourl} />
+  </slot>
+  <main>
+    <slot />
+  </main>
+  <slot name="footer" />
+</Layout>

@@ -1,0 +1,13 @@
+---
+export interface Props {
+  email: string;
+}
+const { email } = Astro.props;
+---
+
+<div
+  class="dark text-muted text-sm bg-black dark:bg-transparent dark:border-b dark:border-slate-800 dark:text-slate-400 hidden lg:grid grid-cols-[1fr_minmax(275px,1fr)_1fr] gap-1 overflow-hidden px-3 py-2 relative text-ellipsis whitespace-nowrap"
+>
+  <div></div>
+  <a href={`mailto:${email}`} class="block text-center">{email}</a>
+</div>
