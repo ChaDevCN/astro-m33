@@ -35,7 +35,7 @@ export const findImage = async (
   }
 
   // Relative paths or not "~/assets/"
-  if (!imagePath.startsWith('~/assets/images')) {
+  if (!imagePath.startsWith('@/assets/images')) {
     return imagePath;
   }
 

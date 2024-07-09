@@ -1,7 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { defineConfig } from "astro/config";
+import { defineConfig, squooshImageService } from "astro/config";
 
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
@@ -32,6 +32,12 @@ export default defineConfig({
       },
     }),
   ],
+
+  image: {
+    service: squooshImageService(),
+    domains: ["http://49.234.109.212:3009"],
+  },
+
   vite: {
     resolve: {
       alias: {

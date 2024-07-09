@@ -1,0 +1,63 @@
+---
+import Image from "../common/Image.astro";
+import { Icon } from "astro-icon/components";
+export interface Props {
+  showPic: string;
+  name: string;
+  path: string;
+  [key: string]: any;
+}
+const { showPic, name, path } = Astro.props;
+---
+
+<li>
+  <a href={path} class="group/knowledge block">
+    <div class="relative overflow-hidden">
+      <Image
+        src={showPic}
+        alt={name}
+        class:list={[
+          "lg:group-hover/knowledge:scale-110 transition-all duration-300 lg:w-auto",
+          "w-full",
+        ]}
+      />
+      <div
+        class:list={[
+          "inline-flex items-center flex-col justify-end ",
+          "absolute  bottom-0 right-0",
+          "lg:w-16 lg:h-16 h-[45px] w-auto",
+          "lg:p[20px] px-[10px] whitespace-nowrap",
+          "bg-haeder-bg text-haeder-text",
+          "lg:group-hover/knowledge:h-[200px]",
+          "transition-all duration-300",
+        ]}
+      >
+        <div class="h-full py-[20px] flex items-center justify-center">
+          <Icon
+            name="tabler:brand-facebook-filled"
+            class="w-7 h-7 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block"
+          />
+        </div>
+        <div class="h-full py-[20px] flex items-center justify-center">
+          <Icon
+            name="tabler:brand-instagram"
+            class="w-7 h-7 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block"
+          />
+        </div>
+        <div class="h-full py-[20px] flex items-center justify-center">
+          <Icon
+            name="tabler:brand-stackshare"
+            class="w-7 h-7 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block group-hover/knowledge:hidden"
+          />
+          <Icon
+            name="tabler:brand-twitter-filled"
+            class="w-7 h-7 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 hidden group-hover/knowledge:inline-block"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="line-clamp-2 ...">
+      {name}
+    </div>
+  </a>
+</li>

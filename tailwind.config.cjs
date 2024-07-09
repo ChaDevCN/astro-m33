@@ -13,21 +13,22 @@ module.exports = {
         muted: "var(--aw-color-text-muted)",
         "haeder-text": "var(--header-text)",
         "haeder-bg": "var(--header-bg)",
+        "b-color": "var(--border-color)",
       },
-      fontFamily: {
-        sans: [
-          "var(--aw-font-sans, ui-sans-serif)",
-          ...defaultTheme.fontFamily.sans,
-        ],
-        serif: [
-          "var(--aw-font-serif, ui-serif)",
-          ...defaultTheme.fontFamily.serif,
-        ],
-        heading: [
-          "var(--aw-font-heading, ui-sans-serif)",
-          ...defaultTheme.fontFamily.sans,
-        ],
-      },
+      // fontFamily: {
+      //   sans: [
+      //     "var(--aw-font-sans, ui-sans-serif)",
+      //     ...defaultTheme.fontFamily.sans,
+      //   ],
+      //   serif: [
+      //     "var(--aw-font-serif, ui-serif)",
+      //     ...defaultTheme.fontFamily.serif,
+      //   ],
+      //   heading: [
+      //     "var(--aw-font-heading, ui-sans-serif)",
+      //     ...defaultTheme.fontFamily.sans,
+      //   ],
+      // },
     },
   },
   plugins: [typographyPlugin],

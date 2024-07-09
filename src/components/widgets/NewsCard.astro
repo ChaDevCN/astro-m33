@@ -1,0 +1,43 @@
+---
+import Image from "../common/Image.astro";
+import { Icon } from "astro-icon/components";
+export interface Props {
+  newsPic: string;
+  name: string;
+  path: string;
+  [key: string]: any;
+}
+const { newsPic, name, path, createTime } = Astro.props;
+---
+
+<li>
+  <a href={path} class="group/news block relative">
+    <Image
+      src={newsPic}
+      alt={name}
+      class:list={[
+        "grayscale group-hover/news:grayscale-0 transition-all duration-200",
+      ]}
+    />
+    <div
+      class:list={[
+        "flex items-center",
+        "absolute bottom-[2.08vw] right-0",
+        "px-[40px] text-haeder-text",
+        "font-medium lg:text-xl text-sm",
+        "overflow-hidden",
+        "group-hover/news:translate-y-[-15px] transition-all duration-200",
+      ]}
+    >
+      <div class="max-w-full line-clamp-2 ...">
+        {name}
+      </div>
+      <div>
+        <Icon
+          name="tabler:arrow-up-right"
+          class="w-7 h-7 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block"
+        />
+      </div>
+    </div>
+  </a>
+</li>

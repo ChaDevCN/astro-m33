@@ -3,6 +3,7 @@ interface DataNode {
     url: string;
     children?: DataNode[];
 }
+/**   */
 export const generatePartialRoutes = (data: DataNode[]): { [key: string]: string[] } => {
     if (!data || !Array.isArray(data)) {
         return data
@@ -30,4 +31,20 @@ export const generatePartialRoutes = (data: DataNode[]): { [key: string]: string
     }, {} as { [key: string]: string[] });
 
     return result;
+};
+/**   */
+export const buildHeaderMenu = (menu) => {
+    const headerMenu = JSON.parse(JSON.stringify(menu));
+
+    clearDetails(headerMenu.find(item => item.type == "products"));
+    clearDetails(headerMenu.find(item => item.type == "knowledge"));
+    clearDetails(headerMenu.find(item => item.type == "news"));
+
+    return headerMenu;
+};
+
+/**   */
+export const clearDetails = (node) => {
+    node.children = node.children.filter(item => !item.type.endsWith("detail"));
+    node.children.forEach(child => clearDetails(child));
 };

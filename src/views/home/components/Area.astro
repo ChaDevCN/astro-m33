@@ -1,0 +1,16 @@
+---
+import { filterHotItemsByKey } from "@/lib/filterHotItemsByKey.ts";
+
+import Section from "@/components/Section.astro";
+import Card from "@/components/widgets/Card.astro";
+
+const result = await filterHotItemsByKey();
+---
+
+<Section>
+  <h2 class="uppercase lg:text-4xl text-xl font-bold">APPLICATION AREA</h2>
+  <p class="desc">This is the industry in which our product is used</p>
+  <ul class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5">
+    {result.length && result.slice(0, 6).map((item) => <Card {...item} />)}
+  </ul>
+</Section>

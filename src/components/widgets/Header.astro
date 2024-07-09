@@ -28,7 +28,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 console.log(position, isFullWidth);
 ---
 
-<header id={id} class="bg-haeder-bg">
+<header id={id} class="bg-haeder-bg sticky">
   <div class="absolute inset-0"></div>
   <div
     class:list={[
@@ -65,24 +65,24 @@ console.log(position, isFullWidth);
         {
           menu.map(({ name_ch: text, url: href, children: links }) => (
             <li
-              class={`${links?.length ? "dropdown" : ""} md:h-full md:flex justify-center items-center`}
+              class={`${links?.length ? "dropdown" : ""} md:h-full md:flex justify-center items-center group/menu `}
             >
               {links?.length ? (
                 <>
                   <button
                     type="button"
-                    class="hover:text-link h-full dark:hover:text-white px-4 py-3 flex items-center text-nowrap md:py-6"
+                    class="hover:text-link h-full relative dark:hover:text-white px-4 py-3 flex items-center text-nowrap md:py-6 pseudo-after after:content-[''] after:block after:w-0 sm:group-hover/menu:after:w-full after:h-[2px] after:bg-white after:absolute after:bottom-1 after:left-1/2 after:translate-x-[-50%] after:transition-width after:duration-300 after:ease"
                   >
                     <a href={href} class="md:text-haeder-text">
                       {text}
                     </a>
                     <Icon
                       name="tabler:chevron-down"
-                      class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline md:text-haeder-text"
+                      class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline md:text-haeder-text sm:group-hover/menu:rotate-180 transition-all duration-300"
                     />
                   </button>
                   {
-                    <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-dark rounded md:absolute top-full pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
+                    <ul class="dropdown-menu after: md:backdrop-blur-md dark:md:bg-dark rounded md:absolute top-full pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
                       {links.map(({ name_ch: text2, url: href2 }) => (
                         <li>
                           <a

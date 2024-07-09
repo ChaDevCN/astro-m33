@@ -58,7 +58,9 @@ if (typeof _image === "string") {
 ---
 
 {
-  !image ? null : (
+  !image ? (
+    <Fragment />
+  ) : (
     <img
       src={image.src}
       crossorigin="anonymous"
