@@ -32,6 +32,9 @@ importers:
       less:
         specifier: ^4.2.0
         version: 4.2.0
+      swiper:
+        specifier: ^11.1.4
+        version: 11.1.4
       typescript:
         specifier: ^5.5.3
         version: 5.5.3
@@ -48,6 +51,9 @@ importers:
       '@types/node':
         specifier: ^20.14.10
         version: 20.14.10
+      dayjs:
+        specifier: ^1.11.11
+        version: 1.11.11
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.4.0
@@ -1001,6 +1007,9 @@ packages:
   csso@5.0.5:
     resolution: {integrity: sha512-0LrrStPOdJj+SPCCrGhzryycLjwcgUSHBtxNA8aIDxf0GLsRh1cKYhB00Gd1lDOS4yGH69+SNn13+TWbVHETFQ==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
+
+  dayjs@1.11.11:
+    resolution: {integrity: sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==}
 
   debug@4.3.5:
     resolution: {integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==}
@@ -2128,6 +2137,10 @@ packages:
     resolution: {integrity: sha512-X4UZvLhOglD5Xrp834HzGHf8RKUW0Ahigg/08yRO1no9t2NxffOkMiQ0WmaMIbaGlVTlSst2zWANsdhz5ybXgA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  swiper@11.1.4:
+    resolution: {integrity: sha512-1n7kbYJB2dFEpUHRFszq7gys/ofIBrMNibwTiMvPHwneKND/t9kImnHt6CfGPScMHgI+dWMbGTycCKGMoOO1KA==}
+    engines: {node: '>= 4.7.0'}
 
   tailwind-merge@2.4.0:
     resolution: {integrity: sha512-49AwoOQNKdqKPd9CViyH5wJoSKsCDjUlzL8DxuGp3P1FsGY36NJDAa18jLZcaHAUUuTj+JB8IAo8zWgBNvBF7A==}
@@ -3476,6 +3489,8 @@ snapshots:
   csso@5.0.5:
     dependencies:
       css-tree: 2.2.1
+
+  dayjs@1.11.11: {}
 
   debug@4.3.5:
     dependencies:
@@ -4878,6 +4893,8 @@ snapshots:
       css-tree: 2.3.1
       csso: 5.0.5
       picocolors: 1.0.1
+
+  swiper@11.1.4: {}
 
   tailwind-merge@2.4.0: {}
 

@@ -1,0 +1,67 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import Products from "@/views/Products/index.astro";
+import ProductsClass from "@/views/ProductsClass/index.astro";
+import AboutUs from "@/views/AboutUs/index.astro";
+import Contact from "@/views/Contact/index.astro";
+import News from "@/views/News/index.astro";
+import NewsClass from "@/views/NewsClass/index.astro";
+import Knowledge from "@/views/Knowledge/index.astro";
+import KnowledgeClass from "@/views/KnowledgeClass/index.astro";
+
+import { fetchData } from "@/lib/fetchDataAll";
+
+import { flattenTree, findNodeByAttribute } from "@/utils/utils";
+import { rootRouteTypes } from "@/common/router";
+
+const componentMap = {
+  products: Products,
+  productsclass: ProductsClass,
+  news: News,
+  newsclass: NewsClass,
+  knowledge: Knowledge,
+  knowledgeclass: KnowledgeClass,
+  contact: Contact,
+  "about-us": AboutUs,
+};
+
+const {
+  result: {
+    data: { menu },
+  },
+} = await fetchData();
+export const getStaticPaths = (async () => {
+  const {
+    result: {
+      data: { menu },
+    },
+  } = await fetchData();
+
+  const treeMenu = flattenTree(menu).filter((item) =>
+    rootRouteTypes.includes(item.type)
+  );
+
+  return treeMenu.map((item) => ({
+    params: { type: item.url.replace("/", "") },
+  }));
+}) satisfies GetStaticPaths;
+
+const { type } = Astro.params;
+const activeUrl = `/${type}`;
+const treeMenu = flattenTree(menu);
+
+const activeItem = findNodeByAttribute(treeMenu, "url", activeUrl) || {};
+
+const Comp = componentMap[activeItem.type];
+---
+
+<Fragment>
+  {
+    rootRouteTypes.includes(activeItem.type) ? (
+      <Comp activeItem={activeItem} />
+    ) : (
+      <p>Type not supported.</p>
+    )
+  }
+</Fragment>

@@ -1,0 +1,29 @@
+<script type="module">
+  const initSwiper = () => {
+    const swiperBanner = new Swiper("#swiper-banner", {
+      loop: true,
+      autoplay: {
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-banner-pagination",
+      },
+      navigation: {
+        nextEl: ".swiper-banner-next",
+        prevEl: ".swiper-banner-prev",
+      },
+    });
+    const swiperbatch = new Swiper("#swiper-batch", {
+      direction: "vertical",
+      loop: true,
+      slidesPerView: 2,
+      spaceBetween: 40,
+      mousewheel: true,
+    });
+  };
+
+  window.addEventListener("astro:after-swap", () => {
+    initSwiper();
+  });
+  window.onpageshow = initSwiper;
+</script>

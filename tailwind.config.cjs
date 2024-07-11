@@ -14,6 +14,9 @@ module.exports = {
         "haeder-text": "var(--header-text)",
         "haeder-bg": "var(--header-bg)",
         "b-color": "var(--border-color)",
+        "time-color": "var(--time-color)",
+        text: "var(--text)",
+        title: "var(--title)",
       },
       // fontFamily: {
       //   sans: [

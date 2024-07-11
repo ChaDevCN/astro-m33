@@ -1,0 +1,76 @@
+---
+import Image from "@/components/common/Image.astro";
+
+const { banner } = Astro.props;
+const groupedBanners = banner.reduce((acc, banner) => {
+  const key = banner.name.split(".")[0];
+  if (!acc[key]) {
+    acc[key] = [];
+  }
+  acc[key].push(banner);
+  return acc;
+}, {});
+---
+
+<div class="banner banner-mobile-box">
+  <div class="swiper swiper-banner" id="swiper-banner">
+    <div class="swiper-wrapper">
+      {
+        Object.entries(groupedBanners).map(([key, images]: any) => {
+          const srcSet = images
+            .map((image) => `${image.url} ${image.width}w`)
+            .join(", ");
+          return (
+            <div class="swiper-slide">
+              <Image
+                srcset={srcSet}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1920px"
+                src={images[0].url}
+                alt={`Banner ${key}`}
+                class="w-full h-auto"
+              />
+            </div>
+          );
+        })
+      }
+    </div>
+    <div class="swiper-pagination swiper-banner-pagination"></div>
+    <div class="swiper-button-box">
+      <div class="swiper-button-prev swiper-banner-prev"></div>
+      <div class="swiper-button-next swiper-banner-next"></div>
+    </div>
+  </div>
+</div>
+<style scoped>
+  .swiper-banner-prev::after,
+  .swiper-banner-next::after {
+    color: rgba(196, 196, 196, 1);
+    font-weight: 600;
+  }
+  :global(.swiper-banner-pagination .swiper-pagination-bullet) {
+    background-color: #fff;
+    opacity: 0.3;
+  }
+  :global(
+      .swiper-banner-pagination
+        .swiper-pagination-bullet.swiper-pagination-bullet-active
+    ) {
+    opacity: 1;
+  }
+  @media (min-width: 1780px) {
+    .swiper-banner-next {
+      right: calc(calc(100vw - 1740px) / 2);
+    }
+    .swiper-banner-prev {
+      left: calc(calc(100vw - 1740px) / 2);
+    }
+  }
+  @media (min-width: 992px) {
+    :global(.swiper-banner .swiper-banner-pagination) {
+      width: auto;
+      left: unset;
+      right: 4.68vw;
+      bottom: 3.125vw;
+    }
+  }
+</style>

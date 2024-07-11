@@ -2,11 +2,11 @@
   "name": "astro-m33",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "node deleteCache.js && astro dev",
+    "start": "node deleteCache.js && astro dev",
+    "build": "node deleteCache.js && astro build",
+    "preview": "node deleteCache.js && astro preview",
+    "astro": "node deleteCache.js && astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
@@ -17,6 +17,7 @@
     "astro": "^4.11.5",
     "astro-icon": "^1.1.0",
     "less": "^4.2.0",
+    "swiper": "^11.1.4",
     "typescript": "^5.5.3",
     "unpic": "^3.18.0"
   },
@@ -24,6 +25,7 @@
     "@astrojs/tailwind": "5.1.0",
     "@tailwindcss/typography": "^0.5.13",
     "@types/node": "^20.14.10",
+    "dayjs": "^1.11.11",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.4"
   }

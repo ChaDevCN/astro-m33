@@ -35,7 +35,7 @@ export default defineConfig({
 
   image: {
     service: squooshImageService(),
-    domains: ["http://49.234.109.212:3009"],
+    domains: ["https://icms.aixdb.cn"],
   },
 
   vite: {

@@ -1,8 +1,9 @@
 ---
-import Layout from "@/layouts/PageLayout.astro";
-import Card from "../components/Card.astro";
 import { getRouter } from "../lib/getRouter";
+
 import Home from "@/views/home/index.astro";
+import Layout from "@/layouts/PageLayout.astro";
+
 const res = await getRouter();
 let arr: any[] = [];
 Object.keys(res).forEach((item) => {

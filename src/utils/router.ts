@@ -48,3 +48,9 @@ export const clearDetails = (node) => {
     node.children = node.children.filter(item => !item.type.endsWith("detail"));
     node.children.forEach(child => clearDetails(child));
 };
+
+
+/**
+ * 根
+ * **/
+

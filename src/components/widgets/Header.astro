@@ -22,17 +22,25 @@ const {
   id = "header",
   position = "center",
   isFullWidth = false,
+  isSticky,
   logourl,
+  isDark,
 } = Astro.props;
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 console.log(position, isFullWidth);
 ---
 
-<header id={id} class="bg-haeder-bg sticky">
+<header
+  id={id}
+  class:list={[
+    { sticky: isSticky, relative: !isSticky },
+    "top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out bg-haeder-bg ",
+  ]}
+>
   <div class="absolute inset-0"></div>
   <div
     class:list={[
-      "relative text-default py-0 md:px-0 px-6 mx-auto w-full ",
+      "relative text-default py-0 px-3 mx-auto w-full max-w-[1740px] ",
       {
         "md:flex md:justify-between": position !== "center",
       },
@@ -82,7 +90,7 @@ console.log(position, isFullWidth);
                     />
                   </button>
                   {
-                    <ul class="dropdown-menu after: md:backdrop-blur-md dark:md:bg-dark rounded md:absolute top-full pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
+                    <ul class="dropdown-menu after: md:backdrop-blur-md dark:md:bg-dark rounded md:absolute top-full pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl z-9">
                       {links.map(({ name_ch: text2, url: href2 }) => (
                         <li>
                           <a

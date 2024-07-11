@@ -1,11 +1,25 @@
 ---
+import { fetchData } from "@/lib/fetchDataAll";
+
 import AboutUs from "./components/AboutUs.astro";
 import HotProducts from "./components/HotProducts.astro";
 import Recommendations from "./components/Recommendations.astro";
 import News from "./components/News.astro";
 import Area from "./components/Area.astro";
+import Banner from "./components/Banner.astro";
+
+const {
+  result: {
+    data: { site_pic_pcbanner, site_pic },
+  },
+} = await fetchData();
+
+const pcbanner = site_pic_pcbanner.filter(
+  (item) => item.glid === site_pic[0].ID
+);
 ---
 
+<Banner banner={pcbanner} />
 <AboutUs />
 <HotProducts />
 <Recommendations />
