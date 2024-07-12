@@ -10,6 +10,8 @@ import NewsClass from "@/views/NewsClass/index.astro";
 import Knowledge from "@/views/Knowledge/index.astro";
 import KnowledgeClass from "@/views/KnowledgeClass/index.astro";
 
+import Layout from "@/layouts/PageLayout.astro";
+
 import { fetchData } from "@/lib/fetchDataAll";
 
 import { flattenTree, findNodeByAttribute } from "@/utils/utils";
@@ -56,7 +58,7 @@ const activeItem = findNodeByAttribute(treeMenu, "url", activeUrl) || {};
 const Comp = componentMap[activeItem.type];
 ---
 
-<Fragment>
+<Layout>
   {
     rootRouteTypes.includes(activeItem.type) ? (
       <Comp activeItem={activeItem} />
@@ -64,4 +66,4 @@ const Comp = componentMap[activeItem.type];
       <p>Type not supported.</p>
     )
   }
-</Fragment>
+</Layout>

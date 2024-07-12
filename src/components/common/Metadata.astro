@@ -1,0 +1,39 @@
+---
+import { AstroSeo } from "@astrolib/seo";
+import type { Props as AstroSeoProps } from "@astrolib/seo";
+import { findNodeByAttribute } from "@/utils/utils";
+
+const {
+  url: { pathname },
+  props: { treeData },
+} = Astro;
+
+const { SITE_URL } = import.meta.env;
+const domin = __DOMAIN__;
+
+const { title, description, keywords } = findNodeByAttribute(
+  treeData,
+  "path",
+  pathname
+);
+const seo: AstroSeoProps = {
+  title,
+  description,
+  titleTemplate: "%s",
+  noindex: false,
+  nofollow: false,
+  canonical: SITE_URL + pathname,
+  openGraph: {
+    url: domin,
+    site_name: SITE_URL + pathname,
+    type: "website",
+    locale: "en",
+    images: [],
+  },
+  twitter: {
+    cardType: "summary",
+  },
+};
+---
+
+<AstroSeo {...seo} />

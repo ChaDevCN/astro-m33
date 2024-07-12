@@ -1,12 +1,19 @@
 ---
+import { fetchData } from "@/lib/fetchDataAll";
 import CustomStyles from "@/components/CustomStyles.astro";
-
 import BasicScripts from "@/components/common/BasicScripts.astro";
 import HomeSwiper from "@/components/common/HomeSwiperScripts.astro";
-
+import CommonMeta from "@/components/common/CommonMeta.astro";
+import Resources from "@/components/common/Resources.astro";
 import Favicons from "@/components/Favicons.astro";
-
+import Metadata from "@/components/common/Metadata.astro";
 import "@/assets/styles/tailwind.css";
+
+const {
+  result: {
+    data: { menu },
+  },
+} = await fetchData();
 ---
 
 <!doctype html>
@@ -17,30 +24,13 @@ import "@/assets/styles/tailwind.css";
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <Favicons />
-    <meta name="generator" content={Astro.generator} />
-    <link
-      rel="preload"
-      href="https://unpkg.com/swiper/swiper-bundle.min.js"
-      as="script"
-    />
-    <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-      />
-    </noscript>
+    <CommonMeta />
+    <Metadata treeData={menu} />
+    <Resources />
   </head>
   <body>
     <slot />
-
     <BasicScripts />
     <HomeSwiper />
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
   </body>
 </html>

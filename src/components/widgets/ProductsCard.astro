@@ -7,14 +7,14 @@ export interface Props {
   path: string;
   [key: string]: any;
 }
-const { knowledgePic, name, path } = Astro.props;
+const { knowledgePic, name, path, showPic } = Astro.props;
 ---
 
 <li>
   <a href={path} class="group/knowledge block">
     <div class="relative overflow-hidden">
       <Image
-        src={knowledgePic}
+        src={knowledgePic || showPic}
         alt={name}
         class:list={[
           "lg:group-hover/knowledge:scale-110 transition-all duration-300 lg:w-auto",

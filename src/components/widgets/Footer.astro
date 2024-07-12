@@ -1,17 +1,63 @@
 ---
 import { footerData } from "@/lib/getFootdata";
+import Image from "@/components/common/Image.astro";
+import { Icon } from "astro-icon/components";
 const {
   info: {
-    copyright = "", //版权信息
+    copyright = "Copyright@2023-2026 All Rights Reserved. Powered by AI Seeker Leopard", //版权信息
+    logourl,
   },
+  bci: { content },
 } = await footerData();
-const fullUrl = Astro.request.url;
 ---
 
-<footer>
-  <div></div>
-  <div>
-    <div>{copyright}</div>
-    <!-- <div>{fullUrl}</div> -->
+<footer
+  class:list={[
+    "lg:bg-footer-bg lg:text-time-color bg-haeder-bg text-haeder-text",
+  ]}
+>
+  <div class:list={["px-4 max-w-[1740px] mx-auto"]}>
+    <div
+      class:list={[
+        "flex lg:flex-col flex-row lg:justify-between",
+        "lg:py-[60px] py-[25px]",
+      ]}
+    >
+      <div class:list={["lg:flex-none lg:w-[29%]"]}>
+        <div class="lg:block hidden">
+          <Image src={logourl} alt={"logo"} />
+        </div>
+        <div set:html={content} class:list={["lg:mt-[40px] mt-5"]} />
+      </div>
+      <div class:list={["lg:w-[69%]"]}></div>
+    </div>
+    <div
+      class:list={[
+        "lg:py-10 border-t-[#6666] border-t lg:text-[16px] py-4",
+        "flex lg:flex-row flex-col lg:justify-between  lg:items-center",
+      ]}
+    >
+      <div class="text-center lg:text-left">{copyright}&nbsp;</div>
+      <div class="flex items-center gap-2 lg:justify-start justify-center">
+        <div>Follow Us</div>
+        {
+          [
+            "tabler:brand-facebook-filled",
+            "tabler:brand-twitter-filled",
+            "tabler:brand-instagram",
+            "tabler:brand-youtube-filled",
+            "tabler:brand-tiktok-filled",
+            "tabler:brand-pinterest",
+          ].map((icon) => (
+            <div class="p-2 bg-white lg:opacity-60 cursor-pointer rounded-full hover:translate-y-[-3px] lg:hover:translate-y-[-10px] transition-all  duration-100">
+              <Icon
+                name={icon}
+                class:list={["lg:w-5 lg:h-5 text-haeder-bg lg:text-[#222]"]}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </footer>

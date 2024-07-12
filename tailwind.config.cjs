@@ -17,6 +17,7 @@ module.exports = {
         "time-color": "var(--time-color)",
         text: "var(--text)",
         title: "var(--title)",
+        "footer-bg": "var(--footer-bg)",
       },
       // fontFamily: {
       //   sans: [

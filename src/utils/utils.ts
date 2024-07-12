@@ -1,4 +1,6 @@
 
+const { SITE_URL } = import.meta.env
+
 export const trim = (str = '', ch?: string) => {
   let start = 0,
     end = str.length || 0;
@@ -37,29 +39,23 @@ export const formatDate = dateString => {
 /**
  * 查找具有指定属性和值的节点
  * 
- * @param {Array} nodes - 待搜索的节点数组，通常是整个树的顶层或任何子节点数组
- * @param {String} attribute - 要搜索的属性名，如 'id', 'type' 等
+ * @param {Array} nodes - 待搜索的节点数组，整个树的顶层或任何子节点数组
+ * @param {String} attribute - 要搜索的属性名
  * @param {*} value - 与属性相匹配的值
  * @returns {Object|null} 返回找到的第一个节点对象，如果没有找到则返回 null
  */
 export const findNodeByAttribute = (nodes, attribute, value) => {
-  // 遍历节点数组
   for (const node of nodes) {
-    // 检查当前节点的指定属性是否与给定值匹配
     if (node[attribute] === value) {
-      // 如果找到匹配的节点，返回这个节点
       return node;
     }
-    // 如果当前节点有子节点，递归调用本函数搜索子节点
     if (node.children && node.children.length > 0) {
       const found = findNodeByAttribute(node.children, attribute, value);
-      // 如果在子节点中找到匹配的节点，返回这个节点
       if (found) {
         return found;
       }
     }
   }
-  // 如果遍历所有节点后都没有找到匹配的节点，返回 null
   return null;
 }
 
@@ -93,3 +89,13 @@ export const flattenTree = (nodes) => {
   traverse(nodes);
   return result;
 }
+/** **/
+export const getCanonical = (path = ''): string | URL => {
+  const url = String(new URL(path, SITE_URL));
+  if (path && url.endsWith('/')) {
+    return url.slice(0, -1);
+  } else if (path && !url.endsWith('/')) {
+    return url + '/';
+  }
+  return url;
+};
