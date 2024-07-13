@@ -10,32 +10,6 @@ export const trim = (str = '', ch?: string) => {
 };
 
 
-export const formatDate = dateString => {
-  const date = new Date(dateString);
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
-  const day = date.getDate();
-  const month = monthNames[date.getMonth()];
-  const year = date.getFullYear();
-
-  const formattedDate = `${month} ${day} ${year}`;
-  return formattedDate;
-};
-
-
 /**
  * 查找具有指定属性和值的节点
  * 

@@ -1,0 +1,96 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import Products from "@/views/Products/index.astro";
+import ProductsClass from "@/views/ProductsClass/index.astro";
+import AboutUs from "@/views/AboutUs/index.astro";
+import Contact from "@/views/Contact/index.astro";
+import News from "@/views/News/index.astro";
+import NewsClass from "@/views/NewsClass/index.astro";
+import Knowledge from "@/views/Knowledge/index.astro";
+import KnowledgeClass from "@/views/KnowledgeClass/index.astro";
+
+import Layout from "@/layouts/PageLayout.astro";
+
+import { fetchData } from "@/lib/fetchDataAll";
+import { getList } from "@/lib/getList";
+
+import { flattenTree, findNodeByAttribute } from "@/utils/utils";
+import { isPagination, isDetail } from "@/common/router";
+
+const componentMap = {
+  products: Products,
+  productsclass: ProductsClass,
+  news: News,
+  newsclass: NewsClass,
+  knowledge: Knowledge,
+  knowledgeclass: KnowledgeClass,
+  contact: Contact,
+  "about-us": AboutUs,
+};
+
+const {
+  result: {
+    data: { menu },
+  },
+} = await fetchData();
+export const getStaticPaths = (async ({ paginate }) => {
+  const {
+    result: {
+      data: { menu },
+    },
+  } = await fetchData();
+
+  const treeMenu = flattenTree(menu).filter((item) =>
+    isDetail.includes(item.type)
+  );
+
+  const staticPath: any[] = [];
+  /** 详情*/
+  treeMenu.forEach((item) => {
+    const params = {
+      params: {
+        type: item.path.split("/")[1] as string,
+        page: item.path.split("/")[2] as string,
+      },
+    };
+    staticPath.push(params);
+  });
+  const noDetail: any = [];
+  /** 分页 */
+  isPagination.forEach(async (type) => {
+    const treeMenu = flattenTree(menu).filter((item) => item.type === type);
+
+    if (!type.includes("detail")) {
+      const nextType = type.includes("class")
+        ? type.replace("class", "")
+        : type;
+      const nextTreeMenu = treeMenu.filter(
+        (s) => s.type === `${nextType}detail`
+      );
+      console.log(nextTreeMenu.length, nextType);
+    }
+  });
+  console.log(noDetail, "123213312");
+
+  return staticPath;
+}) satisfies GetStaticPaths;
+
+const { type } = Astro.params;
+const activeUrl = `/${type}`;
+const treeMenu = flattenTree(menu);
+
+// const activeItem = findNodeByAttribute(treeMenu, "url", activeUrl) || {};
+
+// const Comp = componentMap[activeItem.type];
+---
+
+<!-- <Layout>
+  {
+    rootRouteTypes.includes(activeItem.type) ? (
+      <Comp activeItem={activeItem} />
+    ) : (
+      <p>Type not supported.</p>
+    )
+  }
+</Layout> -->

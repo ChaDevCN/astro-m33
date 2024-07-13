@@ -1,8 +1,10 @@
 ---
 import Section from "@/components/Section.astro";
 import ProductsCard from "@/components/widgets/ProductsCard.astro";
+import Pagination from "@/components/widgets/Pagination.astro";
 
 import { getList } from "@/lib/getList";
+import { Icon } from "astro-icon/components";
 
 const list = await getList({});
 
@@ -14,13 +16,19 @@ const startIndex = (current - 1) * pageSize;
 const endIndex = Math.min(startIndex + pageSize, total);
 
 const paginatedList = list.slice(startIndex, endIndex);
-console.log(activeItem);
+
+const onchange = (a) => {
+  console.log(a);
+};
 ---
 
 <Section>
   <div>
-    <h2 class="text-[#111] font-extrabold uppercase lg:text-[42px] text-[20px]">
+    <h2
+      class="text-[#111] font-extrabold uppercase lg:text-[42px] text-[20px] flex items-center gap-4"
+    >
       {activeItem.name_ch}
+      <Icon name="tabler:arrow-down-right" />
     </h2>
     <ul class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5">
       {
@@ -30,5 +38,14 @@ console.log(activeItem);
           ))
       }
     </ul>
+    <div
+      class:list={[
+        "flex justify-center items-center ",
+        "lg:mt-14 mt-[20px] lg:pt-[60px] pt-0",
+        "border-t-[#ddd] border-t ",
+      ]}
+    >
+      <Pagination pagination={{ pageSize, total, current }} />
+    </div>
   </div>
 </Section>
