@@ -3,12 +3,13 @@ import type { GetStaticPaths } from "astro";
 
 import Products from "@/views/Products/index.astro";
 import ProductsClass from "@/views/ProductsClass/index.astro";
-import AboutUs from "@/views/AboutUs/index.astro";
-import Contact from "@/views/Contact/index.astro";
+import ProductsDetail from "@/views/ProductsDetail/index.astro";
 import News from "@/views/News/index.astro";
 import NewsClass from "@/views/NewsClass/index.astro";
+import NewsDetail from "@/views/NewsDetail/index.astro";
 import Knowledge from "@/views/Knowledge/index.astro";
 import KnowledgeClass from "@/views/KnowledgeClass/index.astro";
+import KnowledgeDetail from "@/views/KnowledgeDetail/index.astro";
 
 import Layout from "@/layouts/PageLayout.astro";
 
@@ -16,25 +17,14 @@ import { fetchData } from "@/lib/fetchDataAll";
 import { getList } from "@/lib/getList";
 
 import { flattenTree, findNodeByAttribute } from "@/utils/utils";
-import { isPagination, isDetail } from "@/common/router";
-
-const componentMap = {
-  products: Products,
-  productsclass: ProductsClass,
-  news: News,
-  newsclass: NewsClass,
-  knowledge: Knowledge,
-  knowledgeclass: KnowledgeClass,
-  contact: Contact,
-  "about-us": AboutUs,
-};
+import { isPagination, isDetail, pageSize } from "@/common/router";
 
 const {
   result: {
     data: { menu },
   },
 } = await fetchData();
-export const getStaticPaths = (async ({ paginate }) => {
+export const getStaticPaths = (async () => {
   const {
     result: {
       data: { menu },
@@ -53,44 +43,103 @@ export const getStaticPaths = (async ({ paginate }) => {
         type: item.path.split("/")[1] as string,
         page: item.path.split("/")[2] as string,
       },
+      props: {
+        default: {
+          type: item.type,
+          detail: item,
+        },
+      },
     };
     staticPath.push(params);
   });
   const noDetail: any = [];
   /** 分页 */
   isPagination.forEach(async (type) => {
-    const treeMenu = flattenTree(menu).filter((item) => item.type === type);
+    const treeMenu = flattenTree(menu);
 
-    if (!type.includes("detail")) {
-      const nextType = type.includes("class")
-        ? type.replace("class", "")
-        : type;
-      const nextTreeMenu = treeMenu.filter(
-        (s) => s.type === `${nextType}detail`
+    if (!type.includes("class")) {
+      const nextTreeMenu = treeMenu.filter((s) => s.type === `${type}detail`);
+      const total = nextTreeMenu.length;
+      const size = Math.ceil(total / pageSize);
+      const active = findNodeByAttribute(treeMenu, "type", type);
+      for (let i = 1; i <= size; i++) {
+        const params = {
+          params: {
+            type: active.path.replace("/", ""),
+            page: `page-${i}`,
+          },
+          props: {
+            default: {
+              type: type,
+              detail: active,
+            },
+          },
+        };
+        noDetail.push(params);
+      }
+    } else {
+      const treeMenuClass = treeMenu.filter((item) =>
+        item.type.endsWith("class")
       );
-      console.log(nextTreeMenu.length, nextType);
+      treeMenuClass.forEach((typeClass) => {
+        const nextTreeMenu = treeMenu.filter(
+          (s) =>
+            s.type === `${type.replace("class", "")}detail` &&
+            s.glid === typeClass.ID
+        );
+        const total = nextTreeMenu.length;
+        const size = Math.ceil(total / pageSize);
+        for (let i = 1; i <= size; i++) {
+          const params = {
+            params: {
+              type: typeClass.path.replace("/", ""),
+              page: `page-${i}`,
+            },
+            props: {
+              default: {
+                type: typeClass.type,
+                detail: typeClass,
+              },
+            },
+          };
+          noDetail.push(params);
+        }
+      });
     }
   });
-  console.log(noDetail, "123213312");
-
-  return staticPath;
+  return [...staticPath, ...noDetail];
 }) satisfies GetStaticPaths;
 
-const { type } = Astro.params;
-const activeUrl = `/${type}`;
+const {
+  url,
+  props: {
+    default: { type, detail },
+  },
+  params,
+} = Astro;
+
 const treeMenu = flattenTree(menu);
-
-// const activeItem = findNodeByAttribute(treeMenu, "url", activeUrl) || {};
-
-// const Comp = componentMap[activeItem.type];
+const paramsAll = [...isDetail, ...isPagination];
+const componentMap = {
+  newsdetail: NewsDetail,
+  productsdetail: ProductsDetail,
+  knowledgedetail: KnowledgeDetail,
+  productsclass: ProductsClass,
+  products: Products,
+  news: News,
+  newsclass: NewsClass,
+  knowledge: Knowledge,
+  knowledgeclass: KnowledgeClass,
+};
+const Comp = componentMap[type];
 ---
 
-<!-- <Layout>
+<Layout>
   {
-    rootRouteTypes.includes(activeItem.type) ? (
-      <Comp activeItem={activeItem} />
+    paramsAll.includes(type) ? (
+      <Comp activeItem={detail} />
     ) : (
       <p>Type not supported.</p>
     )
   }
-</Layout> -->
+</Layout>

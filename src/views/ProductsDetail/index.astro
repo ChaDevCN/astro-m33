@@ -1,0 +1,27 @@
+---
+import Section from "@/components/Section.astro";
+import ProductsCard from "@/components/widgets/ProductsCard.astro";
+import Pagination from "@/components/widgets/Pagination.astro";
+
+import { getList } from "@/lib/getList";
+import { Icon } from "astro-icon/components";
+
+const list = await getList({});
+
+const total = list.length;
+
+const { activeItem, pageSize = "8", current = "1", page } = Astro.props;
+
+const startIndex = (current - 1) * pageSize;
+const endIndex = Math.min(startIndex + pageSize, total);
+
+const paginatedList = list.slice(startIndex, endIndex);
+
+const onchange = (a) => {
+  console.log(a);
+};
+---
+
+<Section>
+  {JSON.stringify(activeItem)}
+</Section>

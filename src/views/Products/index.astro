@@ -10,16 +10,26 @@ const list = await getList({});
 
 const total = list.length;
 
-const { activeItem, pageSize = "8", current = "1" } = Astro.props;
+let { activeItem, pageSize = "8", current = "1" } = Astro.props;
+const { pathname } = Astro.url;
 
+const extractPageNumber = (url) => {
+  const parts = url.split("/");
+  const lastPart = parts.pop();
+
+  if (lastPart.startsWith("page-")) {
+    return parseInt(lastPart.replace("page-", ""), 10);
+  }
+
+  return 1;
+};
+current = extractPageNumber(pathname);
+pageSize = parseInt(pageSize, 10);
+current = parseInt(current, 10);
 const startIndex = (current - 1) * pageSize;
 const endIndex = Math.min(startIndex + pageSize, total);
 
 const paginatedList = list.slice(startIndex, endIndex);
-
-const onchange = (a) => {
-  console.log(a);
-};
 ---
 
 <Section>

@@ -7,7 +7,17 @@ interface Pagination {
 export interface Props {
   pagination: Pagination;
 }
-const { pagination } = Astro.props;
+const {
+  props: { pagination },
+  url,
+} = Astro;
+const href = url.toString();
+let newHref;
+if (href.includes("/page-")) {
+  newHref = href.replace(/\/page-\d+/, `/page-`);
+} else {
+  newHref = `${href}/page-`;
+}
 
 const total = Number(pagination.total);
 const pageSize = Number(pagination.pageSize);
@@ -37,18 +47,28 @@ if (endPage > totalPage) {
       (_, i) => startPage + i
     ).map((page, index) => (
       <Fragment>
-        <input
-          type="radio"
-          name="tab"
-          id={`tab${index + 1}`}
-          class={`tab tab--${index + 1}`}
-        />
-        <label
-          class={`tab_label ${current === page ? "active" : ""}`}
-          for={`tab${index + 1}`}
-        >
-          {page}
-        </label>
+        <>
+          <input
+            type="radio"
+            name="tab"
+            id={`tab${index + 1}`}
+            class={`tab tab--${index + 1}`}
+            checked={current === page}
+          />
+
+          <label
+            class={`tab_label ${current === page ? "active" : ""}`}
+            for={`tab${index + 1}`}
+          >
+            <a
+              href={`${newHref + page}`}
+              class="w-full h-full flex justify-center items-center"
+              data-astro-history="push"
+            >
+              {page}
+            </a>
+          </label>
+        </>
       </Fragment>
     ))
   }
