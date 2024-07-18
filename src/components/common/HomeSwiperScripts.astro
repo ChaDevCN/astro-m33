@@ -22,6 +22,28 @@
     });
   };
 
+  const mdthumbswiper = new Swiper("#products-min-swiper", {
+    spaceBetween: 10,
+    slidesPerView: "auto",
+    autoHeight: true,
+    direction: "vertical",
+    freeMode: true,
+    watchSlidesProgress: true,
+  });
+  const productsSwiper = new Swiper("#products-swiper", {
+    allowTouchMove: false,
+    thumbs: {
+      swiper: mdthumbswiper,
+    },
+    scrollbar: {
+      el: ".mdthumb-swiper-scrollbar",
+    },
+    navigation: {
+      nextEl: ".swiper-md-next",
+      prevEl: ".swiper-md-prev",
+    },
+  });
+
   window.addEventListener("astro:after-swap", () => {
     initSwiper();
   });

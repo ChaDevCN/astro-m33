@@ -1,14 +1,42 @@
 ---
-import { footerData } from "@/lib/getFootdata";
-import Image from "@/components/common/Image.astro";
 import { Icon } from "astro-icon/components";
+
+import Image from "@/components/common/Image.astro";
+import FooterMenuItem from "./FooterMenuItem.astro";
+
+import { footerData } from "@/lib/getFootdata";
+
 const {
   info: {
     copyright = "Copyright@2023-2026 All Rights Reserved. Powered by AI Seeker Leopard", //版权信息
     logourl,
   },
+  productsList,
+  menu,
   bci: { content },
 } = await footerData();
+const footerMenus = [
+  {
+    name: "Products",
+    key: "products",
+    href: "/products",
+    data: (
+      menu.filter((subItem) => subItem.type === "products")[0].children || []
+    ).slice(0, 6),
+  },
+  {
+    name: "Featured",
+    key: "",
+    href: "/products",
+    data: productsList,
+  },
+  {
+    name: "Quick Navigation",
+    key: "menu",
+    href: "/",
+    data: menu,
+  },
+];
 ---
 
 <footer
@@ -19,7 +47,7 @@ const {
   <div class:list={["px-4 max-w-[1740px] mx-auto"]}>
     <div
       class:list={[
-        "flex lg:flex-col flex-row lg:justify-between",
+        "flex lg:flex-row flex-col lg:justify-between",
         "lg:py-[60px] py-[25px]",
       ]}
     >
@@ -29,7 +57,52 @@ const {
         </div>
         <div set:html={content} class:list={["lg:mt-[40px] mt-5"]} />
       </div>
-      <div class:list={["lg:w-[69%]"]}></div>
+      <div class:list={["lg:w-[69%]"]}>
+        <ul class:list={["flex lg:flex-row flex-col justify-between"]}>
+          {
+            footerMenus.map((item) => (
+              <li
+                x-data="{ expanded: window.innerWidth > 1024 }"
+                class="mt-5 lg:mt-0"
+              >
+                <div
+                  class:list={[
+                    "flex items-center justify-between lg:text-[20px] text-[16px]",
+                  ]}
+                >
+                  <a href={item.href} class:list={["text-white "]}>
+                    {item.name}
+                  </a>
+                  <Icon
+                    name="tabler:chevron-down"
+                    class:list={["lg:hidden block w-7 h-7 cursor-pointer"]}
+                    @click="expanded = ! expanded"
+                  />
+                </div>
+                <div
+                  class:list={["lg:mt-10 lg:block"]}
+                  x-show="expanded"
+                  x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="transform opacity-0 scale-95"
+                  x-transition:enter-end="transform opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-300"
+                  x-transition:leave-start="transform opacity-100 scale-100"
+                  x-transition:leave-end="transform opacity-0 scale-95"
+                  x-collapse
+                >
+                  {item.data.length &&
+                    item.data.map((subItem) => (
+                      <FooterMenuItem
+                        href={subItem.path}
+                        name={subItem.name_ch}
+                      />
+                    ))}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
     <div
       class:list={[
@@ -49,12 +122,12 @@ const {
             "tabler:brand-tiktok-filled",
             "tabler:brand-pinterest",
           ].map((icon) => (
-            <div class="p-2 bg-white lg:opacity-60 cursor-pointer rounded-full hover:translate-y-[-3px] lg:hover:translate-y-[-10px] transition-all  duration-100">
+            <a class="p-2 bg-white lg:opacity-60 cursor-pointer rounded-full hover:translate-y-[-3px] lg:hover:translate-y-[-10px] transition-all  duration-100">
               <Icon
                 name={icon}
                 class:list={["lg:w-5 lg:h-5 text-haeder-bg lg:text-[#222]"]}
               />
-            </div>
+            </a>
           ))
         }
       </div>

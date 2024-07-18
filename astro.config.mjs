@@ -5,6 +5,7 @@ import { defineConfig, squooshImageService } from "astro/config";
 
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
+import alpine from "@astrojs/alpinejs";
 import icon from "astro-icon";
 
 import dotenv from "dotenv";
@@ -19,12 +20,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   output: "static",
-  outDir: isProduction ? distPath : "dist",
+  // outDir: isProduction ? distPath : "dist",
   integrations: [
     tailwind({
       applyBaseStyles: false,
     }),
     sitemap(),
+    alpine(),
     icon({
       include: {
         tabler: ["*"],

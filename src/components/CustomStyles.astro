@@ -27,6 +27,7 @@
     --time-color: #999999;
 
     --footer-bg: #222;
+    --swiper-scrollbar-drag-bg-color: #0072ff;
     ::selection {
       background-color: lavender;
     }
@@ -209,5 +210,17 @@
   }
   body {
     overflow-x: hidden;
+  }
+  .normal-tit-circle::before {
+    content: "";
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border: 4px solid #0072ff;
+    opacity: 0.3;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transform: translate(0, -20%);
   }
 </style>

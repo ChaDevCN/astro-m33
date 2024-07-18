@@ -1,25 +1,23 @@
----
-// 脚本区可以定义组件的逻辑
-const headerData = Astro.props.headerData;
-const isShow = Astro.props.isShow;
-
-function updateShow() {
-  // 这里可以定义更新显示的逻辑
-  console.log("切换显示状态");
-}
----
-
-<div class="language" onclick={updateShow}>
-  <div class="language-conf">
-    <span class="language-conf_text select-none">English</span>
+<template>
+  <div class="language">
+    <div @click="$emit('updataShow')" class="language-conf">
+      <span class="language-conf_text select-none">English</span>
+    </div>
+    <LanguageList
+      :headerData="headerData"
+      @updataShow="$emit('updataShow')"
+      :isShow="isShow"
+    />
   </div>
-  <LanguageList
-    headerData={headerData}
-    onUpdateShow={updateShow}
-    isShow={isShow}
-  />
-</div>
+</template>
 
+<script>
+  export default {
+    props: ["isShow", "updataShow", "headerData"],
+  };
+</script>
+
+--- ---
 <style lang="less">
   .language {
     cursor: pointer;

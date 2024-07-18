@@ -56,9 +56,10 @@ const treeMenu = flattenTree(menu);
 const activeItem = findNodeByAttribute(treeMenu, "url", activeUrl) || {};
 
 const Comp = componentMap[activeItem.type];
+const { title, description, keywords } = activeItem;
 ---
 
-<Layout>
+<Layout metadata={{ title, description, keywords }}>
   {
     rootRouteTypes.includes(activeItem.type) ? (
       <Comp activeItem={activeItem} />

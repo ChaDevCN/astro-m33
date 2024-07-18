@@ -1,24 +1,21 @@
 ---
 import { AstroSeo } from "@astrolib/seo";
 import type { Props as AstroSeoProps } from "@astrolib/seo";
-import { findNodeByAttribute } from "@/utils/utils";
+
+import type { MeteDataProps } from "@/types/index";
+
+export interface Props extends MeteDataProps {}
 
 const {
   url: { pathname },
-  props: { treeData },
+  props: { metadata },
 } = Astro;
 
 const { SITE_URL } = import.meta.env;
 const domin = __DOMAIN__;
 
-const { title, description, keywords } = findNodeByAttribute(
-  treeData,
-  "path",
-  pathname
-);
 const seo: AstroSeoProps = {
-  title,
-  description,
+  ...metadata,
   titleTemplate: "%s",
   noindex: false,
   nofollow: false,

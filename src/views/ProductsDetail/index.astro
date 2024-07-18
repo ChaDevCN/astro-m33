@@ -1,27 +1,48 @@
 ---
 import Section from "@/components/Section.astro";
-import ProductsCard from "@/components/widgets/ProductsCard.astro";
-import Pagination from "@/components/widgets/Pagination.astro";
 
-import { getList } from "@/lib/getList";
-import { Icon } from "astro-icon/components";
+import Banner from "./components/Banner.astro";
+import Description from "./components/Description.astro";
+import Detail from "./components/Detail.astro";
+import FeatureProducts from "./components/FeatureProducts.astro";
 
-const list = await getList({});
+import { fetchData } from "@/lib/fetchDataAll";
 
-const total = list.length;
+const { activeItem } = Astro.props;
 
-const { activeItem, pageSize = "8", current = "1", page } = Astro.props;
+const {
+  result: {
+    data: { products },
+  },
+} = await fetchData();
 
-const startIndex = (current - 1) * pageSize;
-const endIndex = Math.min(startIndex + pageSize, total);
-
-const paginatedList = list.slice(startIndex, endIndex);
-
-const onchange = (a) => {
-  console.log(a);
-};
+let {
+  glProductIds,
+  productDes,
+  lTemps,
+  showPic,
+  name = "",
+  glTemps,
+  productPics = [{ src: showPic }],
+} = products.find((item) => item.ID == activeItem.ID) || {};
+productPics.reverse();
+if (showPic && typeof showPic === "string") {
+  productPics = [...productPics, { url: showPic }, { url: showPic }];
+}
+const featureProducts = products.filter((item) =>
+  JSON.stringify(glProductIds).includes(item.ID)
+);
 ---
 
 <Section>
-  {JSON.stringify(activeItem)}
+  <div class:list={["flex lg:flex-row flex-col justify-between"]}>
+    <Banner options={{ productPics }} />
+    <Description options={{ name, productDes }} />
+  </div>
+  <Detail lTemps={glTemps} />
+  {
+    featureProducts.length && (
+      <FeatureProducts featureProducts={featureProducts} />
+    )
+  }
 </Section>

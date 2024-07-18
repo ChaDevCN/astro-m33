@@ -11,7 +11,10 @@ const { showPic, name, path } = Astro.props;
 ---
 
 <li>
-  <a class="block relative overflow-hidden group/products" href={path}>
+  <a
+    class="lg:block relative overflow-hidden group/products flex justify-center items-center"
+    href={path}
+  >
     <Image
       src={showPic}
       alt={name}
@@ -30,7 +33,7 @@ const { showPic, name, path } = Astro.props;
         type="button"
         icon="tabler:arrow-up-right"
         class:list={[
-          "btn-primary group-hover/products:bg-haeder-bg group-hover/products:border-haeder-bg group-hover/products:text-white",
+          "btn-primary group-hover/products:bg-haeder-bg group-hover/products:border-haeder-bg group-hover/products:text-white lg:w-auto w-[180px]",
         ]}>SHOW NOW</Button
       >
     </div>

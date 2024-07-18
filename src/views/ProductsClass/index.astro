@@ -38,10 +38,18 @@ const paginatedList = list.slice(startIndex, endIndex);
     <h2
       class="text-[#111] font-extrabold uppercase lg:text-[42px] text-[20px] flex items-center gap-4"
     >
-      {activeItem.name_ch}
+      PRODUCTS
       <Icon name="tabler:arrow-down-right" />
     </h2>
-    <ul class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5">
+    <p
+      class:list={["font-semibold lg:text-[32px] lg:mt-10 mt-5 lg:mb-10 mb-4"]}
+    >
+      {activeItem.name_ch}
+    </p>
+    <aside class="lg:text-[20px] text-[15px]">{activeItem.description}</aside>
+    <ul
+      class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5 lg:mt-10 mt-5"
+    >
       {
         paginatedList.length &&
           paginatedList.map((item) => (

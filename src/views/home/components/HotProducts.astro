@@ -6,8 +6,12 @@ const result = await filterHotItemsByKey();
 ---
 
 <Section>
-  <h2 class="uppercase lg:text-4xl text-xl font-bold">FEATURED PRODUCTS</h2>
-  <p class="desc">This is our advantageous product</p>
+  <h2
+    class="uppercase lg:text-4xl text-xl font-bold normal-tit-circle relative lg:pl-[21px] pl-[15px]"
+  >
+    FEATURED PRODUCTS
+  </h2>
+  <p class="desc lg:pl-[21px] pl-[15px]">This is our advantageous product</p>
   <ul class="grid lg:grid-cols-4 grid-cols-1 lg:gap-[20px_1%] gap-5">
     {
       result.length &&

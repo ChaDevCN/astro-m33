@@ -6,10 +6,14 @@ const result = await filterHotItemsByKey("knowledge");
 ---
 
 <Section>
-  <h2 class="uppercase lg:text-4xl text-xl font-bold">
+  <h2
+    class="uppercase lg:text-4xl text-xl font-bold normal-tit-circle relative lg:pl-[21px] pl-[15px]"
+  >
     PRODUCT RECOMMENDATIONS
   </h2>
-  <p class="desc">Here we will showcase some of our main products</p>
+  <p class="desc lg:pl-[21px] pl-[15px]">
+    Here we will showcase some of our main products
+  </p>
   <ul class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5">
     {
       result.length &&

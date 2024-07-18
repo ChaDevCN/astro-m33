@@ -1,18 +1,18 @@
 ---
-import { getRouter } from "../lib/getRouter";
+import { fetchData } from "@/lib/fetchDataAll";
 
 import Home from "@/views/home/index.astro";
 import Layout from "@/layouts/PageLayout.astro";
 
-const res = await getRouter();
-let arr: any[] = [];
-Object.keys(res).forEach((item) => {
-  const next = res[item].map((s) => ({
-    type: item,
-    key: s,
-  }));
-  arr.push(next);
-});
+const {
+  result: {
+    data: { menu },
+  },
+} = await fetchData();
+
+const { keywords, title, description } = menu.find(
+  (item) => item.type === "Home"
+);
 ---
 
-<Layout title="Welcome to Astro."><Home /></Layout>
+<Layout metadata={{ keywords, title, description }}><Home /></Layout>

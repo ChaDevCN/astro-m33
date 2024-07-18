@@ -17,8 +17,8 @@ export const footerData = async () => {
         productsList,
         info: {
             ... (base_info[0] || {}),
-            ...(contact_share[0] || {}),
             ...(site_pic[0] || {})
-        }
+        },
+        contactShare: { ...(contact_share[0] || {}) }
     }
 }

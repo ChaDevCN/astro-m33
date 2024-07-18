@@ -14,16 +14,10 @@ import KnowledgeDetail from "@/views/KnowledgeDetail/index.astro";
 import Layout from "@/layouts/PageLayout.astro";
 
 import { fetchData } from "@/lib/fetchDataAll";
-import { getList } from "@/lib/getList";
 
 import { flattenTree, findNodeByAttribute } from "@/utils/utils";
 import { isPagination, isDetail, pageSize } from "@/common/router";
 
-const {
-  result: {
-    data: { menu },
-  },
-} = await fetchData();
 export const getStaticPaths = (async () => {
   const {
     result: {
@@ -65,7 +59,7 @@ export const getStaticPaths = (async () => {
       for (let i = 1; i <= size; i++) {
         const params = {
           params: {
-            type: active.path.replace("/", ""),
+            type: active.type,
             page: `page-${i}`,
           },
           props: {
@@ -111,14 +105,11 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const {
-  url,
   props: {
     default: { type, detail },
   },
-  params,
 } = Astro;
 
-const treeMenu = flattenTree(menu);
 const paramsAll = [...isDetail, ...isPagination];
 const componentMap = {
   newsdetail: NewsDetail,
@@ -132,9 +123,10 @@ const componentMap = {
   knowledgeclass: KnowledgeClass,
 };
 const Comp = componentMap[type];
+const { title, description, keywords } = detail;
 ---
 
-<Layout>
+<Layout metadata={{ title, description, keywords }}>
   {
     paramsAll.includes(type) ? (
       <Comp activeItem={detail} />
