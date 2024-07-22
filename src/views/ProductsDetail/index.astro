@@ -27,7 +27,7 @@ let {
 } = products.find((item) => item.ID == activeItem.ID) || {};
 productPics.reverse();
 if (showPic && typeof showPic === "string") {
-  productPics = [...productPics, { url: showPic }, { url: showPic }];
+  productPics = [...productPics, { url: showPic }];
 }
 const featureProducts = products.filter((item) =>
   JSON.stringify(glProductIds).includes(item.ID)
