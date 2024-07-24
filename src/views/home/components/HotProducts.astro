@@ -1,21 +1,16 @@
 ---
-import Section from '@/components/Section.astro'
-import ProductsItem from '@/components/widgets/ProductsItem.astro'
-import { filterHotItemsByKey } from '@/lib/filterHotItemsByKey'
-const result = await filterHotItemsByKey()
+import Section from '@/components/Section.astro';
+import ProductsItem from '@/components/widgets/ProductsItem.astro';
+import { filterHotItemsByKey } from '@/lib/filterHotItemsByKey';
+const result = await filterHotItemsByKey();
 ---
 
 <Section>
-  <h2
-    class='uppercase lg:text-4xl text-xl font-bold normal-tit-circle relative lg:pl-[21px] pl-[15px]'
-  >
+  <h2 class="uppercase lg:text-4xl text-xl font-bold normal-tit-circle relative lg:pl-[21px] pl-[15px]">
     FEATURED PRODUCTS
   </h2>
-  <p class='desc lg:pl-[21px] pl-[15px]'>This is our advantageous product</p>
-  <ul class='grid lg:grid-cols-4 grid-cols-1 lg:gap-[20px_1%] gap-5'>
-    {
-      result.length > 0 &&
-        result.slice(0, 6).map((item) => <ProductsItem {...item} />)
-    }
+  <p class="desc lg:pl-[21px] pl-[15px]">This is our advantageous product</p>
+  <ul class="grid lg:grid-cols-4 grid-cols-1 lg:gap-[20px_1%] gap-5">
+    {result.length > 0 && result.slice(0, 6).map((item) => <ProductsItem {...item} />)}
   </ul>
 </Section>

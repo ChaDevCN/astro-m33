@@ -1,39 +1,30 @@
 ---
-import Image from '../common/Image.astro'
-import Button from '../ui/Button.astro'
+import Image from '../common/Image.astro';
+import Button from '../ui/Button.astro';
 export interface Props {
-  showPic: string
-  name: string
-  path: string
-  [key: string]: any
+  showPic: string;
+  name: string;
+  path: string;
+  [key: string]: any;
 }
-const { showPic, name, path } = Astro.props
+const { showPic, name, path } = Astro.props;
 ---
 
 <li>
-  <a
-    class='lg:block relative overflow-hidden group/products flex justify-center items-center'
-    href={path}
-  >
-    <Image
-      src={showPic}
-      alt={name}
-      class:list={[
-        'lg:group-hover/products:scale-110 transition-all duration-300'
-      ]}
-    />
+  <a class="lg:block relative overflow-hidden group/products flex justify-center items-center" href={path}>
+    <Image src={showPic} alt={name} class:list={['lg:group-hover/products:scale-110 transition-all duration-300']} />
     <div
-      class='absolute w-full h-full top-0 left-0 flex flex-col justify-between'
-      style='padding:3.125vw 2.60vw 2.60vw;'
+      class="absolute w-full h-full top-0 left-0 flex flex-col justify-between"
+      style="padding:3.125vw 2.60vw 2.60vw;"
     >
-      <div class='line-clamp-2 ... lg:font-medium lg:text-[28px] text-[20px]'>
+      <div class="line-clamp-2 ... lg:font-medium lg:text-[28px] text-[20px]">
         {name}
       </div>
       <Button
-        type='button'
-        icon='tabler:arrow-up-right'
+        type="button"
+        icon="tabler:arrow-up-right"
         class:list={[
-          'btn-primary group-hover/products:bg-haeder-bg group-hover/products:border-haeder-bg group-hover/products:text-white lg:w-auto w-[180px]'
+          'btn-primary group-hover/products:bg-haeder-bg group-hover/products:border-haeder-bg group-hover/products:text-white lg:w-auto w-[180px]',
         ]}>SHOW NOW</Button
       >
     </div>

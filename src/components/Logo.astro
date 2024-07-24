@@ -1,19 +1,15 @@
 ---
-import Image from '@/components/common/Image.astro'
+import Image from '@/components/common/Image.astro';
 export interface Props {
-  logourl: string
+  logourl: string;
 }
-const { logourl } = Astro.props
+const { logourl } = Astro.props;
 ---
 
 <span
-  class='self-center block ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white'
+  class="self-center block ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white"
 >
-  <a class='flex items-center' href='/'>
-    <Image
-      src={logourl}
-      alt='logo'
-      class:list={['lg:max-w-[130px] h-auto', 'max-w-[100px]']}
-    />
+  <a class="flex items-center" href="/">
+    <Image src={logourl} alt="logo" class:list={['lg:max-w-[130px] h-auto', 'max-w-[100px]']} />
   </a>
 </span>

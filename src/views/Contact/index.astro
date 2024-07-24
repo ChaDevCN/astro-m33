@@ -1,99 +1,86 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from 'astro-icon/components';
 
-import Section from '@/components/Section.astro'
-import Breadcrumb from '@/components/widgets/Breadcrumb.astro'
-import NavigationHeader from '@/components/widgets/NavigationHeader.astro'
-import Image from '@/components/common/Image.astro'
+import Section from '@/components/Section.astro';
+import Breadcrumb from '@/components/widgets/Breadcrumb.astro';
+import NavigationHeader from '@/components/widgets/NavigationHeader.astro';
+import Image from '@/components/common/Image.astro';
 
-import { getBaseInfo } from '@/lib/getBaseInfo'
+import { getBaseInfo } from '@/lib/getBaseInfo';
 
-const { email, tel, address } = await getBaseInfo()
+const { email, tel, address } = await getBaseInfo();
 
-const { activeItem } = Astro.props
+const { activeItem } = Astro.props;
 
 const info = [
   {
     icon: 'tabler:phone',
     value: tel,
-    label: 'Company Telephone'
+    label: 'Company Telephone',
   },
   {
     icon: 'tabler:message-dots',
     value: email,
-    label: 'E-mail Address'
+    label: 'E-mail Address',
   },
   {
     icon: 'tabler:map-pin-filled',
     value: address,
-    label: 'Company Location'
-  }
-]
+    label: 'Company Location',
+  },
+];
 
 const BreadcrumbData = [
   {
     link: '/',
-    label: 'Home'
+    label: 'Home',
   },
   {
     link: activeItem.url,
-    label: activeItem.name_ch
-  }
-]
+    label: activeItem.name_ch,
+  },
+];
 
 const swiperContent = [
   {
     title: 'William Boyue',
     subTitle: 'Sales Executive',
-    text: 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.'
+    text: 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.',
   },
   {
     title: 'William Boyue',
     subTitle: 'Sales Executive',
-    text: 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.'
+    text: 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.',
   },
   {
     title: 'William Boyue',
     subTitle: 'Sales Executive',
-    text: 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.'
-  }
-]
+    text: 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.',
+  },
+];
 ---
 
-<Section class='lg:pt-[30px] lg:pb-[80px] pt-[20px] pb-[25px]'>
+<Section class="lg:pt-[30px] lg:pb-[80px] pt-[20px] pb-[25px]">
   <Breadcrumb data={BreadcrumbData} />
   <NavigationHeader name_ch={activeItem.name_ch} />
   <div class:list={['flex justify-between lg:flex-row flex-col lg:mt-10 mt-5']}>
     <div class={'lg:w-[48.3%] w-full'}>
-      <Image
-        src='@/assets/images/cont.png'
-        alt='contact us'
-        class='normal-square max-w-full h-auto'
-      />
+      <Image src="@/assets/images/cont.png" alt="contact us" class="normal-square max-w-full h-auto" />
     </div>
 
-    <div class='lg:w-[48%] flex justify-between flex-col lg:mt-0 mt-[15px]'>
+    <div class="lg:w-[48%] flex justify-between flex-col lg:mt-0 mt-[15px]">
       {
         info.map((item) => (
           <div
-            class:list={[
-              'flex lg:p-5 p-4 items-center lg:gap-5 gap-4 lg:mt-0 mt-[15px]',
-              'border-2 border-[#8DC0FF] '
-            ]}
+            class:list={['flex lg:p-5 p-4 items-center lg:gap-5 gap-4 lg:mt-0 mt-[15px]', 'border-2 border-[#8DC0FF] ']}
           >
             <div
-              class:list={[
-                'lg:w-10 lg:h-10 bg-[#f4f4f4] text-[#8DC0FF] rounded-full flex justify-center items-center'
-              ]}
+              class:list={['lg:w-10 lg:h-10 bg-[#f4f4f4] text-[#8DC0FF] rounded-full flex justify-center items-center']}
             >
               <Icon name={item.icon} class:list={['w-[70%] h-[70%]']} />
             </div>
             <div class:list={['lg:text-[20px] text-[14px]']}>{item.label}</div>
-            <div
-              class:list={[
-                'border-l border-haeder-bg lg:text-[24px] text-[16px] lg:pl-5 pl-4 text-haeder-bg'
-              ]}
-            >
+            <div class:list={['border-l border-haeder-bg lg:text-[24px] text-[16px] lg:pl-5 pl-4 text-haeder-bg']}>
               {item.value}
             </div>
           </div>
@@ -107,50 +94,36 @@ const swiperContent = [
         'lg:py-8 lg:px-9 p-[25px]',
         'lg:w-[calc(100%_-_158px)] lg:mx-[75px]',
         'border-2 border-[#8DC0FF]',
-        'details-inner-b'
+        'details-inner-b',
       ]}
     >
       <div
-        class='swiper swiper-contact swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden'
-        id='swiper-contact'
+        class="swiper swiper-contact swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden"
+        id="swiper-contact"
       >
         <div class:list={['swiper-wrapper']}>
           {
             swiperContent.map((item) => (
               <div class:list={['swiper-slide']}>
-                <div
-                  class:list={[
-                    'uppercase font-semibold lg:text-[28px] text-[20px]',
-                    'text-center'
-                  ]}
-                >
+                <div class:list={['uppercase font-semibold lg:text-[28px] text-[20px]', 'text-center']}>
                   {item.title}
                 </div>
-                <div
-                  class:list={[
-                    'mt-2 lg:text-[20px] text-[12px] text-haeder-bg',
-                    'text-center'
-                  ]}
-                >
+                <div class:list={['mt-2 lg:text-[20px] text-[12px] text-haeder-bg', 'text-center']}>
                   {item.subTitle}
                 </div>
-                <div
-                  class:list={['lg:mt-5 mt-[15px] lg:text-[24px] text-[15px]']}
-                >
-                  {item.text}
-                </div>
+                <div class:list={['lg:mt-5 mt-[15px] lg:text-[24px] text-[15px]']}>{item.text}</div>
               </div>
             ))
           }
         </div>
       </div>
     </div>
-    <div class='swiper-contact-box'>
-      <div class='swiper-button-prev swiper-contact-prev'>
-        <Icon name='tabler:chevron-left' />
+    <div class="swiper-contact-box">
+      <div class="swiper-button-prev swiper-contact-prev">
+        <Icon name="tabler:chevron-left" />
       </div>
-      <div class='swiper-button-next swiper-contact-next'>
-        <Icon name='tabler:chevron-right' />
+      <div class="swiper-button-next swiper-contact-next">
+        <Icon name="tabler:chevron-right" />
       </div>
     </div>
   </div>

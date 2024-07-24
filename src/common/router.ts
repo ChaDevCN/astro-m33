@@ -6,17 +6,10 @@ export const rootRouteTypes = [
   'knowledge',
   'knowledgeclass',
   'contact',
-  'about-us'
-]
+  'about-us',
+];
 
-export const isDetail = ['newsdetail', 'productsdetail', 'knowledgedetail']
-export const isPagination = [
-  'productsclass',
-  'products',
-  'news',
-  'newsclass',
-  'knowledge',
-  'knowledgeclass'
-]
+export const isDetail = ['newsdetail', 'productsdetail', 'knowledgedetail'];
+export const isPagination = ['productsclass', 'products', 'news', 'newsclass', 'knowledge', 'knowledgeclass'];
 
-export const pageSize = 8
+export const pageSize = 8;

@@ -1,7 +1,7 @@
 ---
-import type { CallToAction as Props } from '@/types'
-import { Icon } from 'astro-icon/components'
-import { twMerge } from 'tailwind-merge'
+import type { CallToAction as Props } from '@/types';
+import { Icon } from 'astro-icon/components';
+import { twMerge } from 'tailwind-merge';
 const {
   variant = 'secondary',
   target,
@@ -10,29 +10,20 @@ const {
   class: className = '',
   type,
   ...rest
-} = Astro.props
+} = Astro.props;
 const variants = {
   primary: 'btn-primary',
   secondary: 'btn-secondary',
   tertiary: 'btn btn-tertiary',
-  link: 'cursor-pointer hover:text-primary'
-}
+  link: 'cursor-pointer hover:text-primary',
+};
 ---
 
 {
   type === 'button' || type === 'submit' || type === 'reset' ? (
-    <button
-      type={type}
-      class={twMerge(variants[variant] || '', className)}
-      {...rest}
-    >
+    <button type={type} class={twMerge(variants[variant] || '', className)} {...rest}>
       <Fragment set:html={text} />
-      {icon && (
-        <Icon
-          name={icon}
-          class='w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block'
-        />
-      )}
+      {icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />}
     </button>
   ) : (
     <a
@@ -41,12 +32,7 @@ const variants = {
       {...rest}
     >
       <Fragment set:html={text} />
-      {icon && (
-        <Icon
-          name={icon}
-          class='w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block'
-        />
-      )}
+      {icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />}
     </a>
   )
 }

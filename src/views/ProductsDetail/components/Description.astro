@@ -1,56 +1,41 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from 'astro-icon/components';
 
-import Button from '@/components/ui/Button.astro'
-import SocialShare from '@/components/widgets/SocialShare.astro'
+import Button from '@/components/ui/Button.astro';
+import SocialShare from '@/components/widgets/SocialShare.astro';
 
 export interface Props {
   options: {
-    name: string
-    productDes: string
-  }
+    name: string;
+    productDes: string;
+  };
 }
 
 const {
-  options: { name, productDes }
-} = Astro.props
+  options: { name, productDes },
+} = Astro.props;
 ---
 
 <div class:list={['lg:w-[52.16%] w-full']}>
-  <h2
-    class:list={[
-      'lg:text-[36px] font-semibold text-[20px]',
-      'lg:mt-0 mt-5 mb-5'
-    ]}
-  >
+  <h2 class:list={['lg:text-[36px] font-semibold text-[20px]', 'lg:mt-0 mt-5 mb-5']}>
     {name}
   </h2>
   <div class:list={['flex justify-between items-center']}>
     <SocialShare />
     <div>
-      <Icon
-        name='tabler:arrow-down-right'
-        class={'text-haeder-bg lg:w-[70px] lg:h-[70px] w-10 h-10'}
-      />
+      <Icon name="tabler:arrow-down-right" class={'text-haeder-bg lg:w-[70px] lg:h-[70px] w-10 h-10'} />
     </div>
   </div>
   <div
     class:list={[
       'lg:text-[20px] text-[15px] lg:leading-[1.45em] py-[20px] text-text',
-      'border-t border-1 border-t-haeder-bg'
+      'border-t border-1 border-t-haeder-bg',
     ]}
   >
     <div set:html={productDes} />
   </div>
   <div>
-    <Button
-      variant='primary'
-      icon='tabler:arrow-narrow-right'
-      class:list={['uppercase']}
-      >Send Inquiry
-    </Button>
-    <Button icon='tabler:arrow-bar-to-down' class:list={['uppercase', 'ml-5']}
-      >Download
-    </Button>
+    <Button variant="primary" icon="tabler:arrow-narrow-right" class:list={['uppercase']}>Send Inquiry </Button>
+    <Button icon="tabler:arrow-bar-to-down" class:list={['uppercase', 'ml-5']}>Download </Button>
   </div>
 </div>

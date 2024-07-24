@@ -1,19 +1,19 @@
 ---
-import { AstroSeo } from '@astrolib/seo'
-import type { Props as AstroSeoProps } from '@astrolib/seo'
+import { AstroSeo } from '@astrolib/seo';
+import type { Props as AstroSeoProps } from '@astrolib/seo';
 
-import type { MeteDataProps } from '@/types/index'
+import type { MeteDataProps } from '@/types/index';
 
 export interface Props extends MeteDataProps {}
 
 const {
   url: { pathname },
   props: {
-    metadata: { images = [], ...metadata }
-  }
-} = Astro
+    metadata: { images = [], ...metadata },
+  },
+} = Astro;
 
-const domin = __DOMAIN__
+const domin = __DOMAIN__;
 
 const seo: AstroSeoProps = {
   ...metadata,
@@ -26,12 +26,12 @@ const seo: AstroSeoProps = {
     site_name: domin + pathname,
     type: 'website',
     locale: 'en',
-    images
+    images,
   },
   twitter: {
-    cardType: 'summary'
-  }
-}
+    cardType: 'summary',
+  },
+};
 ---
 
 <AstroSeo {...seo} />

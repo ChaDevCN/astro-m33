@@ -101,23 +101,19 @@ const languages = [
   'eo',
   'xh',
   'la',
-  'en'
-]
-const { pathname } = Astro.url
+  'en',
+];
+const { pathname } = Astro.url;
 
-const deploymentUrl = 'test.com'
+const deploymentUrl = 'test.com';
 ---
 
-<meta charset='UTF-8' />
-<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <Fragment>
   {
     languages.map((item) => (
-      <link
-        rel='alternate'
-        hreflang={item}
-        href={`https://${item}.${deploymentUrl}${pathname}`}
-      />
+      <link rel="alternate" hreflang={item} href={`https://${item}.${deploymentUrl}${pathname}`} />
     ))
   }
 </Fragment>

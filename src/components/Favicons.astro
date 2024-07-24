@@ -1,14 +1,14 @@
 ---
-import { getBaseInfo } from '@/lib/getBaseInfo'
-import config from '../../config.yml'
+import { getBaseInfo } from '@/lib/getBaseInfo';
+import config from '../../config.yml';
 
 const {
-  site: { staticBase }
-} = config
+  site: { staticBase },
+} = config;
 
-const BASE_URL = import.meta.env.MODE === 'production' ? '' : staticBase
+const BASE_URL = import.meta.env.MODE === 'production' ? '' : staticBase;
 
-const { icourl } = await getBaseInfo()
+const { icourl } = await getBaseInfo();
 ---
 
-<link rel='icon' type='image/x-icon' href={BASE_URL + icourl} />
+<link rel="icon" type="image/x-icon" href={BASE_URL + icourl} />

@@ -1,63 +1,54 @@
 ---
-import Section from '@/components/Section.astro'
-import ProductsCard from '@/components/widgets/ProductsCard.astro'
-import Pagination from '@/components/widgets/Pagination.astro'
-import NavigationHeader from '@/components/widgets/NavigationHeader.astro'
+import Section from '@/components/Section.astro';
+import ProductsCard from '@/components/widgets/ProductsCard.astro';
+import Pagination from '@/components/widgets/Pagination.astro';
+import NavigationHeader from '@/components/widgets/NavigationHeader.astro';
 
-import { getList } from '@/lib/getList'
+import { getList } from '@/lib/getList';
 
-let { activeItem, pageSize = '8', current = '1' } = Astro.props
+let { activeItem, pageSize = '8', current = '1' } = Astro.props;
 const list = await getList({
-  glid: activeItem.ID
-})
+  glid: activeItem.ID,
+});
 
-const total = list.length
+const total = list.length;
 
-const { pathname } = Astro.url
+const { pathname } = Astro.url;
 
 const extractPageNumber = (url) => {
-  const parts = url.split('/')
-  const lastPart = parts.pop()
+  const parts = url.split('/');
+  const lastPart = parts.pop();
 
   if (lastPart.startsWith('page-')) {
-    return parseInt(lastPart.replace('page-', ''), 10)
+    return parseInt(lastPart.replace('page-', ''), 10);
   }
 
-  return 1
-}
-current = extractPageNumber(pathname)
-pageSize = parseInt(pageSize, 10)
-current = parseInt(current, 10)
-const startIndex = (current - 1) * pageSize
-const endIndex = Math.min(startIndex + pageSize, total)
+  return 1;
+};
+current = extractPageNumber(pathname);
+pageSize = parseInt(pageSize, 10);
+current = parseInt(current, 10);
+const startIndex = (current - 1) * pageSize;
+const endIndex = Math.min(startIndex + pageSize, total);
 
-const paginatedList = list.slice(startIndex, endIndex)
+const paginatedList = list.slice(startIndex, endIndex);
 ---
 
 <Section>
   <div>
     <NavigationHeader name_ch={activeItem.name_ch} />
-    <p
-      class:list={['font-semibold lg:text-[32px] lg:mt-10 mt-5 lg:mb-10 mb-4']}
-    >
+    <p class:list={['font-semibold lg:text-[32px] lg:mt-10 mt-5 lg:mb-10 mb-4']}>
       {activeItem.name_ch}
     </p>
-    <aside class='lg:text-[20px] text-[15px]'>{activeItem.description}</aside>
-    <ul
-      class='grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5 lg:mt-10 mt-5'
-    >
-      {
-        paginatedList.length &&
-          paginatedList.map((item) => (
-            <ProductsCard {...item} name={item.name_ch} />
-          ))
-      }
+    <aside class="lg:text-[20px] text-[15px]">{activeItem.description}</aside>
+    <ul class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5 lg:mt-10 mt-5">
+      {paginatedList.length && paginatedList.map((item) => <ProductsCard {...item} name={item.name_ch} />)}
     </ul>
     <div
       class:list={[
         'flex justify-center items-center ',
         'lg:mt-14 mt-[20px] lg:pt-[60px] pt-0',
-        'border-t-[#ddd] border-t '
+        'border-t-[#ddd] border-t ',
       ]}
     >
       <Pagination pagination={{ pageSize, total, current }} />

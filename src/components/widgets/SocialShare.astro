@@ -1,40 +1,40 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from 'astro-icon/components';
 const icons = [
   {
     icon: 'tabler:brand-facebook-filled',
-    style: 'bg-[#459dff]'
+    style: 'bg-[#459dff]',
   },
   {
     icon: 'tabler:brand-twitter-filled',
-    style: 'bg-[#00b4ff]'
+    style: 'bg-[#00b4ff]',
   },
   {
     icon: 'tabler:brand-instagram',
-    style: 'bg-[#d4237a]'
+    style: 'bg-[#d4237a]',
   },
   {
     icon: 'tabler:brand-youtube-filled',
-    style: 'bg-[#ff5968]'
+    style: 'bg-[#ff5968]',
   },
   {
     icon: 'tabler:brand-tiktok',
-    style: 'bg-[#111111]'
+    style: 'bg-[#111111]',
   },
   {
     icon: 'tabler:brand-pinterest',
-    style: 'bg-[#ff0024]'
-  }
-]
+    style: 'bg-[#ff0024]',
+  },
+];
 ---
 
-<div class='flex items-center gap-1'>
+<div class="flex items-center gap-1">
   {
     icons.map((icon) => (
       <div
         class:list={[
           'lg:w-[35px] lg:h-[35px] w-6 h-6 rounded-full text-white flex justify-center items-center cursor-pointer',
-          icon.style
+          icon.style,
         ]}
       >
         <Icon name={icon.icon} class:list={['w-3/5 h-3/5 ']} />

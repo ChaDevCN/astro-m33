@@ -1,23 +1,22 @@
-import defaultTheme from "tailwindcss/defaultTheme";
-import typographyPlugin from "@tailwindcss/typography";
+import typographyPlugin from '@tailwindcss/typography';
 
 module.exports = {
-  content: ["./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}"],
+  content: ['./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
       colors: {
-        primary: "var(--aw-color-primary)",
-        secondary: "var(--aw-color-secondary)",
-        accent: "var(--aw-color-accent)",
-        default: "var(--aw-color-text-default)",
-        muted: "var(--aw-color-text-muted)",
-        "haeder-text": "var(--header-text)",
-        "haeder-bg": "var(--header-bg)",
-        "b-color": "var(--border-color)",
-        "time-color": "var(--time-color)",
-        text: "var(--text)",
-        title: "var(--title)",
-        "footer-bg": "var(--footer-bg)",
+        primary: 'var(--aw-color-primary)',
+        secondary: 'var(--aw-color-secondary)',
+        accent: 'var(--aw-color-accent)',
+        default: 'var(--aw-color-text-default)',
+        muted: 'var(--aw-color-text-muted)',
+        'haeder-text': 'var(--header-text)',
+        'haeder-bg': 'var(--header-bg)',
+        'b-color': 'var(--border-color)',
+        'time-color': 'var(--time-color)',
+        text: 'var(--text)',
+        title: 'var(--title)',
+        'footer-bg': 'var(--footer-bg)',
       },
       // fontFamily: {
       //   sans: [
@@ -36,5 +35,5 @@ module.exports = {
     },
   },
   plugins: [typographyPlugin],
-  darkMode: "class",
+  darkMode: 'class',
 };

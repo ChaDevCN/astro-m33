@@ -1,46 +1,38 @@
 ---
-import LanguageJson from '@/common/language.json'
+import LanguageJson from '@/common/language.json';
 
-import Image from '../common/Image.astro'
-import close from '@/assets/svg/close.svg'
+import Image from '../common/Image.astro';
+import close from '@/assets/svg/close.svg';
 
-import config from '../../../config.yml'
+import config from '../../../config.yml';
 
 const {
-  site: { url }
-} = config
+  site: { url },
+} = config;
 ---
 
-<div
-  class:list={['language-box_isshow', 'language-box', 'h-0']}
-  x-show='open'
-  x-collapse
->
-  <ul class='language-list'>
+<div class:list={['language-box_isshow', 'language-box', 'h-0']} x-show="open" x-collapse>
+  <ul class="language-list">
     {
       LanguageJson.map((item) => (
         <li class:list={[item.class]}>
           <a href={`${item.href}.${url}`}>
-            <b class='country-flag' />
-            <div class='language-list-item__text'>{item.language}</div>
+            <b class="country-flag" />
+            <div class="language-list-item__text">{item.language}</div>
           </a>
         </li>
       ))
     }
   </ul>
-  <div
-    class='w-full py-2 flex items-center justify-center mb-3 cursor-pointer'
-    @click='open = ! open'
-  >
+  <div class="w-full py-2 flex items-center justify-center mb-3 cursor-pointer" @click="open = ! open">
     <Image src={close.src} alt={'close'} />
   </div>
 </div>
-<style lang='less' scoped>
-  @country-codes: af, sq, ar, hy, az, eu, be, bg, ca, zh, zh-TW, hr, cs, da, cc,
-    nl, en, et, tl, fi, fr, gl, ka, de, el, ht, iw, hi, hu, is, id, ga, it, ja,
-    ko, la, lv, lt, mk, ms, mt, no, fa, pl, pt, ro, ru, sr, sk, sl, es, sw, sv,
-    th, tr, uk, ur, vi, cy, yi, bn, eo, bs, ceb, ny, ha, hmn, ig, jw, kk, km, lo,
-    la, mg, ml, mi, mr, mn, my, ne, pa, st, si, so, su, tg, uz, yo, zu;
+<style lang="less" scoped>
+  @country-codes: af, sq, ar, hy, az, eu, be, bg, ca, zh, zh-TW, hr, cs, da, cc, nl, en, et, tl, fi, fr, gl, ka, de, el,
+    ht, iw, hi, hu, is, id, ga, it, ja, ko, la, lv, lt, mk, ms, mt, no, fa, pl, pt, ro, ru, sr, sk, sl, es, sw, sv, th,
+    tr, uk, ur, vi, cy, yi, bn, eo, bs, ceb, ny, ha, hmn, ig, jw, kk, km, lo, la, mg, ml, mi, mr, mn, my, ne, pa, st, si,
+    so, su, tg, uz, yo, zu;
 
   a {
     text-decoration: none !important;
@@ -125,8 +117,7 @@ const {
       // 992 开始 需要跳过 27个
       @{class-selector} {
         // 国旗 请勿修改
-        background-position: 0
-          if(@base-position <=-992, @base-position - 432px, @base-position) !important;
+        background-position: 0 if(@base-position <=-992, @base-position - 432px, @base-position) !important;
       }
 
       .flag(@index - 1);
