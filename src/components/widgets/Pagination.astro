@@ -1,46 +1,46 @@
 ---
 interface Pagination {
-  total: Number | String;
-  pageSize: Number | String;
-  current: Number | String;
+  total: number | string
+  pageSize: number | string
+  current: number | string
 }
 export interface Props {
-  pagination: Pagination;
+  pagination: Pagination
 }
 const {
   props: { pagination },
-  url,
-} = Astro;
-const href = url.toString();
-let newHref;
-if (href.includes("/page-")) {
-  newHref = href.replace(/\/page-\d+/, `/page-`);
+  url
+} = Astro
+const href = url.toString()
+let newHref
+if (href.includes('/page-')) {
+  newHref = href.replace(/\/page-\d+/, `/page-`)
 } else {
-  newHref = `${href}/page-`;
+  newHref = `${href}/page-`
 }
 
-const total = Number(pagination.total);
-const pageSize = Number(pagination.pageSize);
-const current = Number(pagination.current);
-const totalPage = Math.ceil(total / pageSize);
+const total = Number(pagination.total)
+const pageSize = Number(pagination.pageSize)
+const current = Number(pagination.current)
+const totalPage = Math.ceil(total / pageSize)
 
-const showNumber = 5;
+const showNumber = 5
 
-const half = Math.floor(showNumber / 2);
+const half = Math.floor(showNumber / 2)
 
-let startPage = current - half;
+let startPage = current - half
 if (startPage <= 0) {
-  startPage = 1;
+  startPage = 1
 }
 
-let endPage = startPage + showNumber - 1;
+let endPage = startPage + showNumber - 1
 if (endPage > totalPage) {
-  endPage = totalPage;
-  startPage = Math.max(1, endPage - showNumber + 1);
+  endPage = totalPage
+  startPage = Math.max(1, endPage - showNumber + 1)
 }
 ---
 
-<div class="tab-container">
+<div class='tab-container'>
   {
     Array.from(
       { length: endPage - startPage + 1 },
@@ -49,21 +49,21 @@ if (endPage > totalPage) {
       <Fragment>
         <>
           <input
-            type="radio"
-            name="tab"
+            type='radio'
+            name='tab'
             id={`tab${index + 1}`}
             class={`tab tab--${index + 1}`}
             checked={current === page}
           />
 
           <label
-            class={`tab_label ${current === page ? "active" : ""}`}
+            class={`tab_label ${current === page ? 'active' : ''}`}
             for={`tab${index + 1}`}
           >
             <a
               href={`${newHref + page}`}
-              class="w-full h-full flex justify-center items-center"
-              data-astro-history="push"
+              class='w-full h-full flex justify-center items-center'
+              data-astro-history='push'
             >
               {page}
             </a>
@@ -73,11 +73,11 @@ if (endPage > totalPage) {
     ))
   }
 
-  <div class="indicator"></div>
+  <div class='indicator'></div>
 </div>
 
 <script></script>
-<style scoped lang="less">
+<style scoped lang='less'>
   /* Remove this container when use*/
   .component-title {
     width: 100%;
@@ -107,7 +107,7 @@ if (endPage > totalPage) {
   }
 
   .indicator {
-    content: "";
+    content: '';
     width: 40px;
     height: 40px;
     background: var(--header-bg);

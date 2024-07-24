@@ -1,36 +1,37 @@
 ---
-import { AstroSeo } from "@astrolib/seo";
-import type { Props as AstroSeoProps } from "@astrolib/seo";
+import { AstroSeo } from '@astrolib/seo'
+import type { Props as AstroSeoProps } from '@astrolib/seo'
 
-import type { MeteDataProps } from "@/types/index";
+import type { MeteDataProps } from '@/types/index'
 
 export interface Props extends MeteDataProps {}
 
 const {
   url: { pathname },
-  props: { metadata },
-} = Astro;
+  props: {
+    metadata: { images = [], ...metadata }
+  }
+} = Astro
 
-const { SITE_URL } = import.meta.env;
-const domin = __DOMAIN__;
+const domin = __DOMAIN__
 
 const seo: AstroSeoProps = {
   ...metadata,
-  titleTemplate: "%s",
+  titleTemplate: '%s',
   noindex: false,
   nofollow: false,
-  canonical: SITE_URL + pathname,
+  canonical: domin + pathname,
   openGraph: {
     url: domin,
-    site_name: SITE_URL + pathname,
-    type: "website",
-    locale: "en",
-    images: [],
+    site_name: domin + pathname,
+    type: 'website',
+    locale: 'en',
+    images
   },
   twitter: {
-    cardType: "summary",
-  },
-};
+    cardType: 'summary'
+  }
+}
 ---
 
 <AstroSeo {...seo} />

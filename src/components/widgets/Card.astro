@@ -1,14 +1,14 @@
 ---
-import dayjs from "dayjs";
+import * as dayjs from 'dayjs';
 
-import Image from "../common/Image.astro";
-import { Icon } from "astro-icon/components";
+import Image from '../common/Image.astro';
+import { Icon } from 'astro-icon/components';
 
 export interface Props {
   showPic: string;
   name: string;
   path: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 const { showPic, name, path, createTime } = Astro.props;
 ---
@@ -19,50 +19,36 @@ const { showPic, name, path, createTime } = Astro.props;
       <Image
         src={showPic}
         alt={name}
-        class:list={[
-          "lg:group-hover/knowledge:scale-110 transition-all duration-300 lg:w-auto",
-          "w-full",
-        ]}
+        class:list={['lg:group-hover/knowledge:scale-110 transition-all duration-300 lg:w-auto', 'w-full']}
       />
       <div
         class:list={[
-          "inline-flex items-center flex-col justify-end ",
-          "absolute  bottom-0 right-0 overflow-y-hidden",
-          "lg:w-16 lg:h-16 h-[45px] w-auto",
-          "lg:p[20px] px-[10px] whitespace-nowrap",
-          "bg-haeder-bg text-haeder-text",
-          "group-hover/knowledge:h-full sm:group-hover/knowledge:max-h-[200px]",
-          "transition-all duration-300",
+          'inline-flex items-center flex-col justify-end ',
+          'absolute  bottom-0 right-0 overflow-y-hidden',
+          'lg:w-16 lg:h-16 h-[45px] w-auto',
+          'lg:p[20px] px-[10px] whitespace-nowrap',
+          'bg-haeder-bg text-haeder-text',
+          'group-hover/knowledge:h-full sm:group-hover/knowledge:max-h-[200px]',
+          'transition-all duration-300',
         ]}
       >
         <div class="h-full sm:py-[20px] py-3 flex items-center justify-center">
-          <Icon
-            name="tabler:brand-facebook-filled"
-            class="w-7 h-7 inline-block"
-          />
+          <Icon name="tabler:brand-facebook-filled" class="w-7 h-7 inline-block" />
         </div>
         <div class="h-full sm:py-[20px] py-3 flex items-center justify-center">
           <Icon name="tabler:brand-instagram" class="w-7 h-7 inline-block" />
         </div>
         <div class="h-full sm:py-[20px] py-3 flex items-center justify-center">
-          <Icon
-            name="tabler:brand-stackshare"
-            class="w-7 h-7 inline-block group-hover/knowledge:hidden"
-          />
-          <Icon
-            name="tabler:brand-twitter-filled"
-            class="w-7 h-7 hidden group-hover/knowledge:inline-block"
-          />
+          <Icon name="tabler:brand-stackshare" class="w-7 h-7 inline-block group-hover/knowledge:hidden" />
+          <Icon name="tabler:brand-twitter-filled" class="w-7 h-7 hidden group-hover/knowledge:inline-block" />
         </div>
       </div>
     </div>
     <div class="sm:mt-8 mt-5">
       <p class="text-time-color sm:text-lg text-sm">
-        {dayjs(createTime).format("MMMM D, YYYY")}
+        {dayjs(createTime).format('MMMM D, YYYY')}
       </p>
-      <p
-        class="line-clamp-2 ... sm:text-[22px] text-title text-[16px] font-medium"
-      >
+      <p class="line-clamp-2 ... sm:text-[22px] text-title text-[16px] font-medium">
         {name}
       </p>
     </div>

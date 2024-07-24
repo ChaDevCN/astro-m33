@@ -1,31 +1,31 @@
 ---
-import { filterHotItemsByKey } from "@/lib/filterHotItemsByKey.ts";
+import { filterHotItemsByKey } from '@/lib/filterHotItemsByKey.ts'
 
-import Section from "@/components/Section.astro";
-import Button from "@/components/ui/Button.astro";
-import Card from "@/components/widgets/Card.astro";
+import Section from '@/components/Section.astro'
+import Button from '@/components/ui/Button.astro'
+import Card from '@/components/widgets/Card.astro'
 
-const result = await filterHotItemsByKey();
+const result = await filterHotItemsByKey()
 ---
 
 <Section>
   <h2
-    class="uppercase lg:text-4xl text-xl font-bold normal-tit-circle relative lg:pl-[21px] pl-[15px]"
+    class='uppercase lg:text-4xl text-xl font-bold normal-tit-circle relative lg:pl-[21px] pl-[15px]'
   >
     APPLICATION AREA
   </h2>
-  <p class="desc lg:pl-[21px] pl-[15px]">
+  <p class='desc lg:pl-[21px] pl-[15px]'>
     This is the industry in which our product is used
   </p>
-  <ul class="grid lg:grid-cols-4 grid-cols-1 lg:gap-[20px_1%] gap-5">
-    {result.length && result.slice(0, 6).map((item) => <Card {...item} />)}
+  <ul class='grid lg:grid-cols-4 grid-cols-1 lg:gap-[20px_1%] gap-5'>
+    {result.length > 0 && result.slice(0, 6).map((item) => <Card {...item} />)}
   </ul>
-  <div class="lg:mt-14 flex justify-center items-center mt-5">
-    <a href="/about-us">
+  <div class='lg:mt-14 flex justify-center items-center mt-5'>
+    <a href='/about-us'>
       <Button
-        type="button"
-        icon="tabler:arrow-up-right"
-        class="lg:w-[220px] uppercase"
+        type='button'
+        icon='tabler:arrow-up-right'
+        class='lg:w-[220px] uppercase'
       >
         show now</Button
       >

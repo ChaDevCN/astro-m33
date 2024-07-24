@@ -1,106 +1,132 @@
 ---
-import { Icon } from "astro-icon/components";
-import Button from "@/components/ui/Button.astro";
-import ToggleMenu from "@/components/common/ToggleMenu.astro";
-import Logo from "@/components/Logo.astro";
+import { Icon } from 'astro-icon/components'
+import Button from '@/components/ui/Button.astro'
+import ToggleMenu from '@/components/common/ToggleMenu.astro'
+import Language from './Language.astro'
+import Logo from '@/components/Logo.astro'
 
-import { getMenu } from "@/lib/getMenu";
+import { getMenu } from '@/lib/getMenu'
 
-import { trimSlash } from "@/utils/permalinks";
-const menu = await getMenu();
+import { trimSlash } from '@/utils/permalinks'
+const menu = await getMenu()
 export interface Props {
-  id?: string;
-  isSticky?: boolean;
-  isDark?: boolean;
-  isFullWidth?: boolean;
-  showToggleTheme?: boolean;
-  showRssFeed?: boolean;
-  position?: string;
-  logourl: string;
+  id?: string
+  isSticky?: boolean
+  isDark?: boolean
+  isFullWidth?: boolean
+  showToggleTheme?: boolean
+  showRssFeed?: boolean
+  position?: string
+  logourl: string
 }
 const {
-  id = "header",
-  position = "center",
+  id = 'header',
+  position = 'center',
   isFullWidth = false,
   isSticky,
   logourl,
-  isDark,
-} = Astro.props;
-const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+  isDark
+} = Astro.props
+const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`
 ---
 
 <header
   id={id}
   class:list={[
     { sticky: isSticky, relative: !isSticky },
-    "top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out bg-haeder-bg ",
+    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out bg-haeder-bg '
   ]}
 >
-  <div class="absolute inset-0"></div>
+  <div class='absolute inset-0'></div>
   <div
     class:list={[
-      "relative text-default py-0 px-3 mx-auto w-full max-w-[1740px] ",
+      'relative text-default py-0 px-3 mx-auto w-full max-w-[1740px] ',
       {
-        "md:flex md:justify-between": position !== "center",
+        'md:flex md:justify-between': position !== 'center'
       },
       {
-        "md:grid md:grid-cols-3 md:items-center": position === "center",
+        'md:grid md:grid-cols-3 md:items-center': position === 'center'
       },
       {
-        "max-w-7xl": !isFullWidth,
-      },
+        'max-w-7xl': !isFullWidth
+      }
     ]}
   >
     <div
       class:list={[
-        { "mr-auto rtl:mr-0 rtl:ml-auto": position === "right" },
-        "flex justify-between md:w-[fit-content]",
+        { 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' },
+        'flex justify-between md:w-[fit-content]'
       ]}
     >
       <Logo logourl={logourl} />
-      <div class="flex items-center md:hidden">
+      <div class='flex items-center md:hidden'>
         <ToggleMenu />
       </div>
     </div>
     <nav
-      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center"
-      aria-label="Main navigation"
+      class='items-center w-full md:w-auto hidden md:flex md:mx-5 text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center'
+      aria-label='Main navigation'
     >
       <ul
-        class="flex md:h-full flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
+        class='flex md:h-full flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center'
       >
         {
           menu.map(({ name_ch: text, url: href, children: links }) => (
             <li
-              class={`${links?.length ? "dropdown" : ""} md:h-full md:flex justify-center items-center group/menu `}
+              class={`${links?.length ? 'dropdown' : ''} md:h-full md:flex justify-center items-center group/menu `}
             >
               {links?.length ? (
                 <>
                   <button
-                    type="button"
+                    type='button'
                     class="hover:text-link h-full relative dark:hover:text-white px-4 py-3 flex items-center text-nowrap md:py-6 pseudo-after after:content-[''] after:block after:w-0 sm:group-hover/menu:after:w-full after:h-[2px] after:bg-white after:absolute after:bottom-1 after:left-1/2 after:translate-x-[-50%] after:transition-width after:duration-300 after:ease"
                   >
-                    <a href={href} class="md:text-haeder-text">
+                    <a href={href} class='md:text-haeder-text'>
                       {text}
                     </a>
                     <Icon
-                      name="tabler:chevron-down"
-                      class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline md:text-haeder-text sm:group-hover/menu:rotate-180 transition-all duration-300"
+                      name='tabler:chevron-down'
+                      class='w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline md:text-haeder-text sm:group-hover/menu:rotate-180 transition-all duration-300'
                     />
                   </button>
                   {
-                    <ul class="dropdown-menu after: md:backdrop-blur-md dark:md:bg-dark rounded md:absolute top-full pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl z-9">
-                      {links.map(({ name_ch: text2, url: href2 }) => (
-                        <li>
+                    <ul class='dropdown-menu after: md:backdrop-blur-md dark:md:bg-dark rounded md:absolute top-full pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl z-9'>
+                      {links.map(({ name_ch: text2, url: href2, children }) => (
+                        <li class='flex justify-between group items-center'>
                           <a
                             class:list={[
-                              "first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap ",
-                              { "aw-link-active": href2 === currentPath },
+                              'first:rounded-t last:rounded-b flex-1 md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap ',
+                              { 'aw-link-active': href2 === currentPath }
                             ]}
                             href={href2}
                           >
                             {text2}
                           </a>
+                          {children.length > 0 && (
+                            <Icon name='tabler:chevron-right' class='mr-3' />
+                          )}
+                          {children.length > 0 && (
+                            <ul class='hidden group-hover:block absolute inset-0 left-full w-fit bg-white h-fit'>
+                              {children.map(
+                                ({ name_ch: text3, url: href3 }) => (
+                                  <li>
+                                    <a
+                                      class:list={[
+                                        'first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap text-nowrap',
+                                        {
+                                          'aw-link-active':
+                                            href3 === currentPath
+                                        }
+                                      ]}
+                                      href={href3}
+                                    >
+                                      {text3}
+                                    </a>
+                                  </li>
+                                )
+                              )}
+                            </ul>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -109,10 +135,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               ) : (
                 <a
                   class:list={[
-                    "hover:text-link dark:hover:text-white px-4 text-nowrap py-3 flex items-center md:py-6 md:text-haeder-text",
-                    { "aw-link-active": href === currentPath },
+                    'hover:text-link dark:hover:text-white px-4 text-nowrap py-3 flex items-center md:py-6 md:text-haeder-text',
+                    { 'aw-link-active': href === currentPath }
                   ]}
-                  href={href === "/home" ? "/" : href}
+                  href={href === '/home' ? '/' : href}
                 >
                   {text}
                 </a>
@@ -122,5 +148,17 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         }
       </ul>
     </nav>
+    <div
+      class:list={[
+        { 'ml-auto rtl:ml-0 rtl:mr-auto': position === 'left' },
+        'hidden md:self-center relative md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0 md:justify-self-end'
+      ]}
+    >
+      <div class='items-center flex justify-between w-full md:w-auto'>
+        <div class='flex'>
+          <Language />
+        </div>
+      </div>
+    </div>
   </div>
 </header>

@@ -1,7 +1,224 @@
 ---
-const { activeItem } = Astro.props;
+import { Icon } from 'astro-icon/components'
+
+import Section from '@/components/Section.astro'
+import Breadcrumb from '@/components/widgets/Breadcrumb.astro'
+import NavigationHeader from '@/components/widgets/NavigationHeader.astro'
+import Image from '@/components/common/Image.astro'
+
+import { getBaseInfo } from '@/lib/getBaseInfo'
+
+const { email, tel, address } = await getBaseInfo()
+
+const { activeItem } = Astro.props
+
+const info = [
+  {
+    icon: 'tabler:phone',
+    value: tel,
+    label: 'Company Telephone'
+  },
+  {
+    icon: 'tabler:message-dots',
+    value: email,
+    label: 'E-mail Address'
+  },
+  {
+    icon: 'tabler:map-pin-filled',
+    value: address,
+    label: 'Company Location'
+  }
+]
+
+const BreadcrumbData = [
+  {
+    link: '/',
+    label: 'Home'
+  },
+  {
+    link: activeItem.url,
+    label: activeItem.name_ch
+  }
+]
+
+const swiperContent = [
+  {
+    title: 'William Boyue',
+    subTitle: 'Sales Executive',
+    text: 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.'
+  },
+  {
+    title: 'William Boyue',
+    subTitle: 'Sales Executive',
+    text: 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.'
+  },
+  {
+    title: 'William Boyue',
+    subTitle: 'Sales Executive',
+    text: 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.'
+  }
+]
 ---
 
-<div>
-  {JSON.stringify(activeItem)}
-</div>
+<Section class='lg:pt-[30px] lg:pb-[80px] pt-[20px] pb-[25px]'>
+  <Breadcrumb data={BreadcrumbData} />
+  <NavigationHeader name_ch={activeItem.name_ch} />
+  <div class:list={['flex justify-between lg:flex-row flex-col lg:mt-10 mt-5']}>
+    <div class={'lg:w-[48.3%] w-full'}>
+      <Image
+        src='@/assets/images/cont.png'
+        alt='contact us'
+        class='normal-square max-w-full h-auto'
+      />
+    </div>
+
+    <div class='lg:w-[48%] flex justify-between flex-col lg:mt-0 mt-[15px]'>
+      {
+        info.map((item) => (
+          <div
+            class:list={[
+              'flex lg:p-5 p-4 items-center lg:gap-5 gap-4 lg:mt-0 mt-[15px]',
+              'border-2 border-[#8DC0FF] '
+            ]}
+          >
+            <div
+              class:list={[
+                'lg:w-10 lg:h-10 bg-[#f4f4f4] text-[#8DC0FF] rounded-full flex justify-center items-center'
+              ]}
+            >
+              <Icon name={item.icon} class:list={['w-[70%] h-[70%]']} />
+            </div>
+            <div class:list={['lg:text-[20px] text-[14px]']}>{item.label}</div>
+            <div
+              class:list={[
+                'border-l border-haeder-bg lg:text-[24px] text-[16px] lg:pl-5 pl-4 text-haeder-bg'
+              ]}
+            >
+              {item.value}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class:list={['lg:mt-[75px] mt-[25px] relative']}>
+    <div
+      class:list={[
+        'lg:py-8 lg:px-9 p-[25px]',
+        'lg:w-[calc(100%_-_158px)] lg:mx-[75px]',
+        'border-2 border-[#8DC0FF]',
+        'details-inner-b'
+      ]}
+    >
+      <div
+        class='swiper swiper-contact swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden'
+        id='swiper-contact'
+      >
+        <div class:list={['swiper-wrapper']}>
+          {
+            swiperContent.map((item) => (
+              <div class:list={['swiper-slide']}>
+                <div
+                  class:list={[
+                    'uppercase font-semibold lg:text-[28px] text-[20px]',
+                    'text-center'
+                  ]}
+                >
+                  {item.title}
+                </div>
+                <div
+                  class:list={[
+                    'mt-2 lg:text-[20px] text-[12px] text-haeder-bg',
+                    'text-center'
+                  ]}
+                >
+                  {item.subTitle}
+                </div>
+                <div
+                  class:list={['lg:mt-5 mt-[15px] lg:text-[24px] text-[15px]']}
+                >
+                  {item.text}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class='swiper-contact-box'>
+      <div class='swiper-button-prev swiper-contact-prev'>
+        <Icon name='tabler:chevron-left' />
+      </div>
+      <div class='swiper-button-next swiper-contact-next'>
+        <Icon name='tabler:chevron-right' />
+      </div>
+    </div>
+  </div>
+</Section>
+<style scoped>
+  .swiper-contact-prev,
+  .swiper-contact-next {
+    width: 69px;
+    height: 100%;
+    border: 2px solid #8dc0ff;
+    margin: 0;
+    transform: translate(0, -50%);
+    left: 0;
+    transition: all 0.3s ease;
+  }
+  .swiper-contact-next {
+    right: 0;
+    left: unset;
+  }
+  .swiper-button-next.swiper-button-disabled,
+  .swiper-button-prev.swiper-button-disabled {
+    pointer-events: all;
+    opacity: 1;
+  }
+  @media (max-width: 992px) {
+    .swiper-contact-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    .swiper-contact-prev,
+    .swiper-contact-next {
+      position: static;
+      transform: none;
+      font-size: 16px;
+      color: #0072ff;
+      width: 48.47%;
+      height: 45px;
+    }
+  }
+
+  .swiper-contact-prev::after,
+  .swiper-contact-next::after {
+    content: '';
+  }
+  .details-inner-b {
+    padding: 30px 35px;
+    border: 2px solid #8dc0ff;
+    position: relative;
+  }
+  .details-inner-b::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 62px;
+    height: 34px;
+    background: #fff url(@/assets/images/quote2.png) no-repeat center;
+    background-size: 100% auto;
+    position: absolute;
+    top: 0;
+    transform: translate(0, calc(-100% + 10px));
+  }
+  @media (max-width: 992px) {
+    .details-inner-b::before {
+      width: 27px;
+      height: 15px;
+      transform: translate(0, -50%);
+    }
+  }
+</style>

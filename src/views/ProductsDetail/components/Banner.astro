@@ -1,42 +1,42 @@
 ---
-import Image from "@/components/common/Image.astro";
+import Image from '@/components/common/Image.astro'
 export interface Props {
   options: {
     productPics: {
-      url: string;
-      type: string;
-    }[];
-  };
+      url: string
+      type: string
+    }[]
+  }
 }
 const {
-  options: { productPics },
-} = Astro.props;
+  options: { productPics }
+} = Astro.props
 ---
 
-<div class:list={["flex justify-between lg:w-[44.57%] w-full"]}>
+<div class:list={['flex justify-between lg:w-[44.57%] w-full']}>
   <div
-    id="products-min-swiper"
+    id='products-min-swiper'
     class:list={[
-      "swiper mySwiper swiper-initialized swiper-horizontal swiper-free-mode swiper-watch-progress swiper-backface-hidden swiper-thumbs lg:block hidden w-20",
+      'swiper mySwiper swiper-initialized swiper-horizontal swiper-free-mode swiper-watch-progress swiper-backface-hidden swiper-thumbs lg:block hidden w-20'
     ]}
   >
-    <div class="swiper-wrapper h-20 w-20">
+    <div class='swiper-wrapper h-20 w-20'>
       {
         productPics.map(
           (item) =>
             item.url && (
               <div
                 class:list={[
-                  "swiper-slide",
+                  'swiper-slide',
                   //   "border-haeder-bg border-2 ",
-                  "mdmain-swiper",
-                  "bg-[#f5f5f5] rounded-md flex justify-center items-center h-auto cursor-pointer",
+                  'mdmain-swiper',
+                  'bg-[#f5f5f5] rounded-md flex justify-center items-center h-auto cursor-pointer'
                 ]}
               >
                 <Image
                   src={item.url}
-                  alt={"banner"}
-                  class:list={["max-w-[calc(100%_-_14px)]", "max-h-[65px]"]}
+                  alt={'banner'}
+                  class:list={['max-w-[calc(100%_-_14px)]', 'max-h-[65px]']}
                 />
               </div>
             )
@@ -46,29 +46,29 @@ const {
   </div>
   <div
     class:list={[
-      "swiper mySwiper2 swiper-initialized swiper-horizontal swiper-backface-hidden",
-      "w-[calc(100%_-_110px)]",
+      'swiper mySwiper2 swiper-initialized swiper-horizontal swiper-backface-hidden',
+      'w-[calc(100%_-_110px)]'
     ]}
-    id="products-swiper"
+    id='products-swiper'
   >
-    <div class:list={["swiper-wrapper"]}>
+    <div class:list={['swiper-wrapper']}>
       {
         productPics.map(
           (item) =>
             item.url && (
               <div
                 class:list={[
-                  "swiper-slide",
-                  "rounded-xl flex justify-center items-center h-auto cursor-pointer bg-[#f5f5f5]",
+                  'swiper-slide',
+                  'rounded-xl flex justify-center items-center h-auto cursor-pointer bg-[#f5f5f5]'
                 ]}
               >
                 <Image
                   src={item.url}
-                  alt={"banner"}
+                  alt={'banner'}
                   class:list={[
-                    "max-w-full max-h-[80%]",
-                    "h-auto rounded-xl",
-                    "select-none",
+                    'max-w-full max-h-[80%]',
+                    'h-auto rounded-xl',
+                    'select-none'
                   ]}
                 />
               </div>
@@ -77,14 +77,14 @@ const {
       }
     </div>
     <div
-      class="swiper-button-prev swiper-md-prev lg:hidden block swiper-normal-button"
+      class='swiper-button-prev swiper-md-prev lg:hidden block swiper-normal-button'
     >
     </div>
     <div
-      class="swiper-button-next swiper-md-next lg:hidden block swiper-normal-button"
+      class='swiper-button-next swiper-md-next lg:hidden block swiper-normal-button'
     >
     </div>
-    <div class="swiper-scrollbar mdthumb-swiper-scrollbar lg:hidden block">
+    <div class='swiper-scrollbar mdthumb-swiper-scrollbar lg:hidden block'>
     </div>
   </div>
 </div>

@@ -1,35 +1,35 @@
 ---
-import { Icon } from "astro-icon/components";
-const { lTemps: i } = Astro.props;
-let glTemps: string | any = i;
-let ue = [];
-glTemps = JSON.parse(glTemps);
+import { Icon } from 'astro-icon/components'
+const { lTemps: i } = Astro.props
+let glTemps: string | any = i
+let ue = []
+glTemps = JSON.parse(glTemps)
 for (let item in glTemps) {
   switch (glTemps[item].type) {
-    case "ue":
-      ue.push(glTemps[item]);
-      break;
-    case "ck":
-      ue.push(glTemps[item]);
-      break;
+    case 'ue':
+      ue.push(glTemps[item])
+      break
+    case 'ck':
+      ue.push(glTemps[item])
+      break
   }
 }
-let ueData: any = ue ? ue[0] : {};
+let ueData: any = ue ? ue[0] : {}
 ---
 
 <div>
   <div
     class:list={[
-      "lg:mt-10 mt-6 text-haeder-bg uppercase flex items-center border-b border-1 border-[#0072FF] lg:pb-5 pb-[10px]",
+      'lg:mt-10 mt-6 text-haeder-bg uppercase flex items-center border-b border-1 border-[#0072FF] lg:pb-5 pb-[10px]'
     ]}
   >
-    <h2 class="text-haeder-bg lg:text-[26px] text-[18px]">
+    <h2 class='text-haeder-bg lg:text-[26px] text-[18px]'>
       PRODUCT DESCRIPTION
     </h2>
     <Icon
-      name="tabler:arrow-down-right"
-      class={"text-haeder-bg  w-10 h-10 ml-3"}
+      name='tabler:arrow-down-right'
+      class={'text-haeder-bg  w-10 h-10 ml-3'}
     />
   </div>
-  <div set:html={ueData?.content} class="lg:pt-10 pt-6" />
+  <div set:html={ueData?.content} class='lg:pt-10 pt-6' />
 </div>

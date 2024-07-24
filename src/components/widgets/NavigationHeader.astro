@@ -1,0 +1,15 @@
+---
+import { Icon } from 'astro-icon/components'
+
+export interface Props {
+  name_ch: string
+}
+const { name_ch } = Astro.props
+---
+
+<h2
+  class='text-[#111] font-extrabold lg:text-[42px] text-[20px] flex items-center gap-4 lg:mb-10 mb-3'
+>
+  {name_ch}
+  <Icon name='tabler:arrow-down-right' />
+</h2>

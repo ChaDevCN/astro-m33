@@ -1,0 +1,207 @@
+---
+import LanguageJson from '@/common/language.json'
+
+import Image from '../common/Image.astro'
+import close from '@/assets/svg/close.svg'
+
+import config from '../../../config.yml'
+
+const {
+  site: { url }
+} = config
+---
+
+<div
+  class:list={['language-box_isshow', 'language-box', 'h-0']}
+  x-show='open'
+  x-collapse
+>
+  <ul class='language-list'>
+    {
+      LanguageJson.map((item) => (
+        <li class:list={[item.class]}>
+          <a href={`${item.href}.${url}`}>
+            <b class='country-flag' />
+            <div class='language-list-item__text'>{item.language}</div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div
+    class='w-full py-2 flex items-center justify-center mb-3 cursor-pointer'
+    @click='open = ! open'
+  >
+    <Image src={close.src} alt={'close'} />
+  </div>
+</div>
+<style lang='less' scoped>
+  @country-codes: af, sq, ar, hy, az, eu, be, bg, ca, zh, zh-TW, hr, cs, da, cc,
+    nl, en, et, tl, fi, fr, gl, ka, de, el, ht, iw, hi, hu, is, id, ga, it, ja,
+    ko, la, lv, lt, mk, ms, mt, no, fa, pl, pt, ro, ru, sr, sk, sl, es, sw, sv,
+    th, tr, uk, ur, vi, cy, yi, bn, eo, bs, ceb, ny, ha, hmn, ig, jw, kk, km, lo,
+    la, mg, ml, mi, mr, mn, my, ne, pa, st, si, so, su, tg, uz, yo, zu;
+
+  a {
+    text-decoration: none !important;
+    color: #222 !important;
+  }
+
+  .language-box {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 390px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 80vh;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+    z-index: 99;
+
+    .language-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      padding: 20px;
+      list-style: none;
+      margin-bottom: 0;
+
+      .language-flag {
+        text-align: center;
+        margin-bottom: 12px;
+
+        a {
+          display: flex;
+          align-items: center;
+
+          &-item__text {
+            flex: 1;
+            word-break: auto-phrase;
+            font-size: 10pt;
+          }
+        }
+      }
+
+      .btn_close {
+        grid-column: span 3;
+        color: #686868;
+        font-size: 20px;
+        text-align: center;
+        background-color: #f8f8f8;
+        cursor: pointer;
+        padding: 8px 0;
+
+        &:hover {
+          color: #88b226;
+        }
+      }
+    }
+
+    .country-flag {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 4px;
+      margin-top: -1px;
+      background-repeat: no-repeat;
+      background-image: url('@/assets/images/all-m.gif');
+      width: 20px;
+      height: 16px;
+    }
+  }
+
+  .generate-flags();
+
+  .generate-flags() {
+    .flag(@index) when (@index > 0) {
+      @flag-name: extract(@country-codes, @index);
+      @class-selector: ~'.language-flag-@{flag-name} .country-flag';
+      // 一个16
+      @base-position: -((@index - 1) * 16px);
+
+      // 992 开始 需要跳过 27个
+      @{class-selector} {
+        // 国旗 请勿修改
+        background-position: 0
+          if(@base-position <=-992, @base-position - 432px, @base-position) !important;
+      }
+
+      .flag(@index - 1);
+    }
+
+    .flag(length(@country-codes));
+  }
+
+  .language-flag-hi .country-flag,
+  .language-flag-te .country-flag,
+  .language-flag-kn .country-flag,
+  .language-flag-ta .country-flag,
+  .language-flag-gu .country-flag {
+    // 国旗 请勿修改
+    background-position: 0 -432px !important;
+  }
+  .language-list-item__text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @media screen and (max-width: 767px) {
+    .language-box {
+      width: 90vw;
+      right: 0;
+      top: 25px;
+      position: absolute;
+      top: 0;
+      left: auto;
+      width: 90vw;
+      background: #fff;
+      padding: 0 20px;
+      transform: scale3d(0.9, 0.9, 1);
+      z-index: 9999;
+      transition: all 0.3s ease-in-out;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow-y: scroll;
+      max-height: 80vh;
+      right: 0;
+      margin-top: 20px;
+
+      .language-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &-item__text {
+          text-align: left;
+          margin-left: 12px;
+          color: #333333;
+        }
+      }
+
+      .btn-close {
+        grid-column: span 1;
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .mobile_language {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .mobile_language {
+      display: block;
+    }
+
+    .mobile_language_btn {
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+</style>

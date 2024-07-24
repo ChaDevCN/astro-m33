@@ -1,13 +1,13 @@
 ---
 export interface Props {
-  name: string;
-  href: string;
+  name: string
+  href: string
 }
-const { name, href } = Astro.props;
+const { name, href } = Astro.props
 ---
 
 <a
   href={href}
-  class:list={["block lg:text-[16px] mt-[20px] lg:hover:text-haeder-bg"]}
+  class:list={['block lg:text-[16px] mt-[20px] lg:hover:text-haeder-bg']}
   >{name}</a
 >

@@ -1,12 +1,14 @@
 ---
-import Section from "@/components/Section.astro";
+import Section from '@/components/Section.astro';
 
-import Banner from "./components/Banner.astro";
-import Description from "./components/Description.astro";
-import Detail from "./components/Detail.astro";
-import FeatureProducts from "./components/FeatureProducts.astro";
+import Banner from './components/Banner.astro';
+import Description from './components/Description.astro';
+import Detail from './components/Detail.astro';
+import FeatureProducts from './components/FeatureProducts.astro';
 
-import { fetchData } from "@/lib/fetchDataAll";
+import { fetchData } from '@/lib/fetchDataAll';
+
+export interface Props {}
 
 const { activeItem } = Astro.props;
 
@@ -19,30 +21,23 @@ const {
 let {
   glProductIds,
   productDes,
-  lTemps,
   showPic,
-  name = "",
+  name = '',
   glTemps,
   productPics = [{ src: showPic }],
 } = products.find((item) => item.ID == activeItem.ID) || {};
 productPics.reverse();
-if (showPic && typeof showPic === "string") {
+if (showPic && typeof showPic === 'string') {
   productPics = [...productPics, { url: showPic }];
 }
-const featureProducts = products.filter((item) =>
-  JSON.stringify(glProductIds).includes(item.ID)
-);
+const featureProducts = products.filter((item) => JSON.stringify(glProductIds).includes(item.ID));
 ---
 
 <Section>
-  <div class:list={["flex lg:flex-row flex-col justify-between"]}>
+  <div class:list={['flex lg:flex-row flex-col justify-between']}>
     <Banner options={{ productPics }} />
     <Description options={{ name, productDes }} />
   </div>
   <Detail lTemps={glTemps} />
-  {
-    featureProducts.length && (
-      <FeatureProducts featureProducts={featureProducts} />
-    )
-  }
+  {featureProducts.length > 0 && <FeatureProducts featureProducts={featureProducts} />}
 </Section>

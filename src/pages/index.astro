@@ -1,18 +1,24 @@
 ---
-import { fetchData } from "@/lib/fetchDataAll";
+import { fetchData } from '@/lib/fetchDataAll'
 
-import Home from "@/views/home/index.astro";
-import Layout from "@/layouts/PageLayout.astro";
+import Home from '@/views/home/index.astro'
+import Layout from '@/layouts/PageLayout.astro'
 
 const {
   result: {
-    data: { menu },
-  },
-} = await fetchData();
+    data: { menu, site_pic_pcbanner, site_pic }
+  }
+} = await fetchData()
 
 const { keywords, title, description } = menu.find(
-  (item) => item.type === "Home"
-);
+  (item) => item.type === 'Home'
+)
+const pcbanner = site_pic_pcbanner.filter(
+  (item) => item.glid === site_pic[0].ID
+)
+const images = pcbanner.map((items) => ({ url: items.url }))
 ---
 
-<Layout metadata={{ keywords, title, description }}><Home /></Layout>
+<Layout metadata={{ keywords, title, description, images }}
+  ><Home banner={pcbanner} /></Layout
+>

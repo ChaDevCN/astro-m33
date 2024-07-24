@@ -1,7 +1,68 @@
 ---
-const { activeItem } = Astro.props;
+import Section from '@/components/Section.astro'
+import Breadcrumb from '@/components/widgets/Breadcrumb.astro'
+import NavigationHeader from '@/components/widgets/NavigationHeader.astro'
+import Pagination from '@/components/widgets/Pagination.astro'
+import Card from '@/components/widgets/Card.astro'
+import { getList } from '@/lib/getList'
+
+let { activeItem, pageSize = '8', current = '1' } = Astro.props
+
+const list = await getList({
+  key: 'knowledge',
+  type: 'knowledgedetail'
+})
+const total = list.length
+
+const BreadcrumbData = [
+  {
+    link: '/',
+    label: 'Home'
+  },
+  {
+    link: activeItem.url,
+    label: activeItem.name_ch
+  }
+]
+const { pathname } = Astro.url
+
+const extractPageNumber = (url) => {
+  const parts = url.split('/')
+  const lastPart = parts.pop()
+
+  if (lastPart.startsWith('page-')) {
+    return parseInt(lastPart.replace('page-', ''), 10)
+  }
+
+  return 1
+}
+current = extractPageNumber(pathname)
+pageSize = parseInt(pageSize, 10)
+current = parseInt(current, 10)
+const startIndex = (current - 1) * pageSize
+const endIndex = Math.min(startIndex + pageSize, total)
+
+const paginatedList = list.slice(startIndex, endIndex)
 ---
 
-<div>
-  {JSON.stringify(activeItem)}
-</div>
+<Section class='lg:pt-[30px] pb-0 pt-[20px]'>
+  <Breadcrumb data={BreadcrumbData} />
+  <NavigationHeader name_ch={activeItem.name_ch} />
+  <ul class='grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5'>
+    {
+      paginatedList.length > 0 &&
+        paginatedList.map((item) => (
+          <Card {...item} name={item.name_ch} showPic={item.knowledgePic} />
+        ))
+    }
+  </ul>
+  <div
+    class:list={[
+      'flex justify-center items-center ',
+      'lg:mt-14 mt-[20px] lg:pt-[60px] pt-3',
+      'border-t-[#ddd] border-t '
+    ]}
+  >
+    <Pagination pagination={{ pageSize, total, current }} />
+  </div>
+</Section>

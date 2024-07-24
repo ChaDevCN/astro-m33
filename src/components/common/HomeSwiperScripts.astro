@@ -1,51 +1,57 @@
-<script type="module">
+<script type='module'>
   const initSwiper = () => {
-    const swiperBanner = new Swiper("#swiper-banner", {
+    new Swiper('#swiper-banner', {
       loop: true,
       autoplay: {
-        disableOnInteraction: false,
+        disableOnInteraction: false
       },
       pagination: {
-        el: ".swiper-banner-pagination",
+        el: '.swiper-banner-pagination'
       },
       navigation: {
-        nextEl: ".swiper-banner-next",
-        prevEl: ".swiper-banner-prev",
-      },
-    });
-    const swiperbatch = new Swiper("#swiper-batch", {
-      direction: "vertical",
+        nextEl: '.swiper-banner-next',
+        prevEl: '.swiper-banner-prev'
+      }
+    })
+    new Swiper('#swiper-batch', {
+      direction: 'vertical',
       loop: true,
       slidesPerView: 2,
       spaceBetween: 40,
-      mousewheel: true,
-    });
-  };
+      mousewheel: true
+    })
+  }
 
-  const mdthumbswiper = new Swiper("#products-min-swiper", {
+  const mdthumbswiper = new Swiper('#products-min-swiper', {
     spaceBetween: 10,
-    slidesPerView: "auto",
+    slidesPerView: 'auto',
     autoHeight: true,
-    direction: "vertical",
+    direction: 'vertical',
     freeMode: true,
-    watchSlidesProgress: true,
-  });
-  const productsSwiper = new Swiper("#products-swiper", {
+    watchSlidesProgress: true
+  })
+  new Swiper('#products-swiper', {
     allowTouchMove: false,
     thumbs: {
-      swiper: mdthumbswiper,
+      swiper: mdthumbswiper
     },
     scrollbar: {
-      el: ".mdthumb-swiper-scrollbar",
+      el: '.mdthumb-swiper-scrollbar'
     },
     navigation: {
-      nextEl: ".swiper-md-next",
-      prevEl: ".swiper-md-prev",
-    },
-  });
+      nextEl: '.swiper-md-next',
+      prevEl: '.swiper-md-prev'
+    }
+  })
+  new Swiper('#swiper-contact', {
+    navigation: {
+      nextEl: '.swiper-contact-next',
+      prevEl: '.swiper-contact-prev'
+    }
+  })
 
-  window.addEventListener("astro:after-swap", () => {
-    initSwiper();
-  });
-  window.onpageshow = initSwiper;
+  window.addEventListener('astro:after-swap', () => {
+    initSwiper()
+  })
+  window.onpageshow = initSwiper
 </script>

@@ -1,109 +1,109 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets'
 
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
-import Button from "../ui/Button.astro";
+import Button from '../ui/Button.astro'
 
-import quote from "@/assets/images/quote.png";
+import quote from '@/assets/images/quote.png'
 
 const textReview = [
   {
-    time: "2023-04-14",
-    title: "Enterprise Name",
-    text: `Your company's products are highly professional, and the customer service personnel have a gentle attitude. Your company's products are highly professional.`,
+    time: '2023-04-14',
+    title: 'Enterprise Name',
+    text: `Your company's products are highly professional, and the customer service personnel have a gentle attitude. Your company's products are highly professional.`
   },
   {
-    time: "2023-04-14",
-    title: "Enterprise Name",
-    text: `Your company's products are highly professional, and the customer service personnel have a gentle attitude. Your company's products are highly professional.`,
+    time: '2023-04-14',
+    title: 'Enterprise Name',
+    text: `Your company's products are highly professional, and the customer service personnel have a gentle attitude. Your company's products are highly professional.`
   },
   {
-    time: "2023-04-14",
-    title: "Enterprise Name",
-    text: `Your company's products are highly professional, and the customer service personnel have a gentle attitude. Your company's products are highly professional.`,
-  },
-];
+    time: '2023-04-14',
+    title: 'Enterprise Name',
+    text: `Your company's products are highly professional, and the customer service personnel have a gentle attitude. Your company's products are highly professional.`
+  }
+]
 
 const inputStyle = [
-  "lg:text-[22px] h-[60px]  lg:border-b-[2px] lg:border-b-[#ccc] w-full lg:text-text lg:placeholder:text-text placeholder:text-white",
-  "text-[14px] border-b border-b-white bg-transparent h-[50px] leading-[50px] text-white overflow-hidden",
-  "focus:outline-none lg:focus:border-b-haeder-bg focus:border-haeder-bg",
-];
-const textareaStyle = [...inputStyle, "lg:h-[174px] lg:bg-b-title resize-none"];
+  'lg:text-[22px] h-[60px]  lg:border-b-[2px] lg:border-b-[#ccc] w-full lg:text-text lg:placeholder:text-text placeholder:text-white',
+  'text-[14px] border-b border-b-white bg-transparent h-[50px] leading-[50px] text-white overflow-hidden',
+  'focus:outline-none lg:focus:border-b-haeder-bg focus:border-haeder-bg'
+]
+const textareaStyle = [...inputStyle, 'lg:h-[174px] lg:bg-b-title resize-none']
 ---
 
 <div
   class:list={[
     "bg-[url('@/assets/images/bj.png')] bg-no-repeat bg-cover bg-center",
-    "lg:py-20 py-10 lg:mt-20 mt-10",
+    'lg:py-20 py-10 lg:mt-20 mt-10'
   ]}
 >
   <div
     class:list={[
-      "px-4 w-full flex justify-between flex-row max-w-[1740px] mx-auto",
+      'px-4 w-full flex justify-between flex-row max-w-[1740px] mx-auto'
     ]}
   >
-    <div class:list={["w-5/12 lg:block hidden"]}>
-      <div class:list={["text-white uppercase ", "flex flex-row items-end"]}>
+    <div class:list={['w-5/12 lg:block hidden']}>
+      <div class:list={['text-white uppercase ', 'flex flex-row items-end']}>
         <Image
           src={quote}
-          alt="min-icon"
-          class:list={["max-w-[140px] max-h-[122px] w-[6vw]"]}
+          alt='min-icon'
+          class:list={['max-w-[140px] max-h-[122px] w-[6vw]']}
         />
-        <div class="flex flex-col justify-between flex-1 pl-7">
-          <p class="font-semibold text-[24px]">USER EVALUATE</p>
-          <p class="mt-1 text-lg">Here is the customer's evaluation of us</p>
+        <div class='flex flex-col justify-between flex-1 pl-7'>
+          <p class='font-semibold text-[24px]'>USER EVALUATE</p>
+          <p class='mt-1 text-lg'>Here is the customer's evaluation of us</p>
         </div>
       </div>
-      <div class="swiper swiper-vertical h-[360px] mt-[50px]" id="swiper-batch">
-        <div class="swiper-wrapper">
+      <div class='swiper swiper-vertical h-[360px] mt-[50px]' id='swiper-batch'>
+        <div class='swiper-wrapper'>
           {
             textReview.map((item) => (
-              <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next select-none h-40 text-white">
-                <div class="text-[18px]">
-                  {dayjs(item.time).format("MMMM D, YYYY")}
+              <div class='swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next select-none h-40 text-white'>
+                <div class='text-[18px]'>
+                  {dayjs(item.time).format('MMMM D, YYYY')}
                 </div>
-                <div class="my-1 mr-5 font-medium text-[22px]">
+                <div class='my-1 mr-5 font-medium text-[22px]'>
                   {item.title}
                 </div>
-                <div class="text-[18px]">{item.text}</div>
+                <div class='text-[18px]'>{item.text}</div>
               </div>
             ))
           }
         </div>
       </div>
     </div>
-    <div class:list={["lg:w-1/2 w-full"]}>
-      <div class="lg:p-[4.16vw] p-0 lg:bg-white bg-transparent">
-        <form class="flex lg:gap-5 gap-[10px] flex-col">
+    <div class:list={['lg:w-1/2 w-full']}>
+      <div class='lg:p-[4.16vw] p-0 lg:bg-white bg-transparent'>
+        <form class='flex lg:gap-5 gap-[10px] flex-col'>
           <div
-            class="font-semibold lg:text-[35px] uppercase text-[20px] lg:text-black text-white"
+            class='font-semibold lg:text-[35px] uppercase text-[20px] lg:text-black text-white'
           >
             Online Message
           </div>
-          <div class="lg:text-[20px] text-[14px] lg:text-black text-white">
+          <div class='lg:text-[20px] text-[14px] lg:text-black text-white'>
             Learn about our latest products and discounts through SMS or email
           </div>
           <div>
             <input
-              type="text"
+              type='text'
               class:list={inputStyle}
-              placeholder="Full name"
+              placeholder='Full name'
             />
           </div>
           <div>
-            <input type="text" class:list={inputStyle} placeholder="Email" />
+            <input type='text' class:list={inputStyle} placeholder='Email' />
           </div>
           <div>
-            <textarea placeholder="Message" class:list={textareaStyle}
+            <textarea placeholder='Message' class:list={textareaStyle}
             ></textarea>
           </div>
         </form>
         <Button
-          type="button"
-          icon="tabler:arrow-up-right"
-          class="lg:w-[220px] w-full font-bold lg:mt-5 mt-[10px]"
+          type='button'
+          icon='tabler:arrow-up-right'
+          class='lg:w-[220px] w-full font-bold lg:mt-5 mt-[10px]'
         >
           SUBSCRIBE
         </Button>

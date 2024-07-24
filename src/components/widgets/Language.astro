@@ -1,0 +1,25 @@
+---
+import LanguageJson from '@/common/language.json'
+import LanguageList from './LanguageList.astro'
+import { Icon } from 'astro-icon/components'
+
+const {
+  url: { hostname }
+} = Astro
+const subdomain = hostname.split('.')[0]
+const language =
+  LanguageJson.filter((item) => item.href === subdomain)[0]?.language ||
+  'English'
+---
+
+<div class='h-full py-6' x-data='{ open: false }'>
+  <div
+    class='flex items-center gap-1 text-haeder-text cursor-pointer select-none'
+    @click='open = ! open'
+  >
+    <Icon name='tabler:world' class:list={['w-[21px] h-[21px]']} />
+    <span>{language}</span>
+    <Icon name='tabler:chevron-down' />
+  </div>
+  <LanguageList />
+</div>

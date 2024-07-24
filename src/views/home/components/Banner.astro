@@ -1,43 +1,54 @@
 ---
-import Image from "@/components/common/Image.astro";
+import Image from '@/components/common/Image.astro'
+interface Img {
+  url: string
+  width: number
+}
 
-const { banner } = Astro.props;
+type GroupedBanners = Record<string, Img[]>
+
+export interface Props {
+  banner: Img[]
+}
+const { banner } = Astro.props
 const groupedBanners = banner.reduce((acc, banner) => {
-  const key = banner.name.split(".")[0];
+  const key = banner.name.split('.')[0]
   if (!acc[key]) {
-    acc[key] = [];
+    acc[key] = []
   }
-  acc[key].push(banner);
-  return acc;
-}, {});
+  acc[key].push(banner)
+  return acc
+}, {})
 ---
 
-<div class="banner banner-mobile-box">
-  <div class="swiper swiper-banner" id="swiper-banner">
-    <div class="swiper-wrapper">
+<div class='banner banner-mobile-box'>
+  <div class='swiper swiper-banner' id='swiper-banner'>
+    <div class='swiper-wrapper'>
       {
-        Object.entries(groupedBanners).map(([key, images]: any) => {
-          const srcSet = images
-            .map((image) => `${image.url} ${image.width}w`)
-            .join(", ");
-          return (
-            <div class="swiper-slide">
-              <Image
-                srcset={srcSet}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1920px"
-                src={images[0].url}
-                alt={`Banner ${key}`}
-                class="w-full h-auto"
-              />
-            </div>
-          );
-        })
+        Object.entries(groupedBanners as GroupedBanners).map(
+          ([key, images]) => {
+            const srcSet = images
+              .map((image) => `${image.url} ${image.width}w`)
+              .join(', ')
+            return (
+              <div class='swiper-slide'>
+                <Image
+                  srcset={srcSet}
+                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1920px'
+                  src={images[0].url}
+                  alt={`Banner ${key}`}
+                  class='w-full h-auto'
+                />
+              </div>
+            )
+          }
+        )
       }
     </div>
-    <div class="swiper-pagination swiper-banner-pagination"></div>
-    <div class="swiper-button-box">
-      <div class="swiper-button-prev swiper-banner-prev"></div>
-      <div class="swiper-button-next swiper-banner-next"></div>
+    <div class='swiper-pagination swiper-banner-pagination'></div>
+    <div class='swiper-button-box'>
+      <div class='swiper-button-prev swiper-banner-prev'></div>
+      <div class='swiper-button-next swiper-banner-next'></div>
     </div>
   </div>
 </div>

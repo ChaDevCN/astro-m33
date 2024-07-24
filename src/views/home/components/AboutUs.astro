@@ -1,51 +1,51 @@
 ---
-import Image from "@/components/common/Image.astro";
-import Section from "@/components/Section.astro";
-import Button from "@/components/ui/Button.astro";
-import { Icon } from "astro-icon/components";
-import "@/assets/styles/global.less";
+import Image from '@/components/common/Image.astro'
+import Section from '@/components/Section.astro'
+import Button from '@/components/ui/Button.astro'
+import { Icon } from 'astro-icon/components'
+import '@/assets/styles/global.less'
 
 const icons = [
   {
-    title: "Original Products",
-    text: "Only parts from trusted brands",
-    icon: "tabler:package",
+    title: 'Original Products',
+    text: 'Only parts from trusted brands',
+    icon: 'tabler:package'
   },
   {
-    title: "Fast Delivery",
-    text: "Free delivery of all products",
-    icon: "tabler:truck",
+    title: 'Fast Delivery',
+    text: 'Free delivery of all products',
+    icon: 'tabler:truck'
   },
   {
-    title: "30 Days Returns",
-    text: "30 days open purchase",
-    icon: "tabler:world",
+    title: '30 Days Returns',
+    text: '30 days open purchase',
+    icon: 'tabler:world'
   },
   {
-    title: "Dedicated Support",
-    text: "We support both Sat & Sun",
-    icon: "tabler:brand-days-counter",
-  },
-];
+    title: 'Dedicated Support',
+    text: 'We support both Sat & Sun',
+    icon: 'tabler:brand-days-counter'
+  }
+]
 ---
 
 <Section>
-  <div class="flex lg:flex-row flex-col justify-between lg:gap-0 gap-5">
-    <div class="lg:w-[48%] w-full">
+  <div class='flex lg:flex-row flex-col justify-between lg:gap-0 gap-5'>
+    <div class='lg:w-[48%] w-full'>
       <Image
-        src="@/assets/images/abus.png"
-        alt="ABOUT US"
-        style="widht:100%;height:auto;"
+        src='@/assets/images/abus.png'
+        alt='ABOUT US'
+        style='widht:100%;height:auto;'
       />
-      <div class="flex justify-between w-full overflow-x-hidden">
-        <Image src="@/assets/images/mach.png" alt="mach" class="max-w-[80%]" />
-        <Image src="@/assets/images/mach1.png" alt="mach1" />
+      <div class='flex justify-between w-full overflow-x-hidden'>
+        <Image src='@/assets/images/mach.png' alt='mach' class='max-w-[80%]' />
+        <Image src='@/assets/images/mach1.png' alt='mach1' />
       </div>
     </div>
-    <div class="lg:w-[48%] w-full flex flex-col justify-center">
-      <h2 class="uppercase text-4xl font-bold">ABOUT US</h2>
-      <p class="vice">A mechanical equipment company with excellent service</p>
-      <aside class="desc">
+    <div class='lg:w-[48%] w-full flex flex-col justify-center'>
+      <h2 class='uppercase text-4xl font-bold'>ABOUT US</h2>
+      <p class='vice'>A mechanical equipment company with excellent service</p>
+      <aside class='desc'>
         Through the company profile, the outside world can have a visual
         understanding of the company and showcase its style. When introducing,
         the key points should be highlighted, and praise words should be used
@@ -53,24 +53,24 @@ const icons = [
         operations.company profile, the outside world can have a visual
         understanding of the company and showcase its style.
       </aside>
-      <Button type="button" icon="tabler:arrow-up-right" class="lg:w-[220px]">
-        <a href="/about-us">show now</a>
+      <Button type='button' icon='tabler:arrow-up-right' class='lg:w-[220px]'>
+        <a href='/about-us'>show now</a>
       </Button>
     </div>
   </div>
-  <ul class:list={["grid lg:grid-cols-4 grid-cols-2 mt-5 gap-5"]}>
+  <ul class:list={['grid lg:grid-cols-4 grid-cols-2 mt-5 gap-5']}>
     {
       icons.map((item) => (
-        <li class="border-[3px] lg:border-b-color lg:text-b-color border-haeder-bg text-haeder-bg cursor-pointer lg:hover:border-haeder-bg lg:hover:text-haeder-bg flex gap-2 lg:px-6 lg:py-6 p-3 transition-all duration-200">
-          <div class="flex justify-center items-center ">
+        <li class='border-[3px] lg:border-b-color lg:text-b-color border-haeder-bg text-haeder-bg cursor-pointer lg:hover:border-haeder-bg lg:hover:text-haeder-bg flex gap-2 lg:px-6 lg:py-6 p-3 transition-all duration-200'>
+          <div class='flex justify-center items-center '>
             <Icon
               name={item.icon}
-              class="lg:w-[60px] lg:h-[70px] w-[30px] h-[28px]"
+              class='lg:w-[60px] lg:h-[70px] w-[30px] h-[28px]'
             />
           </div>
-          <div class="flex justify-center flex-col gap-2">
-            <div class="lg:text-xl text-sm">{item.title}</div>
-            <div class="text-[12px]">{item.text}</div>
+          <div class='flex justify-center flex-col gap-2'>
+            <div class='lg:text-xl text-sm'>{item.title}</div>
+            <div class='text-[12px]'>{item.text}</div>
           </div>
         </li>
       ))

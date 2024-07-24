@@ -1,0 +1,11 @@
+site:
+  name:
+  base: "/"
+  url: "aixdb.cn"
+  staticBase: "http://49.234.109.212:3009"
+
+DB:
+  name:
+
+build:
+  filename:

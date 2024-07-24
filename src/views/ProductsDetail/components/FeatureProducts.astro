@@ -1,18 +1,14 @@
 ---
-import ProductsCard from "@/components/widgets/ProductsCard.astro";
+import ProductsCard from '@/components/widgets/ProductsCard.astro';
 export interface Props {
-  featureProducts: any[];
+  featureProducts: object[];
 }
 const { featureProducts } = Astro.props;
 ---
 
-<div class:list={["lg:mt-20 mt-6"]}>
-  <h3 class="text-center lg:text-[35px] text-[22px] font-semibold">
-    YOU MAY LIKE
-  </h3>
-  <ul
-    class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5 lg:mt-10 mt-5"
-  >
+<div class:list={['lg:mt-20 mt-6']}>
+  <h3 class="text-center lg:text-[35px] text-[22px] font-semibold">YOU MAY LIKE</h3>
+  <ul class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5 lg:mt-10 mt-5">
     {featureProducts.map((item) => <ProductsCard {...item} />)}
   </ul>
 </div>

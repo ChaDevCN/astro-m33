@@ -1,0 +1,28 @@
+---
+interface Item {
+  link: string
+  label: string
+}
+export interface Props {
+  data: Item[]
+}
+const { data } = Astro.props
+---
+
+<nav class='breadcrumb lg:py-[25px] py-[15px]'>
+  {
+    data.map((item, index) => (
+      <>
+        <a
+          href={item.link}
+          class:list={[
+            `${index === data.length - 1 ? 'text-[#333333]' : 'text-[#bbbbbb]'}`
+          ]}
+        >
+          {item.label}
+        </a>
+        <Fragment>{index !== data.length - 1 && <span>&gt;</span>}</Fragment>
+      </>
+    ))
+  }
+</nav>

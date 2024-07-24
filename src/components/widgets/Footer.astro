@@ -1,93 +1,140 @@
 ---
-import { Icon } from "astro-icon/components";
+import { Icon } from 'astro-icon/components'
 
-import Image from "@/components/common/Image.astro";
-import FooterMenuItem from "./FooterMenuItem.astro";
+import Image from '@/components/common/Image.astro'
+import FooterMenuItem from './FooterMenuItem.astro'
 
-import { footerData } from "@/lib/getFootdata";
+import { footerData } from '@/lib/getFootdata'
+
+import { getActiveUrl } from '@/utils/utils'
+
+import type { MeteDataProps } from '@/types/index'
+
+export interface Props extends MeteDataProps {}
 
 const {
   info: {
-    copyright = "Copyright@2023-2026 All Rights Reserved. Powered by AI Seeker Leopard", //版权信息
-    logourl,
+    copyright = 'Copyright@2023-2026 All Rights Reserved. Powered by AI Seeker Leopard', //版权信息
+    logourl
   },
   productsList,
   menu,
-  bci: { content },
-} = await footerData();
+  bci: { content }
+} = await footerData()
+
+const {
+  metadata: { keywords, description, title }
+} = Astro.props
+
+const { pathname } = Astro.url
+
 const footerMenus = [
   {
-    name: "Products",
-    key: "products",
-    href: "/products",
+    name: 'Products',
+    key: 'products',
+    href: '/products',
     data: (
-      menu.filter((subItem) => subItem.type === "products")[0].children || []
-    ).slice(0, 6),
+      menu.filter((subItem) => subItem.type === 'products')[0].children || []
+    ).slice(0, 6)
   },
   {
-    name: "Featured",
-    key: "",
-    href: "/products",
-    data: productsList,
+    name: 'Featured',
+    key: '',
+    href: '/products',
+    data: productsList
   },
   {
-    name: "Quick Navigation",
-    key: "menu",
-    href: "/",
-    data: menu,
+    name: 'Quick Navigation',
+    key: 'menu',
+    href: '/',
+    data: menu
+  }
+]
+
+const socialShare = [
+  {
+    icon: 'tabler:brand-facebook-filled',
+    title: 'Facebook Share',
+    share: 'facebook'
   },
-];
+  {
+    icon: 'tabler:brand-twitter-filled',
+    title: 'Twitter Share',
+    share: 'twitter'
+  },
+  {
+    icon: 'tabler:brand-instagram',
+    title: 'Instagram Share',
+    share: 'instagram'
+  },
+  {
+    icon: 'tabler:brand-youtube-filled',
+    title: 'Youtube Share',
+    share: 'youtube'
+  },
+  {
+    icon: 'tabler:brand-tiktok-filled',
+    title: 'Tiktok Share',
+    share: 'tiktok'
+  },
+  {
+    icon: 'tabler:brand-pinterest',
+    title: 'Pinterest Share',
+    share: 'pinterest'
+  }
+]
 ---
 
 <footer
   class:list={[
-    "lg:bg-footer-bg lg:text-time-color bg-haeder-bg text-haeder-text",
+    'lg:bg-footer-bg lg:text-time-color bg-haeder-bg text-haeder-text'
   ]}
 >
-  <div class:list={["px-4 max-w-[1740px] mx-auto"]}>
+  <div class:list={['px-4 max-w-[1740px] mx-auto']}>
     <div
       class:list={[
-        "flex lg:flex-row flex-col lg:justify-between",
-        "lg:py-[60px] py-[25px]",
+        'flex lg:flex-row flex-col lg:justify-between',
+        'lg:py-[60px] py-[25px]'
       ]}
     >
-      <div class:list={["lg:flex-none lg:w-[29%]"]}>
-        <div class="lg:block hidden">
-          <Image src={logourl} alt={"logo"} />
+      <div class:list={['lg:flex-none lg:w-[29%]']}>
+        <div class='lg:block hidden'>
+          <Image src={logourl} alt={'logo'} />
         </div>
-        <div set:html={content} class:list={["lg:mt-[40px] mt-5"]} />
+        <div set:html={content} class:list={['lg:mt-[40px] mt-5']} />
       </div>
-      <div class:list={["lg:w-[69%]"]}>
-        <ul class:list={["flex lg:flex-row flex-col justify-between"]}>
+      <div class:list={['lg:w-[69%]']}>
+        <ul class:list={['flex lg:flex-row flex-col justify-between']}>
           {
             footerMenus.map((item) => (
               <li
-                x-data="{ expanded: window.innerWidth > 1024 }"
-                class="mt-5 lg:mt-0"
+                x-data='{ expanded: window.innerWidth > 1024 }'
+                class='mt-5 lg:mt-0'
               >
                 <div
                   class:list={[
-                    "flex items-center justify-between lg:text-[20px] text-[16px]",
+                    'flex items-center justify-between lg:text-[20px] text-[16px]'
                   ]}
                 >
-                  <a href={item.href} class:list={["text-white "]}>
+                  <a href={item.href} class:list={['text-white ']}>
                     {item.name}
                   </a>
-                  <Icon
-                    name="tabler:chevron-down"
-                    class:list={["lg:hidden block w-7 h-7 cursor-pointer"]}
-                    @click="expanded = ! expanded"
-                  />
+                  <div @click='expanded = ! expanded'>
+                    <Icon
+                      name='tabler:chevron-down'
+                      class:list={['lg:hidden block w-7 h-7 cursor-pointer']}
+                      x-show='!expanded'
+                    />
+                    <Icon
+                      name='tabler:chevron-up'
+                      class:list={['lg:hidden block w-7 h-7 cursor-pointer']}
+                      x-show='expanded'
+                    />
+                  </div>
                 </div>
                 <div
-                  class:list={["lg:mt-10 lg:block"]}
-                  x-show="expanded"
-                  x-transition:enter="transition ease-out duration-300"
-                  x-transition:enter-start="transform opacity-0 scale-95"
-                  x-transition:enter-end="transform opacity-100 scale-100"
-                  x-transition:leave="transition ease-in duration-300"
-                  x-transition:leave-start="transform opacity-100 scale-100"
-                  x-transition:leave-end="transform opacity-0 scale-95"
+                  class:list={['lg:mt-10 lg:block']}
+                  x-show='expanded'
                   x-collapse
                 >
                   {item.data.length &&
@@ -106,28 +153,27 @@ const footerMenus = [
     </div>
     <div
       class:list={[
-        "lg:py-10 border-t-[#6666] border-t lg:text-[16px] py-4",
-        "flex lg:flex-row flex-col lg:justify-between  lg:items-center",
+        'lg:py-10 border-t-[#6666] border-t lg:text-[16px] py-4',
+        'flex lg:flex-row flex-col lg:justify-between  lg:items-center'
       ]}
     >
-      <div class="text-center lg:text-left">{copyright}&nbsp;</div>
-      <div class="flex items-center gap-2 lg:justify-start justify-center">
+      <div class='text-center lg:text-left'>{copyright}&nbsp;</div>
+      <div class='flex items-center gap-2 lg:justify-start justify-center'>
         <div>Follow Us</div>
         {
-          [
-            "tabler:brand-facebook-filled",
-            "tabler:brand-twitter-filled",
-            "tabler:brand-instagram",
-            "tabler:brand-youtube-filled",
-            "tabler:brand-tiktok-filled",
-            "tabler:brand-pinterest",
-          ].map((icon) => (
-            <a class="p-2 bg-white lg:opacity-60 cursor-pointer rounded-full hover:translate-y-[-3px] lg:hover:translate-y-[-10px] transition-all  duration-100">
+          socialShare.map((item) => (
+            <button
+              data-aw-social-share={item.share}
+              data-aw-url={getActiveUrl(pathname)}
+              data-aw-text={title}
+              title={item.title}
+              class='p-2 bg-white lg:opacity-60 cursor-pointer rounded-full hover:translate-y-[-3px] lg:hover:translate-y-[-10px] transition-all  duration-100'
+            >
               <Icon
-                name={icon}
-                class:list={["lg:w-5 lg:h-5 text-haeder-bg lg:text-[#222]"]}
+                name={item.icon}
+                class:list={['lg:w-5 lg:h-5 text-haeder-bg lg:text-[#222]']}
               />
-            </a>
+            </button>
           ))
         }
       </div>
