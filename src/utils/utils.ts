@@ -4,6 +4,8 @@ const {
   site: { url: BaseUrl },
 } = config;
 
+
+
 export const trim = (str = '', ch?: string) => {
   let start = 0,
     end = str.length || 0;
@@ -70,3 +72,30 @@ export const getCanonical = (path = ''): string | URL => {
 };
 
 export const getActiveUrl = (path = '') => BaseUrl + path;
+
+
+
+export const findRootNode = (tree, targetId) => {
+  const findNodePath = (node, path = []) => {
+    if (node.ID === targetId) {
+      return path.concat(node);
+    }
+    if (node.children) {
+      for (const child of node.children) {
+        const result = findNodePath(child, path.concat(node));
+        if (result) {
+          return result;
+        }
+      }
+    }
+    return null;
+  };
+
+  for (const root of tree) {
+    const path = findNodePath(root);
+    if (path) {
+      return path[0]; // 返回路径中的第一个节点，即根节点
+    }
+  }
+  return null; // 如果没有找到目标节点
+};

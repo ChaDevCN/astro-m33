@@ -1,15 +1,14 @@
 ---
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 import Image from '../common/Image.astro';
 import { Icon } from 'astro-icon/components';
 
-export interface Props {
-  showPic: string;
-  name: string;
-  path: string;
-  [key: string]: unknown;
-}
+import type { Knowledge, Product } from '@/types/index';
+
+type Combined = Knowledge & Product;
+export type Props = Partial<Combined>;
+
 const { showPic, name, path, createTime } = Astro.props;
 ---
 
@@ -19,7 +18,7 @@ const { showPic, name, path, createTime } = Astro.props;
       <Image
         src={showPic}
         alt={name}
-        class:list={['lg:group-hover/knowledge:scale-110 transition-all duration-300 lg:w-auto', 'w-full']}
+        class:list={['lg:group-hover/knowledge:scale-110 transition-all duration-300', 'w-full max-w-[420px]']}
       />
       <div
         class:list={[
@@ -28,7 +27,7 @@ const { showPic, name, path, createTime } = Astro.props;
           'lg:w-16 lg:h-16 h-[45px] w-auto',
           'lg:p[20px] px-[10px] whitespace-nowrap',
           'bg-haeder-bg text-haeder-text',
-          'group-hover/knowledge:h-full sm:group-hover/knowledge:max-h-[200px]',
+          'hover:h-full max-h-[200px] sm:hover:max-h-[200px] group/icons',
           'transition-all duration-300',
         ]}
       >
@@ -39,8 +38,8 @@ const { showPic, name, path, createTime } = Astro.props;
           <Icon name="tabler:brand-instagram" class="w-7 h-7 inline-block" />
         </div>
         <div class="h-full sm:py-[20px] py-3 flex items-center justify-center">
-          <Icon name="tabler:brand-stackshare" class="w-7 h-7 inline-block group-hover/knowledge:hidden" />
-          <Icon name="tabler:brand-twitter-filled" class="w-7 h-7 hidden group-hover/knowledge:inline-block" />
+          <Icon name="tabler:brand-stackshare" class="w-7 h-7 inline-block group-hover/icons:hidden" />
+          <Icon name="tabler:brand-twitter-filled" class="w-7 h-7 hidden group-hover/icons:inline-block" />
         </div>
       </div>
     </div>

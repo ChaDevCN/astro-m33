@@ -4,8 +4,13 @@ import { Image } from 'astro:assets';
 import dayjs from 'dayjs';
 
 import Button from '../ui/Button.astro';
-
 import quote from '@/assets/images/quote.png';
+
+import config from '../../../config.yml';
+
+const {
+  DB: { name },
+} = config;
 
 const textReview = [
   {
@@ -26,9 +31,10 @@ const textReview = [
 ];
 
 const inputStyle = [
-  'lg:text-[22px] h-[60px]  lg:border-b-[2px] lg:border-b-[#ccc] w-full lg:text-text lg:placeholder:text-text placeholder:text-white',
+  'lg:text-[22px] h-[60px] border-l-transparent border-t-transparent border-r-transparent  lg:border-b-[2px] lg:border-b-[#ccc] w-full lg:text-text lg:placeholder:text-text placeholder:text-white',
   'text-[14px] border-b border-b-white bg-transparent h-[50px] leading-[50px] text-white overflow-hidden',
   'focus:outline-none lg:focus:border-b-haeder-bg focus:border-haeder-bg',
+  'focus:border-l-transparent focus:border-t-transparent focus:border-r-transparen focus:border-r-0 focus:ring-offset-[transparen] ',
 ];
 const textareaStyle = [...inputStyle, 'lg:h-[174px] lg:bg-b-title resize-none'];
 ---
@@ -61,25 +67,145 @@ const textareaStyle = [...inputStyle, 'lg:h-[174px] lg:bg-b-title resize-none'];
     </div>
     <div class:list={['lg:w-1/2 w-full']}>
       <div class="lg:p-[4.16vw] p-0 lg:bg-white bg-transparent">
-        <form class="flex lg:gap-5 gap-[10px] flex-col">
+        <form class="flex lg:gap-5 gap-[10px] flex-col" method="post">
           <div class="font-semibold lg:text-[35px] uppercase text-[20px] lg:text-black text-white">Online Message</div>
           <div class="lg:text-[20px] text-[14px] lg:text-black text-white">
             Learn about our latest products and discounts through SMS or email
           </div>
           <div>
-            <input type="text" class:list={inputStyle} placeholder="Full name" />
+            <input type="text" class:list={inputStyle} placeholder="Full name" id="form-name" />
           </div>
           <div>
-            <input type="text" class:list={inputStyle} placeholder="Email" />
+            <input type="text" class:list={inputStyle} placeholder="Email" id="form-email" />
           </div>
           <div>
-            <textarea placeholder="Message" class:list={textareaStyle}></textarea>
+            <textarea placeholder="Message" class:list={textareaStyle} id="form-content"></textarea>
           </div>
         </form>
-        <Button type="button" icon="tabler:arrow-up-right" class="lg:w-[220px] w-full font-bold lg:mt-5 mt-[10px]">
+        <Button
+          type="button"
+          icon="tabler:arrow-up-right"
+          class="lg:w-[220px] w-full font-bold lg:mt-5 mt-[10px]"
+          id="form-submit-btn"
+          data-aw-db-name={name}
+        >
           SUBSCRIBE
         </Button>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  const dispatch = ({ type, content, event = 'notify' }) => {
+    window.dispatchEvent(
+      new CustomEvent(event, {
+        detail: {
+          type,
+          content,
+        },
+      })
+    );
+  };
+
+  const debounce = (func, wait) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(this, args);
+      }, wait);
+    };
+  };
+
+  const validateForm = (formConfig, config) => {
+    let errors = 0;
+    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    formConfig.forEach((item) => {
+      item.required = config[item.key]?.required;
+      if (item.key === 'email' && item.value && !re.test(item.value)) {
+        errors++;
+        dispatch({
+          type: 'error',
+          content: 'Email format is incorrect',
+        });
+      }
+      if (item.required && !item.value) {
+        errors++;
+        dispatch({
+          type: 'error',
+          content: `${item.key} cannot be empty`,
+        });
+      }
+    });
+
+    return errors;
+  };
+
+  const submitForm = async (button) => {
+    const dbName = button.getAttribute('data-aw-db-name');
+    try {
+      const res = await fetch(
+        `https://icms.aixdb.cn/api/appapi/home/get?table=ask_setting&DynamicDbConnectName=${dbName}`
+      );
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch settings');
+      }
+
+      const name = document.querySelector('#form-name') as HTMLInputElement;
+      const email = document.querySelector('#form-email') as HTMLInputElement;
+      const content = document.querySelector('#form-content') as HTMLInputElement;
+
+      const formConfig = [
+        { key: 'name', value: name.value, required: false },
+        { key: 'email', value: email.value, required: false },
+        { key: 'content', value: content.value, required: false },
+      ];
+
+      const result = await res.json();
+      const config = result.result.data[0];
+
+      const errors = validateForm(formConfig, config);
+      if (errors > 0) {
+        return;
+      }
+
+      const otherConfig = [
+        { key: 'DynamicDbConnectName', value: dbName },
+        { key: 'domain', value: window.location.host },
+        { key: 'path', value: window.location.href },
+        ...formConfig,
+      ];
+
+      const url = new URL('https://ipadmin.aixdb.cn/ipadmin/api/ask/add');
+      otherConfig.forEach((item) => {
+        url.searchParams.append(item.key, item.value);
+      });
+
+      await fetch(url);
+      dispatch({
+        type: 'success',
+        content: 'We have received your message and will be in touch with you shortly.',
+      });
+
+      name.value = '';
+      email.value = '';
+      content.value = '';
+    } catch (error) {
+      dispatch({
+        type: 'error',
+        content: 'An error occurred while submitting the form. Please try again later.',
+      });
+    }
+  };
+
+  const btn = document.querySelectorAll('#form-submit-btn');
+  btn.forEach((button) => {
+    button.addEventListener(
+      'click',
+      debounce(() => submitForm(button), 300)
+    );
+  });
+</script>

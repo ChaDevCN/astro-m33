@@ -7,6 +7,7 @@ import Resources from '@/components/common/Resources.astro';
 import Favicons from '@/components/Favicons.astro';
 import Metadata from '@/components/common/Metadata.astro';
 import Wmkc from '@/components/widgets/Wmkc.astro';
+import Notifications from '@/components/widgets/Notifications.astro';
 
 import type { MeteDataProps } from '@/types/index';
 
@@ -33,5 +34,6 @@ const { metadata } = Astro.props;
     <slot />
     <BasicScripts />
     <HomeSwiper />
+    <Notifications />
   </body>
 </html>

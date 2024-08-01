@@ -4,13 +4,24 @@ import { fetchData } from '@/lib/fetchDataAll';
 import Home from '@/views/home/index.astro';
 import Layout from '@/layouts/PageLayout.astro';
 
+import config from '../../config.yml';
+
 const {
   result: {
     data: { menu, site_pic_pcbanner, site_pic },
   },
 } = await fetchData();
 
-const { keywords, title, description } = menu.find((item) => item.type === 'Home');
+const result = menu.find((item) => item.type === 'Home');
+
+const {
+  site: { title: defaultTitle, keywords: defaultKeywords, description: defaultDescription },
+} = config;
+
+const keywords = result?.keywords || defaultTitle;
+const title = result?.title || defaultKeywords;
+const description = result?.description || defaultDescription;
+
 const pcbanner = site_pic_pcbanner.filter((item) => item.glid === site_pic[0].ID);
 const images = pcbanner.map((items) => ({ url: items.url }));
 ---

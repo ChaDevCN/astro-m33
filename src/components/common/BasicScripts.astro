@@ -39,6 +39,7 @@
   const onLoad = function () {
     let lastKnownScrollPosition = window.scrollY;
     let ticking = true;
+    const pathname = location.pathname;
 
     attachEvent('#header nav', 'click', function () {
       document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
@@ -66,6 +67,11 @@
       }
       document.documentElement.classList.toggle('dark');
       localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    });
+    attachEvent('.list-select', 'change', function (e) {
+      if (pathname !== e.target.value) {
+        window.open(e.target.value, '_self');
+      }
     });
 
     attachEvent('[data-aw-social-share]', 'click', function (_, elem) {

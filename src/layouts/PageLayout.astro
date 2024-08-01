@@ -4,6 +4,7 @@ import Announcement from '@/components/widgets/Announcement.astro';
 import Header from '@/components/widgets/Header.astro';
 import Footer from '@/components/widgets/Footer.astro';
 import Feedback from '@/components/widgets/Feedback.astro';
+import EditorStyle from '@/components/common/EditorStyle.astro';
 
 import type { MeteDataProps } from '@/types/index';
 
@@ -13,8 +14,12 @@ import { getBaseInfo } from '@/lib/getBaseInfo';
 const { email = 'tennyson@somyshare.com', logourl } = await getBaseInfo();
 
 const { metadata } = Astro.props;
+const { pathname } = Astro.url;
+
+const isEditorStyle = ['/'];
 ---
 
+{!isEditorStyle.includes(pathname) && <EditorStyle />}
 <Layout metadata={metadata}>
   <slot name="announcement">
     <Announcement email={email} />

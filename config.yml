@@ -1,11 +1,14 @@
 site:
   name:
-  base: "/"
-  url: "aixdb.cn"
-  staticBase: "http://49.234.109.212:3009"
-
+  base: '/'
+  url: 'aixdb.cn'
+  staticBase: 'http://49.234.109.212:3009'
+  baseUrl: 'http://20.239.93.227:7006'
+  keywords: ''
+  title: ''
+  description: ''
 DB:
-  name:
+  name: 'icms_en_25ec0a500d2211ef95b1730a50b7257f'
 
 build:
   filename:

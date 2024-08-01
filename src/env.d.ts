@@ -8,6 +8,10 @@ interface SiteConfig {
   base: string;
   url: string;
   staticBase: string;
+  baseUrl: string
+  description: string
+  title: string
+  keywords: string
 }
 
 interface DBConfig {

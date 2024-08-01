@@ -1,0 +1,35 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Valus {
+  name_ch: string;
+  path: string;
+}
+export interface Props {
+  sblings: Record<string, Valus>;
+}
+const { sblings } = Astro.props;
+---
+
+<div class="flex items-center justify-between lg:border-2 border-[#8DC0FF]">
+  <a
+    href={sblings.prev?.path || '#'}
+    class={`${!sblings.prev?.path ? 'cursor-not-allowed' : ''} lg:p-4 py-3 flex text-haeder-bg items-center justify-center gap-1 border-2 lg:border-none border-[#8DC0FF] lg:w-auto w-[48%]`}
+  >
+    <Icon name="tabler:arrow-left" class:list={['w-7 h-7 ']} />
+    <span class="mt-[2px] lg:hidden">Previous article</span>
+  </a>
+  <a
+    href={sblings?.next?.path || sblings?.prev?.path}
+    class="lg:block hidden flex-1 text-center border-l border-r border-[#8DC0FF] text-[22px] text-[#666] hover:text-haeder-bg items-center"
+    >{sblings.next?.name_ch || sblings.prev?.name_ch || 'No Data'}</a
+  >
+  <a
+    href={sblings.next?.path || '#'}
+    class:list={[
+      `${!sblings.next?.path ? 'cursor-not-allowed' : ''}`,
+      'lg:p-4 py-3 flex text-haeder-bg gap-1 border-2 border-[#8DC0FF] justify-center lg:w-auto w-[48%] lg:border-none',
+    ]}
+    ><span class="mt-[2px] lg:hidden">Next Article</span><Icon name="tabler:arrow-right" class:list={['w-7 h-7 ']} />
+  </a>
+</div>

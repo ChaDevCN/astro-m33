@@ -6,6 +6,12 @@ import News from './components/News.astro';
 import Area from './components/Area.astro';
 import Banner from './components/Banner.astro';
 
+import type { SitePicPcbanner } from '@/types/index';
+
+export interface Props {
+  banner: SitePicPcbanner[];
+}
+
 const { banner: pcbanner } = Astro.props;
 ---
 

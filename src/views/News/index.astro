@@ -4,7 +4,17 @@ import Breadcrumb from '@/components/widgets/Breadcrumb.astro';
 import NavigationHeader from '@/components/widgets/NavigationHeader.astro';
 import Pagination from '@/components/widgets/Pagination.astro';
 import Card from '@/components/widgets/Card.astro';
+import FilterList from '@/components/widgets/FilterList.astro';
+
 import { getList } from '@/lib/getList';
+import { fetchData } from '@/lib/fetchDataAll';
+
+import { findRootNode } from '@/utils/utils';
+const {
+  result: {
+    data: { menu },
+  },
+} = await fetchData();
 
 let { activeItem, pageSize = '8', current = '1' } = Astro.props;
 
@@ -43,11 +53,14 @@ const startIndex = (current - 1) * pageSize;
 const endIndex = Math.min(startIndex + pageSize, total);
 
 const paginatedList = list.slice(startIndex, endIndex);
+
+const tree = findRootNode(menu, activeItem.ID);
 ---
 
 <Section class="lg:pt-[30px] pb-0 pt-[20px]">
   <Breadcrumb data={BreadcrumbData} />
   <NavigationHeader name_ch={activeItem.name_ch} />
+  <FilterList items={tree} />
   <ul class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5">
     {
       paginatedList.length > 0 &&

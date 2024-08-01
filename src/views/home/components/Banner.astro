@@ -1,18 +1,13 @@
 ---
 import Image from '@/components/common/Image.astro';
-interface Img {
-  url: string;
-  width: number;
+import type { Props } from '../index.astro';
+import type { SitePicPcbanner } from '@/types/index';
+interface GroupedBanners {
+  [key: string]: SitePicPcbanner[];
 }
-
-type GroupedBanners = Record<string, Img[]>;
-
-export interface Props {
-  banner: Img[];
-}
-const { banner } = Astro.props;
-const groupedBanners = banner.reduce((acc, banner) => {
-  const key = banner.name.split('.')[0];
+const { banner } = Astro.props as Props;
+const groupedBanners: GroupedBanners = banner.reduce((acc, banner) => {
+  const key = banner.sort;
   if (!acc[key]) {
     acc[key] = [];
   }
@@ -25,7 +20,7 @@ const groupedBanners = banner.reduce((acc, banner) => {
   <div class="swiper swiper-banner" id="swiper-banner">
     <div class="swiper-wrapper">
       {
-        Object.entries(groupedBanners as GroupedBanners).map(([key, images]) => {
+        Object.entries(groupedBanners).map(([key, images]) => {
           const srcSet = images.map((image) => `${image.url} ${image.width}w`).join(', ');
           return (
             <div class="swiper-slide">

@@ -1,7 +1,70 @@
 ---
+import { Icon } from 'astro-icon/components';
+
+import dayjs from 'dayjs';
+
+import Breadcrumb from '@/components/widgets/Breadcrumb.astro';
+import Section from '@/components/Section.astro';
+import FeatureProducts from '../ProductsDetail/components/FeatureProducts.astro';
+import SblingsButton from '@/components/widgets/SblingsButton.astro';
+
+import { fetchData } from '@/lib/fetchDataAll';
+import { getSblings } from '@/lib/sblings';
+
+interface Valus {
+  name_ch: string;
+  path: string;
+}
+
 const { activeItem } = Astro.props;
+const {
+  result: {
+    data: { knowledge, products },
+  },
+} = await fetchData();
+const BreadcrumbData = [
+  {
+    link: '/',
+    label: 'Home',
+  },
+  {
+    link: activeItem.path,
+    label: activeItem.name_ch,
+  },
+];
+
+let { glProductIds, glid, ID, content } = knowledge.find((item) => item.ID == activeItem.ID) || {};
+
+const sblings = await getSblings<Record<string, Valus>>({
+  key: 'knowledge',
+  glid,
+  ID,
+});
+
+const featureProducts = products.filter((item) => JSON.stringify(glProductIds)?.includes(item.ID));
 ---
 
-<div>
-  {JSON.stringify(activeItem)}
-</div>
+<Section class="lg:pt-[30px] pb-0 pt-[20px]">
+  <Breadcrumb data={BreadcrumbData} />
+  <div class:list={['flex']}>
+    <div class:list={['lg:w-[68.67%] w-full']}>
+      <h1 class:list={['font-semibold lg:text-[34px] text-[18px] lg:text-start text-center']}>
+        {activeItem.name_ch}
+      </h1>
+      <div class="text-haeder-bg flex items-center lg:gap-2 gap-1 lg:text-[20px] text-[14px] lg:mt-[25px] mt-[15px]">
+        <Icon name="tabler:calendar-exclamation" class:list={['w-6 h-6']} />
+        <div>{dayjs(activeItem.createTime).format('MMMM D, YYYY')}</div>
+      </div>
+      <div class:list={['lg:py-10 py-5 leading-[1.45em] lg:text-[20px] text-[15px]']} set:html={content} />
+      <SblingsButton sblings={sblings} />
+    </div>
+    <div class:list={['lg:w-[26.83%]', 'lg:block hidden']}></div>
+  </div>
+  {featureProducts.length > 0 && <FeatureProducts featureProducts={featureProducts} />}
+</Section>
+<style>
+  :global(p > img) {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

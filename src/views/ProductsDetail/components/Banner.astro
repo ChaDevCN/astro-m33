@@ -1,11 +1,10 @@
 ---
 import Image from '@/components/common/Image.astro';
+import type { ProductPic } from '@/types/index';
+
 export interface Props {
   options: {
-    productPics: {
-      url: string;
-      type: string;
-    }[];
+    productPics: ProductPic[];
   };
 }
 const {

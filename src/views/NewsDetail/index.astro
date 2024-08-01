@@ -6,8 +6,17 @@ import dayjs from 'dayjs';
 import Breadcrumb from '@/components/widgets/Breadcrumb.astro';
 import Section from '@/components/Section.astro';
 import FeatureProducts from '../ProductsDetail/components/FeatureProducts.astro';
+import SblingsButton from '@/components/widgets/SblingsButton.astro';
 
 import { fetchData } from '@/lib/fetchDataAll';
+import { getSblings } from '@/lib/sblings';
+import type { News } from '@/types/index';
+
+interface Valus {
+  name_ch: string;
+  path: string;
+}
+
 const { activeItem } = Astro.props;
 const {
   result: {
@@ -25,16 +34,13 @@ const BreadcrumbData = [
   },
 ];
 
-let {
-  glProductIds,
-  showPic,
-  productPics = [{ src: showPic }],
-  content,
-} = news.find((item) => item.ID == activeItem.ID) || {};
-productPics.reverse();
-if (showPic && typeof showPic === 'string') {
-  productPics = [...productPics, { url: showPic }];
-}
+let { glProductIds, content, glid, ID } = news.find((item) => item.ID == activeItem.ID) as News;
+
+const sblings = await getSblings<Record<string, Valus>>({
+  key: 'news',
+  glid,
+  ID,
+});
 
 const featureProducts = products.filter((item) => JSON.stringify(glProductIds).includes(item.ID));
 ---
@@ -51,6 +57,7 @@ const featureProducts = products.filter((item) => JSON.stringify(glProductIds).i
         <div>{dayjs(activeItem.createTime).format('MMMM D, YYYY')}</div>
       </div>
       <div class:list={['lg:py-10 py-5 leading-[1.45em] lg:text-[20px] text-[15px]']} set:html={content} />
+      <SblingsButton sblings={sblings} />
     </div>
 
     <div class:list={['lg:w-[26.83%]', 'lg:block hidden']}></div>

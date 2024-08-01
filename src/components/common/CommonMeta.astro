@@ -1,4 +1,6 @@
 ---
+import config from '../../../config.yml';
+
 const languages = [
   'ar',
   'bg',
@@ -105,7 +107,9 @@ const languages = [
 ];
 const { pathname } = Astro.url;
 
-const deploymentUrl = 'test.com';
+const {
+  site: { url: deploymentUrl },
+} = config;
 ---
 
 <meta charset="UTF-8" />

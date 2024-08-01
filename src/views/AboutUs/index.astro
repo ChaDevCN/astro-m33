@@ -1,7 +1,10 @@
 ---
-const { activeItem } = Astro.props;
+import Section from '@/components/Section.astro';
+const {
+  activeItem: { content },
+} = Astro.props;
 ---
 
-<div>
-  {JSON.stringify(activeItem)}
-</div>
+<Section class="lg:pt-[30px] pb-0 pt-[20px]">
+  <div class:list={['lg:py-10 py-5 leading-[1.45em] lg:text-[20px] text-[15px]']} set:html={content} />
+</Section>
