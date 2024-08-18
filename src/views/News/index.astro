@@ -60,7 +60,7 @@ const tree = findRootNode(menu, activeItem.ID);
 <Section class="lg:pt-[30px] pb-0 pt-[20px]">
   <Breadcrumb data={BreadcrumbData} />
   <NavigationHeader name_ch={activeItem.name_ch} />
-  <FilterList items={tree} />
+  <FilterList items={tree} type="news" />
   <ul class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5">
     {
       paginatedList.length > 0 &&

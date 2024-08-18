@@ -10,6 +10,7 @@ import NewsClass from '@/views/NewsClass/index.astro';
 import Knowledge from '@/views/Knowledge/index.astro';
 import KnowledgeClass from '@/views/KnowledgeClass/index.astro';
 import Other from '@/views/Other.astro';
+import Search from '@/views/Search.astro';
 
 import Layout from '@/layouts/PageLayout.astro';
 
@@ -47,7 +48,7 @@ export const getStaticPaths = (async () => {
     .map((item) => ({
       params: { type: item.url.replace('/', '') },
     }))
-    .concat([{ params: { type: 'thanks' } }]);
+    .concat([{ params: { type: 'thanks' } }, { params: { type: 'search' } }]);
 }) satisfies GetStaticPaths;
 
 const { type } = Astro.params;
@@ -66,6 +67,8 @@ const { title, description, keywords } = activeItem;
       <Comp activeItem={activeItem} />
     ) : type === 'thanks' ? (
       <Other key="thanks" />
+    ) : type === 'search' ? (
+      <Search />
     ) : (
       <p>Type not supported.</p>
     )

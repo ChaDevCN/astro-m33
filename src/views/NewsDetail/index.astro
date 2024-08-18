@@ -7,6 +7,7 @@ import Breadcrumb from '@/components/widgets/Breadcrumb.astro';
 import Section from '@/components/Section.astro';
 import FeatureProducts from '../ProductsDetail/components/FeatureProducts.astro';
 import SblingsButton from '@/components/widgets/SblingsButton.astro';
+import Sidebar from '@/components/widgets/Sidebar.astro';
 
 import { fetchData } from '@/lib/fetchDataAll';
 import { getSblings } from '@/lib/sblings';
@@ -47,7 +48,7 @@ const featureProducts = products.filter((item) => JSON.stringify(glProductIds).i
 
 <Section class="lg:pt-[30px] pb-0 pt-[20px]">
   <Breadcrumb data={BreadcrumbData} />
-  <div class:list={['flex']}>
+  <div class:list={['flex justify-between']}>
     <div class:list={['lg:w-[68.67%] w-full']}>
       <h1 class:list={['font-semibold lg:text-[34px] text-[18px] lg:text-start text-center']}>
         {activeItem.name_ch}
@@ -59,8 +60,9 @@ const featureProducts = products.filter((item) => JSON.stringify(glProductIds).i
       <div class:list={['lg:py-10 py-5 leading-[1.45em] lg:text-[20px] text-[15px]']} set:html={content} />
       <SblingsButton sblings={sblings} />
     </div>
-
-    <div class:list={['lg:w-[26.83%]', 'lg:block hidden']}></div>
+    <div class:list={['lg:w-[26.83%]', 'lg:block hidden']}>
+      <Sidebar type="news" parentid={activeItem.parentid} />
+    </div>
   </div>
   {featureProducts.length > 0 && <FeatureProducts featureProducts={featureProducts} />}
 </Section>

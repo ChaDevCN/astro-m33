@@ -18,6 +18,7 @@ module.exports = {
         text: 'var(--text)',
         title: 'var(--title)',
         'footer-bg': 'var(--footer-bg)',
+        'main-bg': 'var(--main)'
       },
       // fontFamily: {
       //   sans: [

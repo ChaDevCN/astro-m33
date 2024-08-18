@@ -3,8 +3,16 @@ import NavigationHeader from '@/components/widgets/NavigationHeader.astro';
 import Section from '@/components/Section.astro';
 import ProductsCard from '@/components/widgets/ProductsCard.astro';
 import Pagination from '@/components/widgets/Pagination.astro';
-
+import FilterList from '@/components/widgets/FilterList.astro';
 import { getList } from '@/lib/getList';
+import { fetchData } from '@/lib/fetchDataAll';
+
+import { findNodeByAttribute } from '@/utils/utils';
+const {
+  result: {
+    data: { menu },
+  },
+} = await fetchData();
 
 const list = await getList({});
 
@@ -30,11 +38,13 @@ const startIndex = (current - 1) * pageSize;
 const endIndex = Math.min(startIndex + pageSize, total);
 
 const paginatedList = list.slice(startIndex, endIndex);
+const tree = findNodeByAttribute(menu, 'path', '/products');
 ---
 
 <Section>
   <div>
     <NavigationHeader name_ch={activeItem.name_ch} />
+    <FilterList items={tree} />
     <ul class="grid lg:grid-cols-4 grid-cols-2 lg:gap-[20px_1%] gap-5">
       {paginatedList.length && paginatedList.map((item) => <ProductsCard {...item} name={item.name_ch} />)}
     </ul>

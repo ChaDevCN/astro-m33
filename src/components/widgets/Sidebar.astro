@@ -1,0 +1,51 @@
+---
+import { Icon } from 'astro-icon/components';
+import { fetchData } from '@/lib/fetchDataAll';
+import { filterHotItemsByKey } from '@/lib/filterHotItemsByKey.ts';
+
+const { type, parentid } = Astro.props;
+
+const knowledgeList = await filterHotItemsByKey('knowledge');
+const newsList = await filterHotItemsByKey('news');
+const {
+  result: {
+    data: { menu },
+  },
+} = await fetchData();
+
+const list = menu.filter((s) => s.type === type);
+---
+
+<div>
+  {
+    Object.keys(list[0].children) && list[0].children.length > 0 && (
+      <select
+        name="location"
+        class="list-select mt-2 block w-full h-[64px] border-0 py-3 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-blue-300 focus:ring-2 focus:ring-blue-500 sm:text-sm sm:leading-6"
+      >
+        {list[0].children.map((s) => (
+          <option value={s.path} selected={s.ID === parentid}>
+            {s.name_ch}
+          </option>
+        ))}
+      </select>
+    )
+  }
+  {
+    ['Corporate News', 'Related Blogs'].map((item, index) => (
+      <div class="mt-[50px]">
+        <div class="h-[64px] border-2 border-[#8DC0FF] text-[#0072FF] flex  items-center px-5">{item}</div>
+        {[knowledgeList, newsList][index].map((item) => (
+          <a href={item.path}>
+            <div class="py-5  border-b border-[#8DC0FF] hover:text-[#0072FF] cursor-pointer flex gap-2 items-center text-[#666]">
+              <div>
+                <Icon name="tabler:arrow-down-right" class="h-[16px] w-[16px]" />
+              </div>
+              <div class="truncate ...">{item.name}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    ))
+  }
+</div>

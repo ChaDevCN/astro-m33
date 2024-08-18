@@ -109,6 +109,23 @@
       newlink.click();
     });
 
+    attachEvent('#search-btn', 'click', function (_, elem) {
+      const group = elem.getAttribute('group');
+      const input = document.querySelector(`#search-input-${group}`);
+
+      if (!input.value) return;
+      const host = window.location.host;
+      const path = '/search';
+      let url;
+      if (group === '2') {
+        const type = elem.getAttribute('da-aw-type');
+        url = `${window.location.protocol}//${host}${path}?key=${encodeURIComponent(input.value)}&type=${type}`;
+      } else {
+        url = `${window.location.protocol}//${host}${path}?key=${encodeURIComponent(input.value)}`;
+      }
+      window.open(url, '_blank');
+    });
+
     const screenSize = window.matchMedia('(max-width: 767px)');
     screenSize.addEventListener('change', function () {
       document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');

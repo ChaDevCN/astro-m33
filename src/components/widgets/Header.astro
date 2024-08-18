@@ -45,11 +45,30 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     ]}
   >
     <div
-      class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between md:w-[fit-content]']}
+      class:list={[
+        { 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' },
+        'flex justify-between md:w-[fit-content] ',
+      ]}
     >
       <Logo logourl={logourl} />
-      <div class="flex items-center md:hidden">
+      <div class="flex items-center md:hidden md:order-none order-1">
         <ToggleMenu />
+      </div>
+      <div class="text-haeder-text cursor-pointer md:hidden order-3 flex items-center" x-data="{ open: false }">
+        <Icon name="tabler:search" class="w-5 h-5" @click="open = ! open" />
+        <div class="absolute top-full right-[12px] mt-5 w-[calc(100%_-_24px)]" x-show="open" x-collapse x-cloak>
+          <input
+            class="w-full text-main-bg rounded-md border-0 py-3 pl-3 text-gray-900 bg-transparent ring-1 ring-inset ring-blue-300 focus:ring-2 focus:ring-blue-500"
+            type="text"
+            id="search-input-0"
+          />
+          <button
+            class="border-none absolute right-0 top-[50%] translate-y-[-50%]"
+            id="search-btn"
+            group="0"
+            type="button"><Icon name="tabler:search" class="w-5 h-5 text-main-bg" /></button
+          >
+        </div>
       </div>
     </div>
     <nav

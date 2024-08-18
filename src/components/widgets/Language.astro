@@ -10,11 +10,24 @@ const subdomain = hostname.split('.')[0];
 const language = LanguageJson.filter((item) => item.href === subdomain)[0]?.language || 'English';
 ---
 
-<div class="h-full py-6" x-data="{ open: false }">
+<div class="h-full py-6 flex justify-between gap-5" x-data="{ open: false }">
   <div class="flex items-center gap-1 text-haeder-text cursor-pointer select-none" @click="open = ! open">
     <Icon name="tabler:world" class:list={['w-[21px] h-[21px]']} />
     <span>{language}</span>
     <Icon name="tabler:chevron-down" />
+  </div>
+  <div class="text-haeder-text cursor-pointer" x-data="{ data: false }">
+    <Icon name="tabler:search" class="w-5 h-5" @click="data = ! data" />
+    <div x-show="data" x-collapse class="absolute top-full right-[12px] mt-5 w-[400px] border-b h-0 border-main-bg">
+      <input
+        class="w-full border-none focus:ring-transparent text-main-bg bg-transparent"
+        type="text"
+        id="search-input-1"
+      />
+      <button class="border-none absolute right-0 top-[50%] translate-y-[-50%]" type="button" group="1" id="search-btn"
+        ><Icon name="tabler:search" class="w-5 h-5 text-main-bg" /></button
+      >
+    </div>
   </div>
   <LanguageList />
 </div>

@@ -4,8 +4,9 @@ import { Icon } from 'astro-icon/components';
 
 export interface Props {
   items: NewsItem;
+  type?: string;
 }
-const { items } = Astro.props;
+const { items, type } = Astro.props;
 const { pathname } = Astro.url;
 ---
 
@@ -13,11 +14,16 @@ const { pathname } = Astro.url;
   <div class="relative mt-2 rounded-md shadow-sm lg:block hidden">
     <input
       type="text"
-      id="search-input"
       class="block w-full rounded-md border-0 py-3 pr-10 text-gray-900 ring-1 ring-inset ring-blue-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
       placeholder="Please enter the news title"
+      id="search-input-2"
     />
-    <button class="absolute inset-y-0 right-0 z-50 flex items-center pr-3 cursor-pointer" id="search-button">
+    <button
+      class="absolute inset-y-0 right-0 z-50 flex items-center pr-3 cursor-pointer"
+      id="search-btn"
+      group="2"
+      da-aw-type={type || 'products'}
+    >
       <Icon name="tabler:search" />
     </button>
   </div>
@@ -27,16 +33,18 @@ const { pathname } = Astro.url;
   >
     <option selected>{items.name_ch}</option>
   </select>
-  <select
-    name="location"
-    class="list-select mt-2 block w-full rounded-md border-0 py-3 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-blue-300 focus:ring-2 focus:ring-blue-500 sm:text-sm sm:leading-6"
-  >
-    {
-      items.children.map((s) => (
-        <option value={s.path} selected={pathname === s.path}>
-          {s.name_ch}
-        </option>
-      ))
-    }
-  </select>
+  {
+    !items.children[0].type.includes('detail') && (
+      <select
+        name="location"
+        class="list-select mt-2 block w-full rounded-md border-0 py-3 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-blue-300 focus:ring-2 focus:ring-blue-500 sm:text-sm sm:leading-6"
+      >
+        {items.children.map((s) => (
+          <option value={s.path} selected={pathname === s.path}>
+            {s.name_ch}
+          </option>
+        ))}
+      </select>
+    )
+  }
 </div>
