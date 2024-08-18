@@ -9,6 +9,9 @@ import News from '@/views/News/index.astro';
 import NewsClass from '@/views/NewsClass/index.astro';
 import Knowledge from '@/views/Knowledge/index.astro';
 import KnowledgeClass from '@/views/KnowledgeClass/index.astro';
+import KnowledgeDetail from '@/views/KnowledgeDetail/index.astro';
+import NewsDetail from '@/views/NewsDetail/index.astro';
+import ProductsDetail from '@/views/ProductsDetail/index.astro';
 import Other from '@/views/Other.astro';
 import Search from '@/views/Search.astro';
 
@@ -28,6 +31,9 @@ const componentMap = {
   knowledgeclass: KnowledgeClass,
   contact: Contact,
   'about-us': AboutUs,
+  newsdetail: NewsDetail,
+  productsdetail: ProductsDetail,
+  knowledgedetail: KnowledgeDetail,
 };
 
 const {
@@ -42,7 +48,9 @@ export const getStaticPaths = (async () => {
     },
   } = await fetchData();
 
-  const treeMenu = flattenTree(menu).filter((item) => rootRouteTypes.includes(item.type));
+  const treeMenu = flattenTree(menu).filter(
+    (item) => item.path.split('/').length === 2 && rootRouteTypes.includes(item.type)
+  );
 
   return treeMenu
     .map((item) => ({

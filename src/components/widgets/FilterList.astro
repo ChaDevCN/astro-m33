@@ -34,7 +34,7 @@ const { pathname } = Astro.url;
     <option selected>{items.name_ch}</option>
   </select>
   {
-    !items.children[0].type.includes('detail') && (
+    items.children.length > 0 && !items.children[0].type.includes('detail') && (
       <select
         name="location"
         class="list-select mt-2 block w-full rounded-md border-0 py-3 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-blue-300 focus:ring-2 focus:ring-blue-500 sm:text-sm sm:leading-6"
