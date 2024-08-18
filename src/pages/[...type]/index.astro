@@ -9,6 +9,7 @@ import News from '@/views/News/index.astro';
 import NewsClass from '@/views/NewsClass/index.astro';
 import Knowledge from '@/views/Knowledge/index.astro';
 import KnowledgeClass from '@/views/KnowledgeClass/index.astro';
+import Other from '@/views/Other.astro';
 
 import Layout from '@/layouts/PageLayout.astro';
 
@@ -42,9 +43,11 @@ export const getStaticPaths = (async () => {
 
   const treeMenu = flattenTree(menu).filter((item) => rootRouteTypes.includes(item.type));
 
-  return treeMenu.map((item) => ({
-    params: { type: item.url.replace('/', '') },
-  }));
+  return treeMenu
+    .map((item) => ({
+      params: { type: item.url.replace('/', '') },
+    }))
+    .concat([{ params: { type: 'thanks' } }]);
 }) satisfies GetStaticPaths;
 
 const { type } = Astro.params;
@@ -58,5 +61,13 @@ const { title, description, keywords } = activeItem;
 ---
 
 <Layout metadata={{ title, description, keywords }}>
-  {rootRouteTypes.includes(activeItem.type) ? <Comp activeItem={activeItem} /> : <p>Type not supported.</p>}
+  {
+    rootRouteTypes.includes(activeItem.type) ? (
+      <Comp activeItem={activeItem} />
+    ) : type === 'thanks' ? (
+      <Other key="thanks" />
+    ) : (
+      <p>Type not supported.</p>
+    )
+  }
 </Layout>

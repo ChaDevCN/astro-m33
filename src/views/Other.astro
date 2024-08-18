@@ -1,0 +1,53 @@
+---
+import Image from '@/components/common/Image.astro';
+import Section from '@/components/Section.astro';
+import Breadcrumb from '@/components/widgets/Breadcrumb.astro';
+import Button from '@/components/ui/Button.astro';
+
+// const { pathname } = Astro.url;
+
+const { key: pathname } = Astro.props;
+
+const config = {
+  '404': {
+    title: 'Sorry, no products were found matching your selection.',
+    src: '@/assets/images/404.webp',
+    subTitle: 'You can contact us or view the product list.',
+  },
+  thanks: {
+    title: 'Thanks！',
+    src: '@/assets/images/404.webp',
+    subTitle: 'Sent successfully, we will contact you soon!',
+  },
+};
+
+const BreadcrumbData = [
+  {
+    link: '/',
+    label: 'Home',
+  },
+  {
+    link: pathname,
+    label: JSON.parse(JSON.stringify(pathname).replace('/', '')),
+  },
+];
+
+const { src, title, subTitle } = config[pathname];
+---
+
+<Section class="lg:pt-[30px] pb-0 pt-[20px]">
+  <Breadcrumb data={BreadcrumbData} />
+  <div class="flex justify-center items-center">
+    <Image src={src} alt={pathname} class:list={['select-none']} />
+  </div>
+  <p class="text-center uppercase font-semibold md:leading-[46px] md:text-[40px] text-title md:mt-14 mt-5">{title}</p>
+  <p class="text-center md:text-[26px] text-[#666] md:leading-[46px] mt-4">{subTitle}</p>
+  <div class="flex gap-5 lg:mt-10 mt-4 lg:justify-center lg:items-center lg:flex-row flex-col">
+    <Button type="button" icon="tabler:arrow-up-right" class="lg:w-[220px] w-full">
+      <a href="/contact-us">Contact Us</a>
+    </Button>
+    <Button type="button" icon="tabler:arrow-up-right" class="lg:w-[220px] w-full">
+      <a href="/products">View products</a>
+    </Button>
+  </div>
+</Section>

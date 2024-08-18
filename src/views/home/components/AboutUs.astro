@@ -3,6 +3,9 @@ import Image from '@/components/common/Image.astro';
 import Section from '@/components/Section.astro';
 import Button from '@/components/ui/Button.astro';
 import { Icon } from 'astro-icon/components';
+
+import { fetchData } from '@/lib/fetchDataAll';
+
 import '@/assets/styles/global.less';
 
 const icons = [
@@ -27,6 +30,20 @@ const icons = [
     icon: 'tabler:brand-days-counter',
   },
 ];
+const defaultTitle = `ABOUT US`;
+
+const defaultContent = ` Through the company profile, the outside world can have a visual understanding of the company and showcase its
+        style. When introducing, the key points should be highlighted, and praise words should be used appropriately to
+        showcase the company's achievements in business operations.company profile, the outside world can have a visual
+        understanding of the company and showcase its style.`;
+
+const {
+  result: {
+    data: { home_introduction },
+  },
+} = await fetchData();
+
+const { title = defaultTitle, content = defaultContent } = home_introduction[0] || {};
 ---
 
 <Section>
@@ -39,13 +56,10 @@ const icons = [
       </div>
     </div>
     <div class="lg:w-[48%] w-full flex flex-col justify-center">
-      <h2 class="uppercase text-4xl font-bold">ABOUT US</h2>
+      <h2 class="uppercase text-4xl font-bold">{title}</h2>
       <p class="vice">A mechanical equipment company with excellent service</p>
       <aside class="desc">
-        Through the company profile, the outside world can have a visual understanding of the company and showcase its
-        style. When introducing, the key points should be highlighted, and praise words should be used appropriately to
-        showcase the company's achievements in business operations.company profile, the outside world can have a visual
-        understanding of the company and showcase its style.
+        {content}
       </aside>
       <Button type="button" icon="tabler:arrow-up-right" class="lg:w-[220px]">
         <a href="/about-us">show now</a>

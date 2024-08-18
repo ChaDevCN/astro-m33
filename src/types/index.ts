@@ -159,6 +159,7 @@ export interface Product {
   teacher_name: string
   updateTime: string
   update_timestamp: number
+  type: string
   productPics: ProductPic[]
 }
 export interface ProductPic {

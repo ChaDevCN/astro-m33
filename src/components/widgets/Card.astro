@@ -6,8 +6,11 @@ import { Icon } from 'astro-icon/components';
 
 import type { Knowledge, Product } from '@/types/index';
 
+import { getActiveUrl } from '@/utils/utils';
+
 type Combined = Knowledge & Product;
 export type Props = Partial<Combined>;
+const { pathname } = Astro.url;
 
 const { showPic, name, path, createTime } = Astro.props;
 ---
@@ -31,16 +34,37 @@ const { showPic, name, path, createTime } = Astro.props;
           'transition-all duration-300',
         ]}
       >
-        <div class="h-full sm:py-[20px] py-3 flex items-center justify-center">
+        <button
+          class="h-full sm:py-[20px] py-3 flex items-center justify-center"
+          type="button"
+          data-aw-url={getActiveUrl(pathname)}
+          data-aw-text={name}
+          title={name}
+          data-aw-social-share={'facebook'}
+        >
           <Icon name="tabler:brand-facebook-filled" class="w-7 h-7 inline-block" />
-        </div>
-        <div class="h-full sm:py-[20px] py-3 flex items-center justify-center">
+        </button>
+        <button
+          class="h-full sm:py-[20px] py-3 flex items-center justify-center"
+          type="button"
+          data-aw-url={getActiveUrl(pathname)}
+          data-aw-text={name}
+          title={name}
+          data-aw-social-share={'instagram'}
+        >
           <Icon name="tabler:brand-instagram" class="w-7 h-7 inline-block" />
-        </div>
-        <div class="h-full sm:py-[20px] py-3 flex items-center justify-center">
+        </button>
+        <button
+          class="h-full sm:py-[20px] py-3 flex items-center justify-center"
+          type="button"
+          data-aw-url={getActiveUrl(pathname)}
+          data-aw-text={name}
+          title={name}
+          data-aw-social-share={'twitter'}
+        >
           <Icon name="tabler:brand-stackshare" class="w-7 h-7 inline-block group-hover/icons:hidden" />
           <Icon name="tabler:brand-twitter-filled" class="w-7 h-7 hidden group-hover/icons:inline-block" />
-        </div>
+        </button>
       </div>
     </div>
     <div class="sm:mt-8 mt-5">

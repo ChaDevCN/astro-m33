@@ -72,9 +72,15 @@ export const getStaticPaths = (async () => {
     } else {
       const treeMenuClass = treeMenu.filter((item) => item.type.endsWith('class'));
       treeMenuClass.forEach((typeClass) => {
-        const nextTreeMenu = treeMenu.filter(
-          (s) => s.type === `${type.replace('class', '')}detail` && s.glid === typeClass.ID
+        const r = findNodeByAttribute(menu, 'ID', typeClass.ID);
+        const nextTreeMenu = flattenTree(r.children).filter(
+          (s) => s.type === `${typeClass.type.replace('class', '')}detail`
         );
+        // const nextTreeMenu = treeMenu.filter(
+        //   (s) =>
+        //     s.type === `${type.replace("class", "")}detail` &&
+        //     s.glid === typeClass.ID
+        // );
         const total = nextTreeMenu.length;
         const size = Math.ceil(total / pageSize);
         for (let i = 1; i <= size; i++) {
