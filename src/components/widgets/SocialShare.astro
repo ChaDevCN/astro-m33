@@ -1,29 +1,40 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { getActiveUrl } from '@/utils/utils';
+const {
+  options: { title, text, pathname },
+} = Astro.props;
+
 const icons = [
   {
     icon: 'tabler:brand-facebook-filled',
     style: 'bg-[#459dff]',
+    share: 'facebook',
   },
   {
     icon: 'tabler:brand-twitter-filled',
     style: 'bg-[#00b4ff]',
+    share: 'twitter',
   },
   {
     icon: 'tabler:brand-instagram',
     style: 'bg-[#d4237a]',
+    share: 'instagram',
   },
   {
     icon: 'tabler:brand-youtube-filled',
     style: 'bg-[#ff5968]',
+    share: 'youtube',
   },
   {
     icon: 'tabler:brand-tiktok',
     style: 'bg-[#111111]',
+    share: 'tiktok',
   },
   {
     icon: 'tabler:brand-pinterest',
     style: 'bg-[#ff0024]',
+    share: 'pinterest',
   },
 ];
 ---
@@ -37,7 +48,15 @@ const icons = [
           icon.style,
         ]}
       >
-        <Icon name={icon.icon} class:list={['w-3/5 h-3/5 ']} />
+        <button
+          class="flex items-center justify-center w-full h-full"
+          data-aw-social-share={icon.share}
+          data-aw-url={getActiveUrl(pathname)}
+          data-aw-text={text}
+          title={title}
+        >
+          <Icon name={icon.icon} class:list={['w-3/5 h-3/5 ']} />
+        </button>
       </div>
     ))
   }

@@ -7,6 +7,7 @@ site:
   keywords: ''
   title: ''
   description: ''
+  site: #正式域名(做site使用 加https)
 DB:
   name: 'icms_en_25ec0a500d2211ef95b1730a50b7257f'
 

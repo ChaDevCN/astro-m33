@@ -19,7 +19,7 @@ import Yaml from 'yaml';
 const file = fs.readFileSync('./config.yml', 'utf8');
 const {
   build: { filename },
-  site: { url, staticBase },
+  site: { url, staticBase, site },
 } = Yaml.parse(file);
 dotenv.config();
 
@@ -31,6 +31,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   output: 'static',
+  site,
   outDir: isProduction ? distPath : 'dist',
   integrations: [
     tailwind({
